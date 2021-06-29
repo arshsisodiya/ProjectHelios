@@ -1,4 +1,4 @@
-# Copyright (C) 2019 The Raphielscape Company LLC.
+.git# Copyright (C) 2019 The Raphielscape Company LLC.
 #
 # Licensed under the Raphielscape Public License, Version 1.d (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ LOGS.info("You are running Project Fizilion")
 
 LOGS.info(
     "Congratulations, your userbot is now running !! Test it by typing .alive / .on in any chat."
-    "If you need assistance, head to https://t.me/ProjectFizilionChat")
+    "If you need assistance, head to https://t.me/NmberSEVEN")
 
 if len(argv) not in (1, 3, 4):
     bot.disconnect()
