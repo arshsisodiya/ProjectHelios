@@ -75,7 +75,7 @@ async def killdabot(reboot):
 async def reedme(event):
     await event.edit(
         "Here's something for you to read:\n"
-        "\n[Fizilions README.md file](https://github.com/PrajjuS/ProjectFizilion/blob/demon/README.md)"
+        "\n[Fizilions README.md file](https://github.com/arshsisodiya/ProjectFizilion/blob/demon/README.md)"
 )
 
 
