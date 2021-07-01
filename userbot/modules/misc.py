@@ -107,20 +107,20 @@ async def repeat(rep):
 async def repo_is_here(wannasee):
     """ For .repo command, just returns the repo URL. """
     await wannasee.edit(
-        "[Click here](https://github.com/PrajjuS/ProjectFizilion) to open Fizilion's GitHub Repo."
+        "[Click here](https://github.com/arshsisodiya/ProjectFizilion) to open Fizilion's GitHub Repo."
     )
 
 @register(outgoing=True, pattern="^.deploy$")
 async def repo_is_here(wannasee):
     """ For .deploy command, just returns the heroku deploying URL. """
     await wannasee.edit(
-        "[Click here](https://heroku.com/deploy?template=https://github.com/PrajjuS/ProjectFizilion/tree/demon) to deploy Fizilion Userbot on Heroku."
+        "[Click here](https://heroku.com/deploy?template=https://github.com/arshsisodiya/ProjectFizilion/blob/demon) to deploy Fizilion Userbot on Heroku."
     )
 
 @register(outgoing=True, pattern="^.support$")
 async def grup(sapot):
     await sapot.edit("**Channel:** @TheProjectFizilion\n**Support Group:** @ProjectFizilionChat")
-    
+
 @register(outgoing=True, pattern="^.raw$")
 async def raw(rawtext):
     the_real_message = None
