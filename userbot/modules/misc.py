@@ -83,7 +83,7 @@ async def reedme(event):
 async def guidee(event):
     await event.edit(
         "*Guide on Deploying Fizilion*\n"
-        "•[Reading Guide](https://elytra8.github.io/ProjectFizilion)\n"
+        "•[Reading Guide](https://telegra.ph/How-to-host-a-Telegram-Userbot-07-01-2)\n"
         "•[Yt Guide](https://youtu.be/tJzmrTq09tA)\n"
 )
 
