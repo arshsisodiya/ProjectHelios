@@ -241,7 +241,7 @@ async def amireallyalive(alive):
         f"•`Distro          : {distro.name(pretty=False)} {distro.version(pretty=False, best=False)}`\n"
         f"`===============================`\n"
         f"**[PYPI Module Versions]:**\n"
-        f"•`Python         : v{python_version()} `\n"   
+        f"•`Python         : v{python_version()} `\n"
         f"•`Telethon       : v{version.__version__} `\n"
         f"•`PIP            : v{pip.__version__} `\n"
         f"`===============================`\n"
@@ -268,10 +268,10 @@ async def amireallyalive(alive):
     else:
         msg=await alive.edit(output)
         await sleep(30)
-        
+
     if TIMEOUT:
         await msg.delete()
-        
+
 
 @register(outgoing=True, pattern="^.aliveu")
 async def amireallyaliveuser(username):
@@ -293,13 +293,18 @@ async def amireallyalivereset(ureset):
     DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
     await ureset.edit("`" "Successfully reset user for alive!" "`")
 
-
+CMD_HELP.update(
+    {
+        "spc": ".spc\
+    \nUsage: Shows system information such as CPU Info, CPU Usage Per Core,Total CPU Usage, Memory Usage(in GB),Disk Usage, Bandwith Usage,Engine Info."
+    }
+)
 CMD_HELP.update(
     {
         "sysd": ".sysd\
     \nUsage: Shows system information using neofetch.\
     \n\n.spc\
-    \nUsage: Show system specification."
+    \nUsage: Show full system specification."
     }
 )
 CMD_HELP.update(
