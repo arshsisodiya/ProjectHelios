@@ -6,7 +6,7 @@
 # You can find misc modules, which dont fit in anything xD
 #
 #
-#Modified by @PrajjuS
+#Modified by @arshsisodiya
 """ Userbot module for other small commands. """
 
 import io
@@ -158,7 +158,7 @@ CMD_HELP.update(
 ".readme"
 "\nUsage: Provide links to setup the userbot and it's modules\nAnd .support for support group\n\n"
 ".guide"
-"\nUsage: Provides Full guide to setup Fizilion Userbot.\n\n"
+"\nUsage: Provides Full guide to setup and deploy Fizilion Userbot.\n\n"
 ".repeat <no.> <text>"
 "\nUsage: Repeats the text for a number of times. Don't confuse this with spam tho.\n\n"
 ".restart"
