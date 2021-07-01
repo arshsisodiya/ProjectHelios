@@ -808,7 +808,7 @@ CMD_HELP.update(
         "\nCan specify the number of results needed (default is 3).",
         "imdb": ">`.imdb <movie-name>`"
         "\nUsage: Shows movie info and other stuff.",
-        "rip": ">`.ra <url> [or reply] or .rv <url> [or reply]`"
-        "\nUsage: Download videos and songs from YouTube "
-        "(and [many other sites](https://ytdl-org.github.io/youtube-dl/supportedsites.html)).",
+        "rip": ">`.ra <url> [or reply] (for audio) or .rv <url> [or reply](for video)`"
+        "\nUsage: Download videos and songs from YouTube  "
+        "(and [many other sites](https://ytdl-org.github.io/youtube-dl/supportedsites.html)) --> Use .ra <url> for downloading audio only and .rv <url> for downloading video.",
     })
