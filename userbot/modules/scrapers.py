@@ -43,7 +43,7 @@ from youtube_search import YoutubeSearch
 from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP, TEMP_DOWNLOAD_DIRECTORY
 from userbot.events import register
 from userbot.modules.upload_download import get_video_thumb
-from userbot.utils import chrome, duckduckgoscraper, progress
+from userbot.utils import chrome, googleimagesdownload, progress
 from userbot.utils.FastTelethon import upload_file
 
 CARBONLANG = "auto"
@@ -113,29 +113,53 @@ async def carbon_api(e):
 
 
 
-@register(outgoing=True, pattern="^.img (.*)")
+@register(outgoing=True, pattern=r"^\.img(?: |$)(\d*)? ?(.*)")
 async def img_sampler(event):
-    """ For .img command, search and return images matching the query. """
-    await event.edit("`Processing...\n please wait for a moment...`")
-    query = event.pattern_match.group(1)
-    scraper = duckduckgoscraper.DuckDuckGoScraper()
-    
-    #The out directory
-    os.system("mkdir -p /tmp/out/images")
-    out = ("/tmp/out/images")
-    
-    if 'query' not in locals():
-        await event.edit("Please specify a query to get images,\n like .img duck")
+    """For .img command, search and return images matching the query."""
+
+    if event.is_reply and not event.pattern_match.group(2):
+        query = await event.get_reply_message()
+        query = str(query.message)
     else:
-        #TODO: add a limit to the images being downloaded
-        scraper.scrape(query,1,out)
-        await asyncio.sleep(4)
-        files = glob.glob("/tmp/out/images/*.jpg")
-        await event.client.send_file(
-            await event.client.get_input_entity(event.chat_id), files
-                )
-        await event.delete()
-        os.system("rm -rf /tmp/out/images")
+        query = str(event.pattern_match.group(2))
+
+    if not query:
+        return await event.edit("**Reply to a message or pass a query to search!**")
+
+    await event.edit("**Processing...**")
+
+    if event.pattern_match.group(1) != "":
+        counter = int(event.pattern_match.group(1))
+        if counter > 10:
+            counter = int(10)
+        if counter <= 0:
+            counter = int(1)
+    else:
+        counter = int(3)
+
+    response = googleimagesdownload()
+
+    # creating list of arguments
+    arguments = {
+        "keywords": query,
+        "limit": counter,
+        "format": "png",
+        "no_directory": "no_directory",
+    }
+
+    # if the query contains some special characters, googleimagesdownload errors out
+    # this is a temporary workaround for it (maybe permanent)
+    try:
+        paths = response.download(arguments)
+    except Exception as e:
+        return await event.edit(f"**Error:** `{e}`")
+
+    lst = paths[0][query]
+    await event.client.send_file(
+        await event.client.get_input_entity(event.chat_id), lst
+    )
+    shutil.rmtree(os.path.dirname(os.path.abspath(lst[0])))
+    await event.delete()
 
 @register(outgoing=True, pattern=r"^\.currency ([\d\.]+) ([a-zA-Z]+) ([a-zA-Z]+)")
 async def moni(event):
@@ -254,9 +278,9 @@ async def ipinfo(event):
     info = json.load(rinfo)
     rinfo.close()
     os.system("rm /Fizilion/ip.txt")
-    
+
     if "error" in info:
-        await event.edit("Invalid IP address")        
+        await event.edit("Invalid IP address")
     elif "country" in info:
         await event.edit(
             "`IP CREDENTIALS FOUND!`\n\n"
@@ -276,7 +300,7 @@ async def ipinfo(event):
         )
     else:
         await event.edit("Invalid Information Provided")
-        
+
 @register(outgoing=True, pattern=r"^\.ud(?: |$)(.*)")
 async def urban_dict(event):
     """Output the definition of a word from Urban Dictionary"""
