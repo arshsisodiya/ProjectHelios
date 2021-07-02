@@ -22,6 +22,7 @@ from google_trans_new import LANGUAGES, google_translator
 from gtts import gTTS
 from gtts.lang import tts_langs
 from requests import get
+from search_engine_parser import GoogleSearch
 from search_engine_parser.core.engines.google import Search as GoogleSearch
 from search_engine_parser.core.exceptions import NoResultsOrTrafficError
 from telethon.tl.types import DocumentAttributeAudio, DocumentAttributeVideo
@@ -182,52 +183,53 @@ async def moni(event):
     c_to_val = round(c_from_val * response["rates"][c_to], 2)
     await event.edit(f"`{c_from_val} {c_from} = {c_to_val} {c_to}`")
 
-@register(outgoing=True, pattern=r"^.google(?: |$)(.*)")
-async def gsearch(q_event):
+@register(outgoing=True, pattern=r"^\.google(?: |$)(\d*)? ?(.*)")
+async def gsearch(event):
     """For .google command, do a Google search."""
-    textx = await q_event.get_reply_message()
-    query = q_event.pattern_match.group(1)
 
-    if query:
-        pass
-    elif textx:
-        query = textx.text
+    if event.is_reply and not event.pattern_match.group(2):
+        match = await event.get_reply_message()
+        match = str(match.message)
     else:
-        await q_event.edit(
-            "`Pass a query as an argument or reply " "to a message for Google search!`"
-        )
-        return
+        match = str(event.pattern_match.group(2))
 
-    await q_event.edit("`Searching...`")
+    if not match:
+        return await event.edit("**Reply to a message or pass a query to search!**")
 
-    search_args = (str(query), 1)
-    googsearch = GoogleSearch()
+    await event.edit("**Processing...**")
+
+    if event.pattern_match.group(1) != "":
+        counter = int(event.pattern_match.group(1))
+        if counter > 10:
+            counter = int(10)
+        if counter <= 0:
+            counter = int(1)
+    else:
+        counter = int(3)
+
+    search_args = (str(match), int(1))
+    gsearch = GoogleSearch()
+
     try:
-        gresults = await googsearch.async_search(*search_args)
-        msg = ""
-        for i in range(0, 5):
-            try:
-                title = gresults["titles"][i]
-                link = gresults["links"][i]
-                desc = gresults["descriptions"][i]
-                msg += f"{i+1}. [{title}]({link})\n`{desc}`\n\n"
-            except IndexError:
-                break
-        await q_event.edit(
-            "**Search Query:**\n`" + query + "`\n\n**Results:**\n" + msg,
-            link_preview=False,
+        gresults = await gsearch.async_search(*search_args)
+    except Exception:
+        return await event.edit(
+            "**Error: Your query could not be found or it was flagged as unusual traffic.**"
         )
-    except NoResultsOrTrafficError as error:
-        if BOTLOG:
-            await q_event.client.send_message(
-                BOTLOG_CHATID, f"`GoogleSearch error: {error}`"
-            )
-        return
-    if BOTLOG:
-        await q_event.client.send_message(
-            BOTLOG_CHATID,
-            "Google Search query `" + query + "` was executed successfully",
-        )
+    msg = ""
+
+    for i in range(counter):
+        try:
+            title = gresults["titles"][i]
+            link = gresults["links"][i]
+            desc = gresults["descriptions"][i]
+            msg += f"[{title}]({link})\n`{desc}`\n\n"
+        except IndexError:
+            break
+
+    await event.edit(
+        "**Search Query:**\n`" + match + "`\n\n**Results:**\n" + msg, link_preview=False
+    )
 
 @register(outgoing=True, pattern=r"^\.wiki(?: |$)(.*)")
 async def wiki(wiki_q):
