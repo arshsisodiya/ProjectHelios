@@ -234,7 +234,7 @@ async def amireallyalive(alive):
     uptime = await get_readable_time((time.time() - StartTime))
     output = (
         f"`===============================`\n"
-        f"**FIZILION IS UP AND RUNNING...**\n"
+        f"**HELIOS IS UP AND RUNNING...**\n"
         f"`=============================== `\n"
         f"**[OS Info]:**\n"
         f"•`Platform Type   : {os.name}`\n"
@@ -249,7 +249,7 @@ async def amireallyalive(alive):
         f"•`User           : {DEFAULTUSER} `\n"
         f"•`Running on     : {repo.active_branch.name} `\n"
         f"•`Loaded modules : {len(modules)} `\n"
-        f"•`Fizilion       : {USERBOT_VERSION} `\n"
+        f"•`Helios         : {USERBOT_VERSION} `\n"
         f"•`Bot Uptime     : {uptime} `\n"
         f"`===============================`\n"
 
