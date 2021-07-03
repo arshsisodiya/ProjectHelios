@@ -301,7 +301,11 @@ output = (
     f"•`Running on     : {repo.active_branch.name} `\n"
     f"•`Loaded modules : 105 `\n"
     f"•`Helios Version : {USERBOT_VERSION} `\n"
-    f"•`Bot started at : {uptime} `\n"
+    f"`         _    ____  ____  _   _
+               / \  |  _ \/ ___|| | | |
+              / _ \ | |_) \___ \| |_| |
+             / ___ \|  _ < ___) |  _  |
+            /_/   \_\_| \_\____/|_| |_|  `\n"
 )
 
 async def start():
