@@ -1,7 +1,7 @@
 {
   "name": "Project Helios",
   "description": "A modular Telegram userbot running on Python 3.8+ with an sqlalchemy database.",
-  "logo": "https://github.com/arshsisodiya/ProjectHelios/blob/demon/resources/arsh_logo.jpg",
+  "logo": "https://github.com/arshsisodiya/ProjectHelios/blob/demon/arsh_logo.jpg",
   "keywords": [
     "telegram",
     "userbot",
