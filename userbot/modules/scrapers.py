@@ -50,7 +50,7 @@ from userbot.utils.FastTelethon import upload_file
 CARBONLANG = "auto"
 TTS_LANG = "en"
 TRT_LANG = os.environ.get("TRT_LANG") or "en"
-TEMP_DOWNLOAD_DIRECTORY = "/Fizilion/.bin/"
+TEMP_DOWNLOAD_DIRECTORY = "/Helios/.bin/"
 
 
 @register(outgoing=True, pattern=r"^\.crblang (.*)")
@@ -275,11 +275,11 @@ async def wiki(wiki_q):
 async def ipinfo(event):
     #Thanks to https://ipinfo.io for this api
     ip = event.pattern_match.group(1)
-    os.system("curl ipinfo.io/{0} --silent > /Fizilion/ip.txt".format(ip))
-    rinfo = open("/Fizilion/ip.txt","r")
+    os.system("curl ipinfo.io/{0} --silent > /Helios/ip.txt".format(ip))
+    rinfo = open("/Helios/ip.txt","r")
     info = json.load(rinfo)
     rinfo.close()
-    os.system("rm /Fizilion/ip.txt")
+    os.system("rm /Helios/ip.txt")
 
     if "error" in info:
         await event.edit("Invalid IP address")
