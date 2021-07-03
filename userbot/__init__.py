@@ -151,7 +151,7 @@ COUNTRY = str(os.environ.get("COUNTRY") or "")
 TZ_NUMBER = os.environ.get("TZ_NUMBER") or 1
 
 # Version of One4uBot
-USERBOT_VERSION = os.environ.get("USERBOT_VERSION") or "production 3.1"
+USERBOT_VERSION = os.environ.get("USERBOT_VERSION") or "2.0"
 
 # User Terminal alias
 USER_TERM_ALIAS = os.environ.get("USER_TERM_ALIAS") or "dem0n"
@@ -293,14 +293,14 @@ uptime = time.strftime('%X')
 ##
 output = (
     "` =============================== `\n"
-    f"`Helios is Up and Running.... `\n"
+    f"`Helios {USERBOT_VERSION} is Up and Running.... `\n"
     f"`=============================== `\n"
     f"•`Telethon       : v{version.__version__} `\n"
     f"•`Python         : v{python_version()} `\n"
     f"•`User           : {DEFAULTUSER} `\n"
     f"•`Running on     : {repo.active_branch.name} `\n"
     f"•`Loaded modules : 105 `\n"
-    f"•`Helios       : {USERBOT_VERSION} `\n"
+    f"•`Helios Version : {USERBOT_VERSION} `\n"
     f"•`Bot started at : {uptime} `\n"
 )
 
