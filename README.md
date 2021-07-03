@@ -1,7 +1,6 @@
-# Project Fizilion
-## Fork of official [Fizilion](https://github.com/PrajjuS/ProjectFizilion) Userbot
+# Project Helios
 
-![logo](https://github.com/PrajjuS/ProjectFizilion/raw/dragon/resources/IMG_20201109_130207_262.jpg)
+![logo](https://github.com/arshsisodiya/ProjectHelios/blob/demon/resources/Project_Helios.png)
 
 ```
 #include <std/disclaimer.h>
@@ -18,7 +17,8 @@
     I will be rolling on the floor laughing at you.
 /**
 ```
-[![Build](https://img.shields.io/github/workflow/status/PrajjuS/ProjectFizilion/FailedChecker?style=for-the-badge)](https://github.com/PrajjuS/ProjectFizilion/actions "build")
+Thanks [Prajju](https://github.com/PrajjuS) For Docker Image and Repl.it Session String Generator
+[![Build](https://img.shields.io/github/workflow/status/arshsisodiya/ProjectHelios/FailedChecker?style=for-the-badge)](https://github.com/arshsisodiya/ProjectHelios/actions "build")
 
 ![Docker_Size](https://img.shields.io/docker/image-size/elytra8/fizfed?style=for-the-badge)
 
@@ -29,14 +29,14 @@
 [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
 
 ## Generate String Session
-Easy way to get STRING_SESSION. 
+Easy way to get STRING_SESSION.
 
 ### Run on repl.it
 [![Run repl.it](https://img.shields.io/badge/run-string__session.py-blue?style=flat-square&logo=repl.it)](https://session.uraniumcore.repl.run)
 
 ### or Run on your terminal
 ```
-wget https://raw.githubusercontent.com/PrajjuS/ProjectFizilion/demon/terminal_getstring.sh && bash terminal_getstring.sh
+wget https://raw.githubusercontent.com/arshsisodiya/ProjectHelios/demon/terminal_getstring.sh && bash terminal_getstring.sh
 ```
 
 ## How To Host?
@@ -44,17 +44,18 @@ wget https://raw.githubusercontent.com/PrajjuS/ProjectFizilion/demon/terminal_ge
 The easiest way to deploy this great bot! is click on button below.
 Make sure you have an account of heroku and follow all the steps required.
 
-<p align="left"><a href="https://heroku.com/deploy?template=https://github.com/arshsisodiya/ProjectFizilion/blob/demon"> <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" /></a></p>
+<p align="left"><a href="https://heroku.com/deploy?template=https://github.com/arshsisodiya/ProjectHelios/blob/demon"> <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" /></a></p>
 
 For further guide you can head to [Groups and Support](https://github.com/MoveAngel/One4uBot#Groups-and-Support) or read this [guide](https://telegra.ph/How-to-host-a-Telegram-Userbot-07-01-2)
 
 ## Groups and Support
 
-For discussion, bug reporting, and help, you can join [Project Fizilion Support Group](https://t.me/ProjectFizilionChat).
 
 ## Credits
 
-Thanks: 
+Thanks:
+* [Prajwal](https://github.com/PrajjuS/ProjectFizilion) - ProjectFizilion
+* [KenHV](https://github.com/KenHV/KensurBot) - KensurBot
 * [RaphielGang](https://github.com/RaphielGang) - Telegram-Paperplane
 * [AvinashReddy3108](https://github.com/AvinashReddy3108) - PaperplaneExtended
 * [kandnub](https://github.com/kandnub) - TG-UserBot
@@ -64,10 +65,10 @@ Thanks:
 * [Mkaraniya](https://github.com/mkaraniya) & [Dev73](https://github.com/Devp73) - OpenUserBot
 * [MoveAngel](https://github.com/MoveAngel) - One4U
 
-and many more people who aren't mentioned here, but may be found in [Contributors](https://github.com/ElytrA8/ProjectFizilion/graphs/contributors).
+and many more people who aren't mentioned here, but may be found in [Contributors](https://github.com/arshsisodiya/ProjectHelios/graphs/contributors).
 
 ## License
 
-This userbot licensed on [Raphielscape Public License](https://github.com/PrajjuS/ProjectFizilion/blob/demon/LICENSE) - Version 1.d, February 2020
+This userbot licensed on [Raphielscape Public License](https://github.com/arshsisodiya/ProjectHelios/blob/demon/LICENSE) - Version 1.d, February 2020
 
-Graphics Copyrighted By [ElytrA8](https://t.me/ElytrA8) © 2021
+Graphics Copyrighted By [Arsh Sisodiya](https://t.me/NmberSeven) © 2021
