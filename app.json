@@ -1,7 +1,7 @@
 {
-  "name": "Project Fizilion",
+  "name": "Project Helios",
   "description": "A modular Telegram userbot running on Python 3.8+ with an sqlalchemy database.",
-  "logo": "https://github.com/PrajjUS/ProjectFizilion/raw/demon/resources/Fizilion.png",
+  "logo": "https://github.com/arshsisodiya/ProjectHelios/blob/demon/resources/arsh_logo.jpg",
   "keywords": [
     "telegram",
     "userbot",
@@ -9,9 +9,9 @@
     "modular",
     "productivity"
   ],
-  "repository": "https://github.com/PrajjuS/ProjectFizilion",
-  "website": "https://t.me/PrajjuS",
-  "success_url": "https://t.me/ProjectFizilion",
+  "repository": "https://github.com/arshsisodiya/ProjectHelios",
+  "website": "https://t.me/NmberSeven",
+  "success_url": "https://github.com/arshsisodiya/ProjectHelios",
   "stack": "container",
   "env": {
     "API_KEY": {
@@ -162,11 +162,11 @@
     },
     "BIO_PREFIX": {
       "description": "Prefix for Last.FM Module Bio.",
-      "required": false 
+      "required": false
     },
     "DEFAULT_BIO": {
       "description": "Default profile bio.",
-      "value": "[PM = Report Spam] I ❤ ️Fizilion",
+      "value": "I ❤ ️Helios",
       "required": false
     },
     "ALIVE_NAME": {
