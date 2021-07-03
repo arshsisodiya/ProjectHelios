@@ -75,14 +75,14 @@ async def killdabot(reboot):
 async def reedme(event):
     await event.edit(
         "Here's something for you to read:\n"
-        "\n[Fizilions README.md file](https://github.com/arshsisodiya/ProjectFizilion/blob/demon/README.md)"
+        "\n[Helios's README.md file](https://github.com/arshsisodiya/ProjectHelios/blob/demon/README.md)"
 )
 
 
 @register(outgoing=True, pattern="^.guide$")
 async def guidee(event):
     await event.edit(
-        "*Guide on Deploying Fizilion*\n"
+        "*Guide on Deploying Helios*\n"
         "•[Reading Guide](https://telegra.ph/How-to-host-a-Telegram-Userbot-07-01-2)\n"
         "•[Yt Guide](https://youtu.be/tJzmrTq09tA)\n"
 )
@@ -107,14 +107,14 @@ async def repeat(rep):
 async def repo_is_here(wannasee):
     """ For .repo command, just returns the repo URL. """
     await wannasee.edit(
-        "[Click here](https://github.com/arshsisodiya/ProjectFizilion) to open Fizilion's GitHub Repo."
+        "[Click here](https://github.com/arshsisodiya/ProjectHelios) to open Helios's GitHub Repo."
     )
 
 @register(outgoing=True, pattern="^.deploy$")
 async def repo_is_here(wannasee):
     """ For .deploy command, just returns the heroku deploying URL. """
     await wannasee.edit(
-        "[Click here](https://heroku.com/deploy?template=https://github.com/arshsisodiya/ProjectFizilion/blob/demon) to deploy Fizilion Userbot on Heroku."
+        "[Click here](https://heroku.com/deploy?template=https://github.com/arshsisodiya/ProjectHelios/blob/demon) to deploy Helios Userbot on Heroku."
     )
 
 @register(outgoing=True, pattern="^.support$")
@@ -158,7 +158,7 @@ CMD_HELP.update(
 ".readme"
 "\nUsage: Provide links to setup the userbot and it's modules\nAnd .support for support group\n\n"
 ".guide"
-"\nUsage: Provides Full guide to setup and deploy Fizilion Userbot.\n\n"
+"\nUsage: Provides Full guide to setup and deploy Helios Userbot.\n\n"
 ".repeat <no.> <text>"
 "\nUsage: Repeats the text for a number of times. Don't confuse this with spam tho.\n\n"
 ".restart"
@@ -166,6 +166,6 @@ CMD_HELP.update(
 ".raw"
 "\nUsage: Get detailed JSON-like formatted data about replied message."
 ".deploy"
-"\nUsage: Get link to deploy Fizilion Userbot on Heroku."
+"\nUsage: Get link to deploy Helios Userbot on Heroku."
      }
 )
