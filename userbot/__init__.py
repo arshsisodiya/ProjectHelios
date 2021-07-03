@@ -84,7 +84,7 @@ if BOTLOG:
     LOGSPAMMER = sb(os.environ.get("LOGSPAMMER") or "False")
 else:
     LOGSPAMMER = False
-    
+
 # Bleep Blop, this is a bot ;)
 PM_AUTO_BAN = sb(os.environ.get("PM_AUTO_BAN") or "False")
 
@@ -99,11 +99,11 @@ GITHUB_ACCESS_TOKEN = os.environ.get("GITHUB_ACCESS_TOKEN") or None
 
 # Custom (forked) repo URL and BRANCH for updater.
 UPSTREAM_REPO_URL = (os.environ.get("UPSTREAM_REPO_URL")
-                     or "https://github.com/arshsisodiya/ProjectFizilion.git")
+                     or "https://github.com/arshsisodiya/ProjectHelios.git")
 UPSTREAM_REPO_BRANCH = os.environ.get("UPSTREAM_REPO_BRANCH") or "demon"
 ###
 FUPSTREAM_REPO_URL = (os.environ.get("FPSTREAM_REPO_URL")
-                     or "https://github.com/arshsisodiya/ProjectFizilion.git")
+                     or "https://github.com/arshsisodiya/ProjectHelios.git")
 FUPSTREAM_REPO_BRANCH = os.environ.get("FPSTREAM_REPO_BRANCH") or "demon"
 # Console verbose logging
 CONSOLE_LOGGER_VERBOSE = sb(os.environ.get(
@@ -141,7 +141,7 @@ ANTI_SPAMBOT_SHOUT = sb(os.environ.get("ANTI_SPAMBOT_SHOUT") or "False")
 ALIVE_NAME = os.environ.get("ALIVE_NAME") or None
 
 # Default .alive logo
-ALIVE_LOGO = str(os.environ.get("ALIVE_LOGO") or "https://github.com/arshsisodiya/ProjectFizilion/blob/demon/resources/arsh_logo.jpg")
+ALIVE_LOGO = str(os.environ.get("ALIVE_LOGO") or "https://github.com/arshsisodiya/ProjectHelios.git/blob/demon/resources/arsh_logo.jpg")
 
 # .alive and .help timeout
 TIMEOUT = sb(os.environ.get("TIMEOUT") or "True")
@@ -157,7 +157,7 @@ USERBOT_VERSION = os.environ.get("USERBOT_VERSION") or "production 3.1"
 USER_TERM_ALIAS = os.environ.get("USER_TERM_ALIAS") or "dem0n"
 
 # Updater alias
-UPDATER_ALIAS = os.environ.get("UPDATER_ALIAS") or "Fizilion"
+UPDATER_ALIAS = os.environ.get("UPDATER_ALIAS") or "Helios"
 
 # Zipfile module
 ZIP_DOWNLOAD_DIRECTORY = os.environ.get("ZIP_DOWNLOAD_DIRECTORY") or "./zips"
@@ -246,7 +246,7 @@ with bot:
             "valid entity. Check your environment variables/config.env file."
         )
         quit(1)
-        
+
 async def get_readable_time(seconds: int) -> str:
     count = 0
     up_time = ""
@@ -293,15 +293,15 @@ uptime = time.strftime('%X')
 ##
 output = (
     "` =============================== `\n"
-    f"`Fizilion is Up and Running.... `\n"
+    f"`Helios is Up and Running.... `\n"
     f"`=============================== `\n"
     f"•`Telethon       : v{version.__version__} `\n"
     f"•`Python         : v{python_version()} `\n"
     f"•`User           : {DEFAULTUSER} `\n"
     f"•`Running on     : {repo.active_branch.name} `\n"
     f"•`Loaded modules : 105 `\n"
-    f"•`Fizilion       : {USERBOT_VERSION} `\n"
-    f"•`Bot started at : {uptime} `\n" 
+    f"•`Helios       : {USERBOT_VERSION} `\n"
+    f"•`Bot started at : {uptime} `\n"
 )
 
 async def start():
@@ -317,4 +317,3 @@ async def start():
 
 with bot:
     bot.loop.run_until_complete(start())
-
