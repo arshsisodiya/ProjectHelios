@@ -17,7 +17,7 @@
     I will be rolling on the floor laughing at you.
 /**
 ```
-Thanks [Prajju](https://github.com/PrajjuS) For Docker Image and Repl.it Session String Generator
+Thanks [Prajju](https://github.com/PrajjuS) For Docker Image and Repl.it Session String Generator <br>
 [![Build](https://img.shields.io/github/workflow/status/arshsisodiya/ProjectHelios/FailedChecker?style=for-the-badge)](https://github.com/arshsisodiya/ProjectHelios/actions "build")
 
 ![Docker_Size](https://img.shields.io/docker/image-size/elytra8/fizfed?style=for-the-badge)
