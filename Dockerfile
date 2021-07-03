@@ -2,15 +2,15 @@
 FROM prajwals3/projectfizilion:latest
 
 # env setup
-RUN mkdir /Fizilion && chmod 777 /Fizilion
-ENV PATH="/Fizilion/bin:$PATH"
-WORKDIR /Fizilion
+RUN mkdir /Helios && chmod 777 /Helios
+ENV PATH="/Helios/bin:$PATH"
+WORKDIR /Helios
 
 # clone repo
-RUN git clone https://github.com/arshsisodiya/ProjectFizilion.git -b demon /Fizilion
+RUN git clone https://github.com/arshsisodiya/ProjectHelios.git -b demon /Helios
 
 # Copies session and config(if it exists)
-COPY ./sample_config.env ./userbot.session* ./config.env* /Fizilion/
+COPY ./sample_config.env ./userbot.session* ./config.env* /Helios/
 
 # install required pypi modules
 RUN pip3 install -r requirements.txt
