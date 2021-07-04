@@ -7,7 +7,7 @@ ENV PATH="/Helios/bin:$PATH"
 WORKDIR /Helios
 
 # clone repo
-RUN git clone https://github.com/arshsisodiya/ProjectHelios.git -b demon /Helios
+RUN git clone https://github.com/arshsisodiya/ProjectHelios.git -b test /Helios
 
 # Copies session and config(if it exists)
 COPY ./sample_config.env ./userbot.session* ./config.env* /Helios/
