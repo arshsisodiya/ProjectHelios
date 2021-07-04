@@ -301,11 +301,6 @@ output = (
     f"•`Running on     : {repo.active_branch.name} `\n"
     f"•`Loaded modules : 105 `\n"
     f"•`Helios Version : {USERBOT_VERSION} `\n"
-    "`  ______   __             _    ____  ____  _   _ `\n"
-    "` | __ ) \ / /            / \  |  _ \/ ___|| | | |`\n"
-    "` |  _ \\ V /   _____    / _ \ | |_) \___ \| |_| |`\n"
-    "` | |_) || |   |_____|  / ___ \|  _ < ___) |  _  |`\n"
-    "` |____/ |_|           /_/   \_\_| \_\____/|_| |_|`\n"
 )
 
 async def start():
