@@ -791,6 +791,7 @@ CMD_HELP.update(
         "\nUsage: Gets the info of given ipaddress, send .ipinfo for bot's server ip info",
         "carbon": ">`.carbon <text> [or reply]`"
         "\nUsage: Beautify your code using carbon.now.sh\n"
+        "Go to [Carbon](https://carbon.now.sh) for different lang/style names and previews."
         "Use .crblang <text> to set language for your code.",
         "google": ">`.google [count] <query> [or reply]`"
         "\nUsage: Does a search on Google."
