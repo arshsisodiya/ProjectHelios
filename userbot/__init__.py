@@ -100,11 +100,11 @@ GITHUB_ACCESS_TOKEN = os.environ.get("GITHUB_ACCESS_TOKEN") or None
 # Custom (forked) repo URL and BRANCH for updater.
 UPSTREAM_REPO_URL = (os.environ.get("UPSTREAM_REPO_URL")
                      or "https://github.com/arshsisodiya/ProjectHelios.git")
-UPSTREAM_REPO_BRANCH = os.environ.get("UPSTREAM_REPO_BRANCH") or "demon"
+UPSTREAM_REPO_BRANCH = os.environ.get("UPSTREAM_REPO_BRANCH") or "test"
 ###
 FUPSTREAM_REPO_URL = (os.environ.get("FPSTREAM_REPO_URL")
                      or "https://github.com/arshsisodiya/ProjectHelios.git")
-FUPSTREAM_REPO_BRANCH = os.environ.get("FPSTREAM_REPO_BRANCH") or "demon"
+FUPSTREAM_REPO_BRANCH = os.environ.get("FPSTREAM_REPO_BRANCH") or "test"
 # Console verbose logging
 CONSOLE_LOGGER_VERBOSE = sb(os.environ.get(
     "CONSOLE_LOGGER_VERBOSE") or "False")
