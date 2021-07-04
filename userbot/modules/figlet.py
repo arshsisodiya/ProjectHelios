@@ -32,7 +32,7 @@ async def figlet(fg):
     }
     input_str = fg.pattern_match.group(1)
     if "." in input_str:
-        text, cmd = input_str.split(".", maxsplit=1)
+        text, cmd = input_str.split(".", maxsplit=2)
     elif input_str is not None:
         cmd = None
         text = input_str
