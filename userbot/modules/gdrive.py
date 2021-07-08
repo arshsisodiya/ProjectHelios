@@ -791,24 +791,8 @@ async def lists(gdrive):
     del result
     if query == "":
         query = "Not specified"
-    if len(message) > 4096:
-        await gdrive.edit("`Result is too big, sending it as file...`")
-        with open("result.txt", "w") as r:
-            r.write(f"Google Drive Query:\n{query}\n\nResults\n\n{message}")
-        await gdrive.client.send_file(
-            gdrive.chat_id, "result.txt", caption="Google Drive Query List."
-        )
-    else:
-        await gdrive.edit(
-            "**Google Drive Query**:\n" f"`{query}`\n\n**Results**\n\n{message}"
-        )
-    return
-
-    del result
-    if query == "":
-        query = "Not specified"
-    if len(message) < 20 :
-        await gdrive.edit("`No Result found`")
+    if len(message) < 20:
+        await gdrive.edit("`NO FILE...`")
     else:
         await gdrive.edit(
             "**Google Drive Query**:\n" f"`{query}`\n\n**Results**\n\n{message}"
