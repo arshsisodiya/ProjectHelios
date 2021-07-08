@@ -804,6 +804,17 @@ async def lists(gdrive):
         )
     return
 
+    del result
+    if query == "":
+        query = "Not specified"
+    if len(message) < 20 :
+        await gdrive.edit("`No Result found`")
+    else:
+        await gdrive.edit(
+            "**Google Drive Query**:\n" f"`{query}`\n\n**Results**\n\n{message}"
+        )
+    return
+
 
 @register(pattern="^.gdf (mkdir|rm|chck) (.*)", outgoing=True)
 async def google_drive_managers(gdrive):
