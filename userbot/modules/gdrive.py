@@ -792,7 +792,7 @@ async def lists(gdrive):
     if query == "":
         query = "Not specified"
     if len(message) < 20:
-        await gdrive.edit("`No File found which\n" f"`{query}`\n `")
+        await gdrive.edit("`No File found which" f"`{query}`\n `")
     else:
         await gdrive.edit(
             "**Google Drive Query**:\n" f"`{query}`\n\n**Results**\n\n{message}"
