@@ -9,7 +9,7 @@
 import re
 import urllib
 import urllib.parse
-
+from userbot.events import register
 import requests
 from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
@@ -17,7 +17,7 @@ from fake_useragent import UserAgent
 from main_startup.helper_func.basic_helpers import edit_or_reply, get_text
 
 
-@friday_on_cmd(
+@register(
     ["duckduckgo", "ddg"],
     cmd_help={"help": "duckduckgo searcher!", "example": "{ch}ddg (query to search)"},
 )
@@ -36,7 +36,7 @@ async def duckduckgo(client, message):
     )
 
 
-@friday_on_cmd(
+@register(
     ["gs", "grs", "google"],
     cmd_help={"help": "Google Searcher!", "example": "{ch}gs (query to search)"},
 )
