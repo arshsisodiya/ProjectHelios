@@ -25,9 +25,6 @@ from pyrogram.types import (
     Message,
 )
 
-from main_startup import Friday, Friday2, Friday3, Friday4
-from main_startup.config_var import Config
-
 import mimetypes
 
 
