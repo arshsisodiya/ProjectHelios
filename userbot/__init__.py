@@ -298,14 +298,9 @@ output = (
     f"•`Telethon       : v{version.__version__} `\n"
     f"•`Python         : v{python_version()} `\n"
     f"•`User           : {DEFAULTUSER} `\n"
-    f"•`Running on     : {repo.active_branch.name} `\n"
+    #f"•`Running on (Current Branch)     : {repo.active_branch.name} Branch`\n"
     f"•`Loaded modules : 105 `\n"
     f"•`Helios Version : {USERBOT_VERSION} `\n"
-    "`            _    ____  ____  _   _  `\n"
-    "`           / \  |  _ \/ ___|| | | | `\n"
-    "`          / _ \ | |_) \___ \| |_| | `\n"
-    "`         / ___ \|  _ < ___) |  _  | `\n"
-    "`        /_/   \_\_| \_\____/|_| |_| `\n"
 )
 
 async def start():

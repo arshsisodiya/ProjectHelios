@@ -65,3 +65,9 @@ validators
 aiofiles
 git+https://github.com/code-rgb/search-engine-parser
 patool
+pyrogram
+fake_useragent>=0.1.11
+beautifulsoup4>=4.9.3
+requests>=2.25.1
+motor>=2.3.1
+TgCrypto>=1.2.2

@@ -1,4 +1,5 @@
 config.env
+.idea
 __pycache__/*
 userbot.db
 userbot.session
