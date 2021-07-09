@@ -121,7 +121,7 @@ async def convert_vid_to_vidnote(input_vid: str, final_path: str):
         os.remove(input_vid)
     else:
         os.rename(input_vid, final_path)
-        
+
 async def convert_image_to_image_note(input_path):
     """Crop Image To Circle"""
     img = Image.open(input_path).convert("RGB")
