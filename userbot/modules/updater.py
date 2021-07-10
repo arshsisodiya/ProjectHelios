@@ -77,7 +77,7 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
                 f"{txt}\n`Invalid Heroku credentials for deploying userbot dyno.`"
             )
             return repo.__del__()
-        await event.edit("`Userbot dyno build in progress, please wait...`")
+        await event.edit("**Perfoming a full update...**\nThis usually takes less than 5 minutes, please wait.")
         ups_rem.fetch(ac_br)
         repo.git.reset("--hard", "FETCH_HEAD")
         heroku_git_url = heroku_app.git_url.replace(
@@ -93,7 +93,7 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
         except GitCommandError as error:
             await event.edit(f"{txt}\n`Here is the error log:\n{error}`")
             return repo.__del__()
-        await event.edit("`Successfully Updated!\n" "Restarting, please wait...`")
+        await event.edit("**Successfully updated!**\nBot is restarting, will be back up in a few seconds.")
 
         if BOTLOG:
             await event.client.send_message(
@@ -185,7 +185,7 @@ async def upstream(event):
 
     if conf is None and force_update is False:
         changelog_str = (
-            f"**New UPDATE available for [{ac_br}]:\n\nCHANGELOG:**\n`{changelog}`"
+            f"**New UPDATE available for HeliosBot in [{ac_br}] Branch:\n\nCHANGELOG:**\n`{changelog}`"
         )
         if len(changelog_str) > 4096:
             await event.edit("`Changelog is too big, view the file to see it.`")
