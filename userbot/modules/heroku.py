@@ -205,9 +205,8 @@ async def _(dyno):
         .get("result")
         .get("key")
     )
-    response = post("https://api.katb.in/api/paste", json={"content": message}).json()
 
-    if response["msg"] == "Successfully created paste":
+        if response["msg"] == "Successfully created paste":
         await dyno.edit(
             f"**Pasted successfully:** [Katb.in](https://katb.in/{response['paste_id']})\n"
         )
