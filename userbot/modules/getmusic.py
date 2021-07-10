@@ -90,6 +90,7 @@ async def _(event):
 
 @register(outgoing=True, pattern=r"^\.songl(?: |$)(.*)")
 @register(outgoing=True, pattern=r"^\.spotify(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.sp(?: |$)(.*)")
 async def _(event):
     if event.fwd_from:
         return
