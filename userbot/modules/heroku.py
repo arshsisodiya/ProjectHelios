@@ -198,7 +198,7 @@ async def _(dyno):
     await dyno.edit("`Getting Logs....`")
     with open("logs.txt", "w") as log:
         log.write(app.get_log())
-    fd = codecs.open("logs.txt", "r", encoding="utf-8")
+    """fd = codecs.open("logs.txt", "r", encoding="utf-8")
     data = fd.read()
     key = (
         requests.post("https://nekobin.com/api/documents", json={"content": data})
@@ -208,7 +208,7 @@ async def _(dyno):
     )
     url = f"https://nekobin.com/raw/{key}"
     await dyno.edit(f"`Here the heroku logs:`\n\nPasted to: [Nekobin]({url})")
-    return os.remove("logs.txt")
+    return os.remove("logs.txt")"""
 
 
 CMD_HELP.update(
