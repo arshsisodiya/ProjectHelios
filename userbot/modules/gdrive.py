@@ -934,7 +934,8 @@ async def google_drive_managers(gdrive):
             )
             if mimeType != "application/vnd.google-apps.folder":
                 msg += f"`Size  :` `{humanbytes(f_size)}`\n"
-                msg += f"`Link  :` {downloadURL}\n\n"
+                msg += f"`URL   :` [Open]({webViewLink})\n\n"
+                message += f"📄️ • [{name_or_id}]({downloadURL})\n"
             else:
                 msg += f"`URL   :` [Open]({webViewLink})\n\n"
             if description:
