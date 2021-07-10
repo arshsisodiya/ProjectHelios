@@ -247,9 +247,9 @@ async def amireallyalive(alive):
         f"`===============================`\n"
         f"**[MISC Info]:**\n"
         f"•`User           : {DEFAULTUSER} `\n"
-        #f"•`Running on     : {repo.active_branch.name} `\n"
+        f"•`Current Branch : {repo.active_branch.name} `\n"
         f"•`Loaded modules : {len(modules)} `\n"
-        f"•`Helios         : {USERBOT_VERSION} `\n"
+        f"•`Helios Version : {USERBOT_VERSION} `\n"
         f"•`Bot Uptime     : {uptime} `\n"
         f"`===============================`\n"
 
