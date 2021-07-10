@@ -777,7 +777,7 @@ async def lists(gdrive):
             file_name = files.get("name")
             if files.get("mimeType") == "application/vnd.google-apps.folder":
                 link = files.get("webViewLink")
-                message += f"📁️ • [{file_name}]({link})\n"
+                message += f"📁️ • [{file_name}]({link})\n {humanbytes(result[0])} \n" 
             else:
                 link = files.get("webContentLink")
                 message += f"📄️ • [{file_name}]({link})\n"
