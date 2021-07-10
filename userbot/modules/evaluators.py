@@ -15,6 +15,7 @@ from userbot.events import register
 
 
 @register(outgoing=True, pattern=r"^\.eval(?: |$|\n)(.*)")
+@register(outgoing=True, pattern=r"^\.clac(?: |$|\n)(.*)")
 async def evaluate(query):
     """ For .eval command, evaluates the given Python expression. """
     if query.is_channel and not query.is_group:
@@ -189,6 +190,7 @@ async def terminal_runner(term):
 
 
 CMD_HELP.update({"eval": ">`.eval 2 + 3`"
+                 "clac": "> .clac 2 + 3`"
                  "\nUsage: Evalute mini-expressions.",
                  "exec": ">`.exec print('hello')`"
                  "\nUsage: Execute small python scripts.",
