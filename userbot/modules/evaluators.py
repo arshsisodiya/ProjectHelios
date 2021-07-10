@@ -63,10 +63,10 @@ async def evaluate(query):
             "**Query: **\n`" f"{expression}" "`\n**Exception: **\n" f"`{err}`"
         )
 
-    if BOTLOG:
+    """if BOTLOG:
         await query.client.send_message(
             BOTLOG_CHATID, f"Eval query {expression} was executed successfully."
-        )
+        )"""
 
 
 @register(outgoing=True, pattern=r"^\.exec(?: |$|\n)([\s\S]*)")
