@@ -781,7 +781,7 @@ async def lists(gdrive):
                 message += f"`Size  :` `{humanbytes(f_size)}`\n"
             else:
                 link = files.get("webContentLink")
-                message += f"📄️ • [{file_name}]({link})\n [{humanbytes(result[0])}] \n"
+                message += f"📄️ • [{file_name}]({link})\n"
                 message += f"`Size  :` `{humanbytes(f_size)}`\n"
             result.append(files)
         if len(result) >= page_size:
