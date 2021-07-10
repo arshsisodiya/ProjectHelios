@@ -162,10 +162,6 @@ async def show_all(event):
         await event.edit("`On-going Downloads: `\n" + msg)
         await sleep(15)
         await event.delete()
-    if len(msg) > 30:
-        await event.edit("`No On-going Downloads found `\n")
-        await sleep(15)
-        await event.delete()
     else:
         await event.edit("`Output is too big, sending it as a file...`")
         output = "output.txt"
