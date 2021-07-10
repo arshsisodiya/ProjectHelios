@@ -188,30 +188,19 @@ async def dyno_usage(dyno):
 
 @register(outgoing=True, pattern=r"^\.logs")
 async def _(dyno):
-    try:
-        Heroku = heroku3.from_key(HEROKU_API_KEY)
-        app = Heroku.app(HEROKU_APP_NAME)
-    except BaseException:
-        return await dyno.reply(
-            "`Please make sure your Heroku API Key, Your App name are configured correctly in the heroku var.`"
+    if app is None:
+        return await dyno.edit(
+            "**Please setup your** `HEROKU_APP_NAME` **and** `HEROKU_API_KEY`**.**"
         )
-    await dyno.edit("`Getting Logs....`")
+    await dyno.edit("**Processing...**")
     with open("logs.txt", "w") as log:
         log.write(app.get_log())
-    fd = codecs.open("logs.txt", "r", encoding="utf-8")
-    data = fd.read()
-    key = (
-        response = post("https://api.katb.in/api/paste", json={"content": message}).json()
-        .get("result")
-        .get("key")
+    await dyno.client.send_file(
+        entity=dyno.chat_id, file="logs.txt", caption="**Heroku dyno logs**"
     )
+    await dyno.delete()
+    return os.remove("logs.txt")
 
-        if response["msg"] == "Successfully created paste":
-        await dyno.edit(
-            f"**Pasted successfully:** [Katb.in](https://katb.in/{response['paste_id']})\n"
-        )
-    else:
-        await event.edit("**Katb.in seems to be down.**")
 
 
 CMD_HELP.update(
