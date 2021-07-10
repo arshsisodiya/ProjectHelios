@@ -61,6 +61,6 @@ async def mention(event):
 CMD_HELP.update({
     "mention":
     "Mention users with a custom name."
-    "\nUsage: `Hi @PrajjuS[Noob]`"
-    "\nResult: Hi [Noob](tg://resolve?domain=PrajjuS)"
+    "\nUsage: `Hi @NmberSEVEN[Noob Dev]`"
+    "\nResult: Hi [Noob](tg://resolve?domain=NmberSEVEN)"
 })
