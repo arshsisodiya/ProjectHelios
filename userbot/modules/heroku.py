@@ -200,15 +200,19 @@ async def _(dyno):
         log.write(app.get_log())
     fd = codecs.open("logs.txt", "r", encoding="utf-8")
     data = fd.read()
-    """key = (
-        requests.post("https://nekobin.com/api/documents", json={"content": data})
-        .json()
+    key = (
+        response = post("https://api.katb.in/api/paste", json={"content": message}).json()
         .get("result")
         .get("key")
     )
-    url = f"https://nekobin.com/raw/{key}"
-    await dyno.edit(f"`Here the heroku logs:`\n\nPasted to: [Nekobin]({url})")
-    return os.remove("logs.txt")"""
+    response = post("https://api.katb.in/api/paste", json={"content": message}).json()
+
+    if response["msg"] == "Successfully created paste":
+        await dyno.edit(
+            f"**Pasted successfully:** [Katb.in](https://katb.in/{response['paste_id']})\n"
+        )
+    else:
+        await event.edit("**Katb.in seems to be down.**")
 
 
 CMD_HELP.update(
