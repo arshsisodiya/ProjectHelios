@@ -189,8 +189,7 @@ async def terminal_runner(term):
         )
 
 
-CMD_HELP.update({"eval": ">`.eval 2 + 3`"
-                 "clac": "> .clac 2 + 3`"
+CMD_HELP.update({"eval": ">`.eval or .clac 2 + 3`"
                  "\nUsage: Evalute mini-expressions.",
                  "exec": ">`.exec print('hello')`"
                  "\nUsage: Execute small python scripts.",
