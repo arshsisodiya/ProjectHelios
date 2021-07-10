@@ -89,6 +89,7 @@ async def _(event):
 
 
 @register(outgoing=True, pattern=r"^\.songl(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.spotify(?: |$)(.*)")
 async def _(event):
     if event.fwd_from:
         return
@@ -184,7 +185,7 @@ CMD_HELP.update(
     {
         "getmusic": ".songn <Artist - Song Title>"
         "\nUsage: Download music by name (@WooMaiBot)"
-        "\n\n.songl <Spotify/Deezer Link>"
+        "\n\n.songl/.spotify <Spotify/Deezer Link>"
         "\nUsage: Download music by link (@MusicsHunterBot)"
         "\n\n.songf <Artist - Song Title>"
         "\nUsage: Download music by name (@SpotifyMusicDownloaderBot)"
