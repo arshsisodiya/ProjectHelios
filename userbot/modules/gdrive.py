@@ -928,14 +928,11 @@ async def google_drive_managers(gdrive):
             else:
                 status = "[FILE - EXIST]"
             msg = (
-                f"`{status}`\n\n"
-                f"`Name  :` `{name_or_id}`\n"
-                f"`ID    :` `{f_id}`\n"
+                f"`{status}`\n\n" f"`Name  :` `{name_or_id}`\n" f"`ID    :` `{f_id}`\n"
             )
             if mimeType != "application/vnd.google-apps.folder":
                 msg += f"`Size  :` `{humanbytes(f_size)}`\n"
-                msg += f"`URL   :` [Open]({webViewLink})\n\n"
-                msg += f"📄️ • [{name_or_id}]({downloadURL})\n"
+                msg += f"`Link  :` [{name_or_id}]({downloadURL})\n\n"
             else:
                 msg += f"`URL   :` [Open]({webViewLink})\n\n"
             if description:
