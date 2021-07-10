@@ -120,7 +120,7 @@ async def _(event):
         return await event.edit("`Error: `@MusicsHunterBot` is not responding!.`")
 
 
-@register(outgoing=True, pattern=r"^\.songf (?:(now)|(.*) - (.*))")
+"""@register(outgoing=True, pattern=r"^\.songf (?:(now)|(.*) - (.*))")
 async def _(event):
     if event.fwd_from:
         return
@@ -160,7 +160,7 @@ async def _(event):
         await event.delete()
     except TimeoutError:
         return await event.edit(
-            "`Error: `@SpotifyMusicDownloaderBot` is not responding!.`"
+            "`Error: `@SpotifyMusicDownloaderBot` is not responding!.`"""
         )
 
 
@@ -231,12 +231,12 @@ CMD_HELP.update(
         "\nUsage: Download music by name (@WooMaiBot)"
         "\n\n.songl <Spotify/Deezer Link>"
         "\nUsage: Download music by link (@MusicsHunterBot)"
-        "\n\n.songf <Artist - Song Title>"
-        "\nUsage: Download music by name (@SpotifyMusicDownloaderBot)"
         "\n\n.songn now"
         "\nUsage: Download current LastFM scrobble with @WooMaiBot"
         "\n\n.songf now"
-        "\nUsage: Download current LastFM scrobble with @SpotifyMusicDownloaderBot"
+        """\nUsage: Download current LastFM scrobble with @SpotifyMusicDownloaderBot"
+        "\n\n.songf <Artist - Song Title>"
+        "\nUsage: Download music by name (@SpotifyMusicDownloaderBot)"""
         "\n\n.vsong <Artist - Song Title>"
         "\nUsage: Finding and uploading videoclip.\n"
     }
