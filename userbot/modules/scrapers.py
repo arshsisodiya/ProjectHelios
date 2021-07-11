@@ -23,8 +23,6 @@ from gtts import gTTS
 from gtts.lang import tts_langs
 from requests import get
 from search_engine_parser import GoogleSearch
-from search_engine_parser.core.engines.google import Search as GoogleSearch
-from search_engine_parser.core.exceptions import NoResultsOrTrafficError
 from telethon.tl.types import DocumentAttributeAudio, DocumentAttributeVideo
 from wikipedia import summary
 from wikipedia.exceptions import DisambiguationError, PageError
@@ -184,28 +182,38 @@ async def moni(event):
     c_to_val = round(c_from_val * response["rates"][c_to], 2)
     await event.edit(f"`{c_from_val} {c_from} = {c_to_val} {c_to}`")
 
-@register(outgoing=True, pattern=r"^.google (.*)")
+register(outgoing=True, pattern=r"^.google (.*)")
 async def gsearch(q_event):
     """ For .google command, do a Google search. """
-    if not q_event.text[0].isalpha() and q_event.text[0] not in ("/", "#", "@", "!"):
-        match_ = q_event.pattern_match.group(1)
-        match = parse.quote_plus(match_)
-        result_ = await asyncsh(
-            f"gsearch {match}",
-            stdout=asyncsh_PIPE,
-            stderr=asyncsh_PIPE
+    match = q_event.pattern_match.group(1)
+    page = findall(r"page=\d+", match)
+    try:
+        page = page[0]
+        page = page.replace("page=", "")
+        match = match.replace("page=" + page[0], "")
+    except IndexError:
+        page = 1
+    search_args = (str(match), int(page))
+    gsearch = GoogleSearch()
+    gresults = await gsearch.async_search(*search_args)
+    msg = ""
+    for i in range(10):
+        try:
+            title = gresults["titles"][i]
+            link = gresults["links"][i]
+            desc = gresults["descriptions"][i]
+            msg += f"[{title}]({link})\n`{desc}`\n\n"
+        except IndexError:
+            break
+    await q_event.edit(
+        "**Search Query:**\n`" + match + "`\n\n**Results:**\n" + msg, link_preview=False
+    )
+
+    if BOTLOG:
+        await q_event.client.send_message(
+            BOTLOG_CHATID,
+            "Google Search query `" + match + "` was executed successfully",
         )
-        stdout, stderr = await result_.communicate()
-        result = str(stdout.decode().strip()) \
-            + str(stderr.decode().strip())
-        await q_event.edit(
-            "**Search Query:**\n`" + match_ + "`\n\n**Result:**\n" + result
-        )
-        if BOTLOG:
-            await q_event.client.send_message(
-                BOTLOG_CHATID,
-                "Google Search query " + match_ + " was executed successfully",
-            )
 
 @register(outgoing=True, pattern=r"^\.wiki(?: |$)(.*)")
 async def wiki(wiki_q):
