@@ -527,11 +527,11 @@ async def translateme(trans):
     reply_text = f"From: **{source_lan}**\nTo: **{LANGUAGES.get(TRT_LANG).title()}**\n\n{reply_text.text}"
 
     await trans.edit(reply_text)
-    if BOTLOG:
+    """if BOTLOG:
         await trans.client.send_message(
             BOTLOG_CHATID,
             f"Translated some {source_lan.title()} stuff to {LANGUAGES[TRT_LANG].title()} just now.",
-        )
+        )"""
 
 
 @register(pattern=r"\.lang (trt|tts) (.*)", outgoing=True)
@@ -561,10 +561,10 @@ async def lang(value):
                 f"`Invalid Language code !!`\n`Available language codes for TTS`:\n\n`{tts_langs()}`"
             )
     await value.edit(f"`Language for {scraper} changed to {LANG.title()}.`")
-    if BOTLOG:
+    """if BOTLOG:
         await value.client.send_message(
             BOTLOG_CHATID, f"`Language for {scraper} changed to {LANG.title()}.`"
-        )
+        )"""
 
 
 @register(outgoing=True, pattern=r"^\.yt(?: |$)(\d*)? ?(.*)")
