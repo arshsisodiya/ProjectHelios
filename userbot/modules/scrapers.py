@@ -513,8 +513,8 @@ async def translateme(trans):
     """if BOTLOG:
         await trans.client.send_message(
             BOTLOG_CHATID,
-            f"Translated some {source_lan.title()} stuff to {LANGUAGES[TRT_LANG].title()} just now.","""
-        )
+            f"Translated some {source_lan.title()} stuff to {LANGUAGES[TRT_LANG].title()} just now.",
+        )"""
 
 
 @register(pattern=r"\.lang (trt|tts) (.*)", outgoing=True)
