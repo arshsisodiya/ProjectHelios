@@ -20,6 +20,7 @@ google-auth-httplib2
 google-auth-oauthlib
 googletrans
 google_images_download
+gpytranslate
 gTTS
 gTTS-token
 hachoir
