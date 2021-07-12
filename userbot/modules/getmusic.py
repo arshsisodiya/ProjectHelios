@@ -119,34 +119,41 @@ async def _(event):
             )
             await event.delete()
     except TimeoutError:
-        if event.fwd_from:
-            return
-        d_link = event.pattern_match.group(1)
-        if ".com" not in d_link:
-            await event.edit("`Enter a valid link to download from`")
-        else:
-            await event.edit("`Downloading...`")
-        chat = "@DeezerMusicBot"
-        try:
-            async with bot.conversation(chat) as conv:
-                try:
-                    msg_start = await conv.send_message("/start")
-                    response = await conv.get_response()
-                    msg = await conv.send_message(d_link)
-                    details = await conv.get_response()
-                    song = await conv.get_response()
-                    """- don't spam notif -"""
-                    await bot.send_read_acknowledge(conv.chat_id)
-                except YouBlockedUserError:
-                    await event.edit("`Unblock `@DeezerMusicBot` and retry`")
-                    return
-                await bot.send_file(event.chat_id, song, caption=details.text)
-                await event.client.delete_messages(
-                    conv.chat_id, [msg_start.id, response.id, msg.id, details.id, song.id]
-                )
-                await event.delete()
-        except TimeoutError:
-            return await event.edit("`Error: `@DeezerMusicBot` is not responding!.`")
+        return await event.edit("`Error: `@MusicsHunterBot` is not responding!.`")
+
+@register(outgoing=True, pattern=r"^\.songl2(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.spotify2(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.sp2(?: |$)(.*)")
+async def _(event):
+    if event.fwd_from:
+        return
+    d_link = event.pattern_match.group(1)
+    if ".com" not in d_link:
+        await event.edit("`Enter a valid link to download from`")
+    else:
+        await event.edit("`Downloading...`")
+    chat = "@DeezerMusicBot"
+    try:
+        async with bot.conversation(chat) as conv:
+            try:
+                msg_start = await conv.send_message("/start")
+                response = await conv.get_response()
+                msg = await conv.send_message(d_link)
+                details = await conv.get_response()
+                song = await conv.get_response()
+                """- don't spam notif -"""
+                await bot.send_read_acknowledge(conv.chat_id)
+            except YouBlockedUserError:
+                await event.edit("`Unblock `@DeezerMusicBot` and retry`")
+                return
+            await bot.send_file(event.chat_id, song, caption=details.text)
+            await event.client.delete_messages(
+                conv.chat_id, [msg_start.id, response.id, msg.id, details.id, song.id]
+            )
+            await event.delete()
+    except TimeoutError:
+        return await event.edit("`Error: `@DeezerMusicBot` is not responding!.`")
+
 
 @register(outgoing=True, pattern=r"^\.vsong(?: |$)(.*)")
 async def _(event):
@@ -213,8 +220,10 @@ CMD_HELP.update(
     {
         "getmusic": ".songn <Artist - Song Title>"
         "\nUsage: Download music by name (@WooMaiBot)"
-        "\n\n.songl/.spotify <Spotify/Deezer Link>"
+        "\n\n.songl/.spotify/.sp <Spotify/Deezer Link>"
         "\nUsage: Download music by link (@MusicsHunterBot)"
+        "\n\n.songl2/.spotify2 /.sp2 <Spotify/Deezer Link>"
+        "\nUsage: Download music by link (@@DeezerMusicBot)"
         "\n\n.songn now"
         "\nUsage: Download current LastFM scrobble with @WooMaiBot"
         "\n\n.vsong <Artist - Song Title>"
