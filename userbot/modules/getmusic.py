@@ -98,6 +98,8 @@ async def _(event):
     d_link = event.pattern_match.group(1)
     if ".com" not in d_link:
         await event.edit("`Enter a valid link to download from`")
+    elif "playlist" in d_link:
+        await trans.client.send_message ("`You are downloading A playlist the bot will only send first song to the current chat, you can find remaining songs in (@MusicsHunterBot) chat`")
     else:
         await event.edit("`Downloading...`")
     chat = "@MusicsHunterBot"
