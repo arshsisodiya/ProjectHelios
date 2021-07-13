@@ -89,9 +89,7 @@ async def _(event):
         return await event.edit("`Error: `@WooMaiBot` is not responding!.`")
 
 
-@register(outgoing=True, pattern=r"^\.songl(?: |$)(.*)")
-@register(outgoing=True, pattern=r"^\.spotify(?: |$)(.*)")
-@register(outgoing=True, pattern=r"^\.sp(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.s(ongl|potify|p) (?: |$)(.*)")
 async def _(event):
     if event.fwd_from:
         return
@@ -101,8 +99,10 @@ async def _(event):
     if msg_link:
         d_link = msg_link.text
         await event.edit("`Downloading...`")
+
     elif ".com" not in d_link:
         await event.edit("`Enter a valid link to download from`")
+
     elif "playlist" in d_link:
         await event.edit("`You are downloading A playlist the bot will only send first song to the current chat, you can find remaining songs in (@MusicsHunterBot) chat \n Downloading Playlsit.....`")
     else:
@@ -130,9 +130,7 @@ async def _(event):
         return await event.edit("`Error: `@MusicsHunterBot` is not responding!.`\n try using .songl2 /.spotify2 /.sp2 for downloading the song using @DeezerMusicBot")
 
 
-@register(outgoing=True, pattern=r"^\.songl2(?: |$)(.*)")
-@register(outgoing=True, pattern=r"^\.spotify2(?: |$)(.*)")
-@register(outgoing=True, pattern=r"^\.sp2(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.s(ongl2|potify2|p2) (?: |$)(.*)")
 async def _(event):
     if event.fwd_from:
         return
@@ -170,9 +168,7 @@ async def _(event):
     except TimeoutError:
         return await event.edit("`Error: `@DeezerMusicBot` is not responding!.` \n try using .songl3 /.spotify3 /.sp3 for downloading the song using @MusicDownloaderRobot\n but it ts slow AF")
 
-@register(outgoing=True, pattern=r"^\.songl3(?: |$)(.*)")
-@register(outgoing=True, pattern=r"^\.spotify3(?: |$)(.*)")
-@register(outgoing=True, pattern=r"^\.sp3(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.s(ongl2|potify2|p2) (?: |$)(.*)")
 async def _(event):
     if event.fwd_from:
         return
@@ -212,6 +208,7 @@ async def _(event):
         return await event.edit("`Error: `@MusicsHunterBot` is not responding!.`")
 
 @register(outgoing=True, pattern=r"^\.vsong(?: |$)(.*)")
+
 async def _(event):
     reply_to_id = event.message.id
     if event.reply_to_msg_id:
