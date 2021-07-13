@@ -154,7 +154,7 @@ async def _(event):
             )
             await event.delete()
     except TimeoutError:
-        return await event.edit("`Error: `@DeezerMusicBot` is not responding!.` \n try using .songl3 /.spotify3 /.sp3 for downloading the song using @MusicDownloaderRobot\n but it ts slow AF")
+        return await event.edit("`Error: `@DeezerMusicBot` is not responding!.` \n try using .songl3 /.spotify3 /.sp3 for downloading the song using @MusicDownloaderRobot but it is slow AF")
 
 @register(outgoing=True, pattern=r"^\.songl3(?: |$)(.*)")
 @register(outgoing=True, pattern=r"^\.spotify3(?: |$)(.*)")
