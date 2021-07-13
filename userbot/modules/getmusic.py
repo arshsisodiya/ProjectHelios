@@ -95,18 +95,11 @@ async def _(event):
 async def _(event):
     if event.fwd_from:
         return
-    msg_link = await event.get_reply_message()
     d_link = event.pattern_match.group(1)
-    if d_link:
-        pass
-    elif msg_link:
-        d_link = msg_link.text
-        
-    elif ".com" not in d_link:
+    if ".com" not in d_link:
         await event.edit("`Enter a valid link to download from`")
     elif "playlist" in d_link:
-        await event.edit("`Playlist Downloading...`")
-        await event.client.send_message("`You are downloading A playlist the bot will only send first song to the current chat, you can find remaining songs in (@MusicsHunterBot) chat`")
+        await event.edit("`You are downloading A playlist the bot will only send first song to the current chat, you can find remaining songs in (@MusicsHunterBot) chat \n Downloading Playlsit.....`")
     else:
         await event.edit("`Downloading...`")
     chat = "@MusicsHunterBot"
@@ -141,6 +134,8 @@ async def _(event):
     d_link = event.pattern_match.group(1)
     if ".com" not in d_link:
         await event.edit("`Enter a valid link to download from`")
+    elif "playlist" in d_link:
+            await event.edit("`You are downloading A playlist the bot will only send first song to the current chat, you can find remaining songs in (@DeezerMusicBot) chat \n Downloading Playlsit.....`")
     else:
         await event.edit("`Downloading...`")
     chat = "@DeezerMusicBot"
@@ -163,7 +158,7 @@ async def _(event):
             )
             await event.delete()
     except TimeoutError:
-        return await event.edit("`Error: `@DeezerMusicBot` is not responding!.` \n try using .songl3 /.spotify3 /.sp3 for downloading the song using @MusicDownloaderRobot but it is slow AF")
+        return await event.edit("`Error: `@DeezerMusicBot` is not responding!.` \n try using .songl3 /.spotify3 /.sp3 for downloading the song using @MusicDownloaderRobot\n but it ts slow AF")
 
 @register(outgoing=True, pattern=r"^\.songl3(?: |$)(.*)")
 @register(outgoing=True, pattern=r"^\.spotify3(?: |$)(.*)")
@@ -174,6 +169,9 @@ async def _(event):
     d_link = event.pattern_match.group(1)
     if ".com" not in d_link:
         await event.edit("`Enter a valid link to download from`")
+    elif "playlist" in d_link:
+        await event.edit(
+            "`@MusicDownloaderRobot doesn`t support downloading playlist use `@MusicsHunterBot` or `@DeezerMusicBot` `")
     else:
         await event.edit("`Downloading...`")
     chat = "@MusicDownloaderRobot"
@@ -196,7 +194,7 @@ async def _(event):
             )
             await event.delete()
     except TimeoutError:
-        return await event.edit("`Error: `@MusicDownloaderRobot` is not responding!.`")
+        return await event.edit("`Error: `@MusicsHunterBot` is not responding!.`")
 
 @register(outgoing=True, pattern=r"^\.vsong(?: |$)(.*)")
 async def _(event):
@@ -263,7 +261,7 @@ CMD_HELP.update(
     {
         "getmusic": ".songn <Artist - Song Title>"
         "\nUsage: Download music by name (@WooMaiBot)"
-        "\n\n.songl/.spotify/.sp <Spotify/Deezer Link>"
+        "\n\n.songl/.spotify <Spotify/Deezer Link>"
         "\nUsage: Download music by link (@MusicsHunterBot)"
         "\n\n.songl2/.spotify2 /.sp2 <Spotify/Deezer Link>"
         "\nUsage: Download music by link (@DeezerMusicBot)"
