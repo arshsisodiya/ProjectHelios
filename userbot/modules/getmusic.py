@@ -111,7 +111,7 @@ async def _(event):
                 """- don't spam notif -"""
                 await bot.send_read_acknowledge(conv.chat_id)
             except YouBlockedUserError:
-                msg_start = await conv.send_message("/start")
+                await conv.send_message("/start")
                 return
             await bot.send_file(event.chat_id, song, caption=details.text)
             await event.client.delete_messages(
