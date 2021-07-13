@@ -14,10 +14,10 @@ from userbot.utils import progress
 async def _(event):
     "To recognize a image."
     if not event.reply_to_msg_id:
-        return await edit(event, "Reply to any user's media message.")
+        return await event.edit(event, "Reply to any user's media message.")
     reply_message = await event.get_reply_message()
     if not reply_message.media:
-        return await edit_or_reply(event, "reply to media file")
+        return await event.edit(event, "reply to media file")
     chat = "@Rekognition_Bot"
     if reply_message.sender.bot:
         return await event.edit("Reply to actual users message.")
