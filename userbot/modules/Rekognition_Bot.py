@@ -10,7 +10,7 @@ from userbot import CMD_HELP
 from userbot.events import register
 from userbot.utils import progress
 
-@register(outgoing=True, pattern=r"^\.recognize")
+@register(outgoing=True, pattern=r"^\.reco(?: |$)(.*)")
 async def _(event):
     "To recognize a image."
     if not event.reply_to_msg_id:
