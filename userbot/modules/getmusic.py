@@ -100,7 +100,7 @@ async def _(event):
         await event.edit("`Enter a valid link to download from`")
     elif "playlist" in d_link:
         await event.edit("`Playlist Downloading...`")
-        await conv.send_message("`You are downloading A playlist the bot will only send first song to the current chat, you can find remaining songs in (@MusicsHunterBot) chat`")
+        await client.send_message("`You are downloading A playlist the bot will only send first song to the current chat, you can find remaining songs in (@MusicsHunterBot) chat`")
     else:
         await event.edit("`Downloading...`")
     chat = "@MusicsHunterBot"
