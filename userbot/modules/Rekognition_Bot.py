@@ -10,7 +10,7 @@ from userbot import CMD_HELP
 from userbot.events import register
 from userbot.utils import progress
 
-@register(outgoing=True, pattern=r"^\.rcg")
+@register(outgoing=True, pattern=r"^\.recognize")
 async def _(event):
     "To recognize a image."
     if not event.reply_to_msg_id:
@@ -42,3 +42,9 @@ async def _(event):
         else:
             await event.edit("sorry, I couldnt find it")
         await event.client.send_read_acknowledge(conv.chat_id)
+CMD_HELP.update(
+    {
+        "\n\n .recognize <reply to any image>"
+        "\nUsage: Get information about an image using AWS Rekognition. Find out information including detected labels, faces. text and moderation tags)"
+    }
+)
