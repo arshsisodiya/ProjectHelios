@@ -89,7 +89,7 @@ async def _(event):
         return await event.edit("`Error: `@WooMaiBot` is not responding!.`")
 
 
-@register(outgoing=True, pattern=r"^\.s(ongl|potify|p) (?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.s(ongl|potify|p)(?: |$)(.*)")
 async def _(event):
     if event.fwd_from:
         return
@@ -130,7 +130,7 @@ async def _(event):
         return await event.edit("`Error: `@MusicsHunterBot` is not responding!.`\n try using .songl2 /.spotify2 /.sp2 for downloading the song using @DeezerMusicBot")
 
 
-@register(outgoing=True, pattern=r"^\.s(ongl2|potify2|p2) (?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.s(ongl2|potify2|p2)(?: |$)(.*)")
 async def _(event):
     if event.fwd_from:
         return
@@ -168,7 +168,7 @@ async def _(event):
     except TimeoutError:
         return await event.edit("`Error: `@DeezerMusicBot` is not responding!.` \n try using .songl3 /.spotify3 /.sp3 for downloading the song using @MusicDownloaderRobot\n but it ts slow AF")
 
-@register(outgoing=True, pattern=r"^\.s(ongl2|potify2|p2) (?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.s(ongl3|potify3|p3)(?: |$)(.*)")
 async def _(event):
     if event.fwd_from:
         return
