@@ -6,7 +6,7 @@ from userbot.events import register
 from userbot.utils import progress
 from userbot.utils.helper import edit_or_reply, fetch_audio
 
-@register(outgoing=True, pattern=r"^\.sazam (?:(now)|(.*) - (.*))")
+@register(outgoing=True, pattern=r"^.shazamm(?: |$)(.*)")
 async def shazamm(event):
     kek = await event.edit("`Shazaming In Progress!`")
     if not message.reply_to_message:
