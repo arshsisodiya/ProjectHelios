@@ -17,7 +17,7 @@ async def _(event):
     mediatype = media_type(reply)
     if not reply or not mediatype or mediatype not in ["Voice", "Audio"]:
         return await event.edit("__Reply to Voice clip or Audio clip to reverse search that song.__")
-    catevent = await event("__Downloading the audio clip...__")
+    catevent = await event.edit("__Downloading the audio clip...__")
     try:
         for attr in getattr(reply.document, "attributes", []):
             if isinstance(attr, types.DocumentAttributeFilename):
