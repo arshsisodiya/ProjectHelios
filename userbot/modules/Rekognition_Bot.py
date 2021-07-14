@@ -1,14 +1,10 @@
 import asyncio
-import glob
-import os
-import time
 from asyncio.exceptions import TimeoutError
 import requests
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from userbot import CMD_HELP
 from userbot.events import register
-from userbot.utils import progress
 
 @register(outgoing=True, pattern=r"^\.r(eco|ecognize)(?: |$)(.*)")
 async def _(event):
@@ -39,7 +35,7 @@ async def _(event):
             )
             response = await response
             msg = response.message.message
-            await event.event(msg)
+            await event.edit(msg)
         else:
             await event.edit("sorry, I couldnt find it")
         await event.client.send_read_acknowledge(conv.chat_id)
