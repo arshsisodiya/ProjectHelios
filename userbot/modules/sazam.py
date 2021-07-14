@@ -8,6 +8,7 @@ from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 from validators.url import url
 from userbot import CMD_HELP
 from userbot.events import register
+from userbot.utils import media_type
 
 @register(outgoing=True, pattern=r"^\.szm(?: |$)(.*)")
 async def _(event):
