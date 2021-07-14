@@ -33,12 +33,13 @@ async def _(event):
             await event.edit("unblock @Rekognition_Bot and try again")
             return
         if response.text.startswith("See next message."):
+            await event.delete()
             response = conv.wait_event(
                 events.NewMessage(incoming=True, from_users=461083923)
             )
             response = await response
             msg = response.message.message
-            await event.delete()
+            await event.event(msg)
         else:
             await event.edit("sorry, I couldnt find it")
         await event.client.send_read_acknowledge(conv.chat_id)
