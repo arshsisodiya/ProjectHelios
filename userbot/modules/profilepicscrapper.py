@@ -70,7 +70,6 @@ CMD_HELP.update(
              "\nUsage: download all profile pictures of the user."
              "\n\n>`dp <number>`"
              "\nUsage: download the <number>th profile picture of the user "
-             "else use"
              "\n\n>`pp"
              "\nUsage: download current picture of the user."
              "\n\n>`pp all"
