@@ -1,3 +1,9 @@
+
+#All Thenks goes to Emily ( The creater of This Plugin) from ftg userbot
+
+#ported by arshsisodiya
+
+
 import asyncio
 from telethon import events
 from userbot import CMD_HELP
@@ -22,6 +28,7 @@ async def _(event):
             )
         send_photos = await event.client.download_media(photos[uid - 1])
         await event.client.send_file(event.chat_id, send_photos)
+        await event.edit("Downloading all profile picture of the user")
     elif uid.strip() == "all":
         if len(photos) > 0:
             await event.client.send_file(event.chat_id, photos)
@@ -32,6 +39,7 @@ async def _(event):
                 else:
                     photo = await event.client.download_profile_photo(event.input_chat)
                 await event.client.send_file(event.chat_id, photo)
+                await event.edit ("Downloading all profile picture of the user2")
             except Exception:
                 return await event.edit("`This user has no photos to show you`")
     else:
@@ -55,8 +63,15 @@ async def _(event):
     await event.delete()
 
 CMD_HELP.update(
-    {"poto": ">`.poto` \ `.`ppic <text/reply>" "\nUsage: Reply to a user to get his profile pic or use command along\
+    {"poto": ">`.poto` \nUsage: Reply to a user to get his profile pic or use command along\
         with profile pic number to get desired pic else use .poto all to get\
         all pics. If you don't reply to any one\
-        then the bot will get the chat profile pic"}
+        then the bot will get the chat profile pic"
+             "\n\n>`poto"
+             "\nUsage: download current picture of the user."
+             "\n\n>`poto all"
+             "\nUsage: download all profile pictures of the user."
+             "\n\n>`poto <number>`"
+             "\nUsage: download the <number>th profile picture of the user "
+     }
 )
