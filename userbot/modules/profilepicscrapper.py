@@ -18,17 +18,19 @@ async def _(event):
     if user:
         photos = await event.client.get_profile_photos(user.sender)
         u = True
+        await event.edit("Downloading profile picture of the replied user")
     else:
         photos = await event.client.get_profile_photos(chat)
         u = False
+        await event.edit("Downloading profile picture of the current chat")
     if uid.strip() == "":
+        await event.edit("Downloading current profile picture of the user")
         uid = 1
         if int(uid) > (len(photos)):
             return await event.edit("`No photo found of this NIBBA / NIBBI. Now u Die!`"
             )
         send_photos = await event.client.download_media(photos[uid - 1])
         await event.client.send_file(event.chat_id, send_photos)
-        await event.edit("Downloading all profile picture of the user")
     elif uid.strip() == "all":
         if len(photos) > 0:
             await event.client.send_file(event.chat_id, photos)
