@@ -1,6 +1,7 @@
 import asyncio
 import io
 import os
+from pathlib import Path
 from ShazamAPI import Shazam
 from telethon import types
 from telethon.errors.rpcerrorlist import YouBlockedUserError
@@ -24,7 +25,7 @@ async def _(event):
             if isinstance(attr, types.DocumentAttributeFilename):
                 name = attr.file_name
         dl = io.FileIO(name, "a")
-        await event.client.fast_download_file(
+        await event.client.download_file(
             location=reply.document,
             out=dl,
         )
@@ -34,7 +35,6 @@ async def _(event):
         recognize_generator = shazam.recognizeSong()
         track = next(recognize_generator)[1]["track"]
     except Exception as e:
-        LOGS.error(e)
         return await event.edit("**Error while reverse searching song:**\n__{str(e)}__"
         )
     image = track["images"]["background"]
