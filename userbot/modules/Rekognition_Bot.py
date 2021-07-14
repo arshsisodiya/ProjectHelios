@@ -10,7 +10,7 @@ from userbot import CMD_HELP
 from userbot.events import register
 from userbot.utils import progress
 
-@register(outgoing=True, pattern=r"^\.reco(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.r(eco|ecognize)(?: |$)(.*)")
 async def _(event):
     "To recognize a image."
     if not event.reply_to_msg_id:
@@ -20,8 +20,8 @@ async def _(event):
         return await event.edit(event, "reply to media file")
     chat = "@Rekognition_Bot"
     if reply_message.sender.bot:
-        return await event.edit("Reply to actual users message.")
-    cat = await event.edit("recognizeing this media")
+        return await event.edit(event, "Reply to actual users message.")
+    await event.edit("recognizeing this media")
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
