@@ -50,6 +50,7 @@ pymongo[srv]
 qrcode
 redis
 requests
+ShazamAPI
 speedtest-cli
 sqlalchemy==1.3.23
 telethon
