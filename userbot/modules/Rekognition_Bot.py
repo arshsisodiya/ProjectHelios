@@ -38,7 +38,7 @@ async def _(event):
             )
             response = await response
             msg = response.message.message
-            await event.delete(msg)
+            await event.delete()
         else:
             await event.edit("sorry, I couldnt find it")
         await event.client.send_read_acknowledge(conv.chat_id)
