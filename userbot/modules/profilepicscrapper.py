@@ -5,7 +5,8 @@
 from userbot import CMD_HELP
 from userbot.events import register
 
-@register(outgoing=True, pattern=r"^\.p(oto|pic)(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.d(p|isplaypic)(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.p(p|profilepic)(?: |$)(.*)")
 async def _(event):
     "To get user or group profile pic"
     uid = "".join(event.raw_text.split(maxsplit=1)[1:])
@@ -61,15 +62,21 @@ async def _(event):
     await event.delete()
 
 CMD_HELP.update(
-    {"poto": ">`.poto` \nUsage: Reply to a user to get his profile pic or use command along\
-        with profile pic number to get desired pic else use .poto all to get\
-        all pics. If you don't reply to any one\
+    {"displaypic": ">`.dp` \nUsage: Reply to a user to get his profile pic \ If you don't reply to any specific user \
         then the bot will get the chat profile pic"
-             "\n\n>`poto"
+             "\n\n>`dp"
              "\nUsage: download current picture of the user."
-             "\n\n>`poto all"
+             "\n\n>`dp all"
              "\nUsage: download all profile pictures of the user."
-             "\n\n>`poto <number>`"
+             "\n\n>`dp <number>`"
              "\nUsage: download the <number>th profile picture of the user "
+             "else use"
+             "\n\n>`pp"
+             "\nUsage: download current picture of the user."
+             "\n\n>`pp all"
+             "\nUsage: download all profile pictures of the user."
+             "\n\n>`pp <number>`"
+             "\nUsage: download the <number>th profile picture of the user "
+
      }
 )
