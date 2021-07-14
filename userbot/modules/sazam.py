@@ -69,7 +69,8 @@ async def _(event):
             await event.edit("```Please unblock (@auddbot) and try again```")
             return
     namem = f"**Song Name : **`{result.text.splitlines()[0]}`\
-        \n\n**Details : **__{result.text.splitlines()[2]}__"
+        \n\n**Details : **__{result.text.splitlines()[2]}__\
+       \n\n ** Links: ** __{result.text.splitlines()[5]}__"
     await event.edit(namem)
 
 
