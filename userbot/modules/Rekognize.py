@@ -1,6 +1,7 @@
+#ported by arshsisodiya from catusernbot
+
 import asyncio
 from asyncio.exceptions import TimeoutError
-import requests
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from userbot import CMD_HELP
@@ -29,7 +30,6 @@ async def _(event):
             await event.edit("unblock @Rekognition_Bot and try again")
             return
         if response.text.startswith("See next message."):
-            await event.delete()
             response = conv.wait_event(
                 events.NewMessage(incoming=True, from_users=461083923)
             )
@@ -42,7 +42,6 @@ async def _(event):
 
 
 
-
 CMD_HELP.update(
-    {"recognize": ">`.recognize` <text/reply>" "\nUsage: Get information about an image using AWS Rekognition. Find out information including detected labels, faces. text and moderation tags."}
+    {"recognize": ">`.recognize` \ `.reco` <text/reply>" "\nUsage: Get information about an image using AWS Rekognition. Find out information including detected labels, faces. text and moderation tags."}
 )
