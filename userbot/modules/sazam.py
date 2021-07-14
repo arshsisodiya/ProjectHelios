@@ -9,6 +9,7 @@ from validators.url import url
 from userbot import CMD_HELP
 from userbot.events import register
 from userbot.utils import media_type
+from userbot.utils.logger import logging
 
 @register(outgoing=True, pattern=r"^\.szm(?: |$)(.*)")
 async def _(event):
