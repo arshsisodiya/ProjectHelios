@@ -1,11 +1,7 @@
-
 #All Thenks goes to Emily ( The creater of This Plugin) from ftg userbot
 
 #ported by arshsisodiya
 
-
-import asyncio
-from telethon import events
 from userbot import CMD_HELP
 from userbot.events import register
 
@@ -32,6 +28,7 @@ async def _(event):
         send_photos = await event.client.download_media(photos[uid - 1])
         await event.client.send_file(event.chat_id, send_photos)
     elif uid.strip() == "all":
+        await event.edit("Downloading all profile pictures of the user")
         if len(photos) > 0:
             await event.client.send_file(event.chat_id, photos)
         else:
@@ -41,7 +38,6 @@ async def _(event):
                 else:
                     photo = await event.client.download_profile_photo(event.input_chat)
                 await event.client.send_file(event.chat_id, photo)
-                await event.edit ("Downloading all profile picture of the user2")
             except Exception:
                 return await event.edit("`This user has no photos to show you`")
     else:
