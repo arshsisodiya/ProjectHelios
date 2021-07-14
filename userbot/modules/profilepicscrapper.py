@@ -18,7 +18,7 @@ async def _(event):
     if uid.strip() == "":
         uid = 1
         if int(uid) > (len(photos)):
-            return await event.edit( event, "`No photo found of this NIBBA / NIBBI. Now u Die!`"
+            return await event.edit("`No photo found of this NIBBA / NIBBI. Now u Die!`"
             )
         send_photos = await event.client.download_media(photos[uid - 1])
         await event.client.send_file(event.chat_id, send_photos)
@@ -33,7 +33,7 @@ async def _(event):
                     photo = await event.client.download_profile_photo(event.input_chat)
                 await event.client.send_file(event.chat_id, photo)
             except Exception:
-                return await event.edit(event, "`This user has no photos to show you`")
+                return await event.edit("`This user has no photos to show you`")
     else:
         try:
             uid = int(uid)
@@ -43,7 +43,7 @@ async def _(event):
                 )
                 return
         except BaseException:
-            await event.edit(event, "`Are you comedy me ?`")
+            await event.edit("`Are you comedy me ?`")
             return
         if int(uid) > (len(photos)):
             return await edit_delere(
