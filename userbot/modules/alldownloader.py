@@ -17,27 +17,28 @@ async def _(event):
         chat = "@allsaverbot"
         if reply_message.sender.bot:
             return await event.edit(event, "Reply to actual users message.")
-        await event.edit("recognizeing this media")
+        await event.edit("downloading this media")
         async with event.client.conversation(chat) as conv:
             try:
                 response = conv.wait_event(
-                    events.NewMessage(incoming=True, )
+                    events.NewMessage(incoming=True,)
                 )
-                await event.client.forward_messages(chat, reply_message)
+                await event.client.send_message(chat, reply_message)
                 response = await response
             except YouBlockedUserError:
                 await event.edit("unblock @allsaverbot and try again")
                 return
             if response.text.startswith("Follow to @allsavernews channel, in order to keep up to date with all the bot news."):
                 response = conv.wait_event(
-                    event.client.download_media(chat, message)
                 )
                 response = await response
                 msg = response.message
-                await event.edit("kuch ho jaye bas")
+                event.client.download_media(chat, msg)
             else:
                 await event.edit("sorry, I couldnt find it")
             await event.client.send_read_acknowledge(conv.chat_id)
+
+
 
 CMD_HELP.update(
     {"reels": ">`.rd <text/reply>" "\nUsage: download reels"}
