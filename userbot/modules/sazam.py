@@ -94,10 +94,10 @@ async def _(event):
             await event.edit("Wait just a sec...")
             await conv.get_response()
             await event.client.send_read_acknowledge(conv.chat_id)
+            message.delete()
         except YouBlockedUserError:
             await event.edit("```Please unblock (@SongIDbot) and try again```")
             return
-        await conv.get_response()
 
 @register(outgoing=True, pattern=r"^\.sid2(?: |$)(.*)")
 async def _(event):
