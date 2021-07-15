@@ -91,8 +91,12 @@ async def _(event):
                     "An error while identifying the song. Try to use a 5-10s long audio message."
                 )
             await event.edit("Wait just a sec...")
-            result = await conv.get_response()
-            await event.client.send_read_acknowledge(conv.chat_id)
+            response = conv.wait_event(
+                events.NewMessage(incoming=True, from_users=461083923)
+            )
+            response = await response
+            msg = response.message.message
+            await event.edit(msg)
         except YouBlockedUserError:
             await event.edit("```Please unblock (@SongIDbot) and try again```")
             return
