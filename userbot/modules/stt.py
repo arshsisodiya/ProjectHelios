@@ -19,6 +19,7 @@ async def _(event):
     await event.edit("recognizeing this media")
     async with event.client.conversation(chat) as conv:
         try:
+            await event.client.forward_messages(chat, reply_message)
             response = await conv.get_response()
             """- don't spam notif -"""
             await bot.send_read_acknowledge(conv.chat_id)
