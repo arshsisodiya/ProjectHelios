@@ -69,11 +69,36 @@ async def _(event):
             await event.edit("```Please unblock (@auddbot) and try again```")
             return
     namem = f"**Song Name : **`{result.text.splitlines()[0]}`\
-        \n\n**Details : **__{result.text.splitlines()[2]}__\
-       \n\n ** Links: ** __{result.text.splitlines()[8]}__"
+        \n\n**Details : **__{result.text.splitlines()[2]}__"
     await event.edit(namem)
 
-
+@register(outgoing=True, pattern=r"^\.sid(?: |$)(.*)")
+async def _(event):
+    "To reverse search music by bot."
+    if not event.reply_to_msg_id:
+        return await event.edit("```Reply to an audio message.```")
+    reply_message = await event.get_reply_message()
+    chat = "@SongIDbot"
+    await event.edit("```Identifying the song```")
+    async with event.client.conversation(chat) as conv:
+        try:
+            await conv.send_message("/start")
+            await conv.get_response()
+            await conv.send_message(reply_message)
+            check = await conv.get_response()
+            if check.text.startswith("No Match"):
+                return await event.edit(
+                    "An error while identifying the song. Try to use a 5-10s long audio message."
+                )
+            await event.edit("Wait just a sec...")
+            result = await conv.get_response()
+            await event.client.send_read_acknowledge(conv.chat_id)
+        except YouBlockedUserError:
+            await event.edit("```Please unblock (@SongIDbot) and try again```")
+            return
+    namem = f"**Song Name : **`{result.text.splitlines()[0]}`\
+        \n\n**Details : **__{result.text.splitlines()[2]}__"
+    await event.edit(namem)
 
 CMD_HELP.update(
     {
