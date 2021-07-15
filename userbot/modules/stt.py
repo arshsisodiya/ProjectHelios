@@ -27,7 +27,7 @@ async def _(event):
         except YouBlockedUserError:
             await event.edit("`Unblock `@voicybot` and retry`")
             return
-        await bot.send_file(event.chat_id, response)
+        await event.client.send_message(event.chat_id, response)
         await event.client.delete_messages(
             conv.chat_id, [msg_start.id, response.id, msg.id, ]
         )
