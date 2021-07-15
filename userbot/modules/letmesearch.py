@@ -2,9 +2,10 @@ from asyncio import sleep
 import requests
 from userbot.events import register
 from userbot import CMD_HELP
-@register(outgoing=True, pattern=r"^\.gg(?: |$(.*)")
+
+@register(outgoing=True, pattern=r"^\.gg(?: |$)(.*)")
 async def _(event):
-    "Searches the given query in Google and shows you the link of that query."
+    """Searches the given query in Google and shows you the link of that query."""
     input_str = event.pattern_match.group(1)
     sample_url = "https://da.gd/s?url=http://google.com/search?q={}".format(
         input_str.replace(" ", "+")
