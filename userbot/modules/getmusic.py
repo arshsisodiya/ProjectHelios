@@ -89,7 +89,7 @@ async def _(event):
         return await event.edit("`Error: `@WooMaiBot` is not responding!.`")
 
 
-@register(outgoing=True, pattern=r"^\.s(ongl|potify|p)(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.sp)(?: |$)(.*)")
 async def _(event):
     if event.fwd_from:
         return
@@ -121,9 +121,9 @@ async def _(event):
             except YouBlockedUserError:
                 await event.edit("`Unblock `@MusicsHunterBot` and retry`")
                 return
-            await client.send_message(event.chat_id, song, caption=details.text)
-            client.start()
-            client.run_until_disconnected()
+            await event.send_message(event.chat_id, song, caption=details.text)
+            event.start()
+            event.run_until_disconnected()
 
             await event.client.delete_messages(
                 conv.chat_id, [msg_start.id, response.id, msg.id, details.id, song.id]
