@@ -6,50 +6,39 @@ from userbot import CMD_HELP
 from userbot.events import register
 from userbot.utils import progress
 
-@register(outgoing=True, pattern=r"^\.allsave (?:(now)|(.*) - (.*))")
+@register(outgoing=True, pattern=r"^\.rd(?: |$)(.*)")
 async def _(event):
-    if event.fwd_from:
-        return
-    msg_link = await event.get_reply_message()
-    d_link = event.pattern_match.group(1)
-
-    if msg_link:
-        d_link = msg_link.text
-        await event.edit("`Downloading...`")
-
-    elif ".com" not in d_link:
-        await event.edit("`Enter a valid link to download from`")
-
-    elif "playlist" in d_link:
-        await event.edit("``")
-    else:
-        await event.edit("`Downloading...`")
-    chat = "@allsaverbot"
-    try:
-        async with bot.conversation(chat) as conv:
+        "To recognize a image."
+        if not event.reply_to_msg_id:
+            return await event.edit("Reply to any user's media message.")
+        reply_message = await event.get_reply_message()
+        if not reply_message.media:
+            return await event.edit(event, "reply to media file")
+        chat = "@allsaverbot"
+        if reply_message.sender.bot:
+            return await event.edit(event, "Reply to actual users message.")
+        await event.edit("recognizeing this media")
+        async with event.client.conversation(chat) as conv:
             try:
-                msg_start = await conv.send_message("/start")
-                response = await conv.get_response()
-                msg = await conv.send_message(d_link)
-                details = await conv.get_response()
-                song = await conv.get_response()
-                """- don't spam notif -"""
-                await bot.send_read_acknowledge(conv.chat_id)
+                response = conv.wait_event(
+                    events.NewMessage(incoming=True, from_users=461083923)
+                )
+                await event.client.forward_messages(chat, reply_message)
+                response = await response
             except YouBlockedUserError:
-                await event.edit("`Unblock `@allsaverbot` and retry`")
+                await event.edit("unblock @allsaverbot and try again")
                 return
-            await bot.send_file(event.chat_id, song, caption=details.text)
-            await event.client.delete_messages(
-                conv.chat_id, [msg_start.id, response.id, msg.id, details.id, song.id]
-            )
-            await event.delete()
-    except TimeoutError:
-        return await event.edit("`Error:")
+            if response.text.startswith("Follow to @allsavernews channel, in order to keep up to date with all the bot news.."):
+                response = conv.wait_event(
+                    events.NewMessage(incoming=True, from_users=461083923)
+                )
+                response = await response
+                msg = response.message.message
+                await event.edit(msg)
+            else:
+                await event.edit("sorry, I couldnt find it")
+            await event.client.send_read_acknowledge(conv.chat_id)
 
-    CMD_HELP.update(
-        {
-            "allsave": ".reel <lonk> "
-                        "\nUsage: Download reels"
-
-        }
-    )
+CMD_HELP.update(
+    {"reels": ">`.rd <text/reply>" "\nUsage: download reels"}
+)
