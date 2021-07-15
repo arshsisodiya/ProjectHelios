@@ -16,7 +16,7 @@ async def _(event):
             return await event.edit("reply to a link")
         chat = "@allsaverbot"
         if reply_message.sender.bot:
-            return await event.edit(event, "Reply to actual users message.")
+            return await event.edit("Reply to actual users message.")
         await event.edit("downloading this media")
         async with bot.conversation(chat) as conv:
             try:
