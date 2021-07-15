@@ -2,7 +2,7 @@ import asyncio
 from asyncio.exceptions import TimeoutError
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
-from userbot import CMD_HELP
+from userbot import CMD_HELP, bot
 from userbot.events import register
 
 @register(outgoing=True, pattern=r"^\.stt(?: |$)(.*)")
