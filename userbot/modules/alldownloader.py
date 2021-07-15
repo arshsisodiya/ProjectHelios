@@ -33,12 +33,13 @@ async def _(event):
                 msg = await conv.send_message(d_link)
                 details = await conv.get_response()
                 song = await conv.get_response()
+                video = await conv.get_response()
                 """"- don't spam notif -"""
                 await bot.send_read_acknowledge(conv.chat_id)
             except YouBlockedUserError:
                 await event.edit("unblock @allsaverbot and try again")
                 return
-            await event.client.send_message(event.chat_id, song,)
+            await event.client.send_message(event.chat_id, song, video,)
             await event.client.delete_messages(
                 conv.chat_id, [msg_start.id, response.id, msg.id, details.id, song.id]
             )
