@@ -18,7 +18,7 @@ from bs4 import BeautifulSoup
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from pylast import User
-from telethon import TelegramClient, events
+from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl.types import DocumentAttributeVideo
 
@@ -115,16 +115,13 @@ async def _(event):
                 response = await conv.get_response()
                 msg = await conv.send_message(d_link)
                 details = await conv.get_response()
-                song = await conv.get_response()
+                song = await conv.get_response(), await conv.get_response()
                 """- don't spam notif -"""
                 await bot.send_read_acknowledge(conv.chat_id)
             except YouBlockedUserError:
                 await event.edit("`Unblock `@MusicsHunterBot` and retry`")
                 return
-            await event.send_file(event.chat_id, song, caption=details.text)
-            event.start()
-            event.run_until_disconnected()
-
+            await bot.send_file(event.chat_id, song, caption=details.text)
             await event.client.delete_messages(
                 conv.chat_id, [msg_start.id, response.id, msg.id, details.id, song.id]
             )
