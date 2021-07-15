@@ -30,7 +30,7 @@ async def _(event):
                 return
             if response.text.startswith("Follow to @allsavernews channel, in order to keep up to date with all the bot news."):
                 response = conv.wait_event(
-                    events.client.download_media(chat, message)
+                    event.client.download_media(chat, message)
                 )
                 response = await response
                 msg = response.message
