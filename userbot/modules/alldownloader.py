@@ -28,9 +28,9 @@ async def _(event):
             except YouBlockedUserError:
                 await event.edit("unblock @allsaverbot and try again")
                 return
-            if response.text.startswith("📥 @allsaverbot"):
+            if response.text.startswith("Follow to @allsavernews channel, in order to keep up to date with all the bot news."):
                 response = conv.wait_event(
-                    events.client.download_media(message)
+                    events.client.download_media(chat, message)
                 )
                 response = await response
                 msg = response.message
