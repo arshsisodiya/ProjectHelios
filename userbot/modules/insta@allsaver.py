@@ -16,6 +16,15 @@ async def _(event):
     if msg_link:
         d_link = msg_link.text
         await event.edit("`Downloading...`")
+    elif ".com" not in d_link:
+        await event.edit("`Enter a valid link to download from`")
+
+    elif "reel" in d_link:
+        await event.edit("`Reel is downloading......`")
+    elif "stories" in d_link:
+        await event.edit("`Sorry but story downloading is not supported yet`")
+    else:
+        await event.edit("`fetching post from instagram...`")
     chat = "@allsaverbot"
     try:
         async with bot.conversation(chat) as conv:
@@ -23,8 +32,9 @@ async def _(event):
                 msg_start = await conv.send_message("/start")
                 response = await conv.get_response()
                 msg = await conv.send_message(d_link)
+                garbagetext = await conv.get_response()
+                angarbasgetext = await conv.get_response()
                 video = await conv.get_response()
-                detail= await conv.get_response()
                 """- don't spam notif -"""
                 await bot.send_read_acknowledge(conv.chat_id)
             except YouBlockedUserError:
@@ -32,7 +42,7 @@ async def _(event):
                 return
             await event.client.send_message(event.chat_id, video,)
             await event.client.delete_messages(
-                conv.chat_id, [msg_start.id, response.id, msg.id,video.id]
+                conv.chat_id, [msg_start.id, response.id, msg.id,video.id, garbagetext.id, angarbasgetext.id]
             )
             await event.delete()
     except TimeoutError:
