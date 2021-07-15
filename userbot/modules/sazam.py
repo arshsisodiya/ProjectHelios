@@ -4,6 +4,7 @@ import os
 from pathlib import Path
 from ShazamAPI import Shazam
 from telethon import types
+from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 from validators.url import url
