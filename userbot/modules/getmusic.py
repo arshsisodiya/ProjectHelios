@@ -121,7 +121,7 @@ async def _(event):
             except YouBlockedUserError:
                 await event.edit("`Unblock `@MusicsHunterBot` and retry`")
                 return
-            await event.send_message(event.chat_id, song, caption=details.text)
+            await event.send_file(event.chat_id, song, caption=details.text)
             event.start()
             event.run_until_disconnected()
 
