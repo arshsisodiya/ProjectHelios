@@ -39,7 +39,7 @@ async def _(event):
             except YouBlockedUserError:
                 await event.edit("unblock @allsaverbot and try again")
                 return
-            await event.client.send_message(event.chat_id, song, video,)
+            await event.client.send_message(event.chat_id, video,)
             await event.client.delete_messages(
                 conv.chat_id, [msg_start.id, response.id, msg.id, details.id, song.id]
             )
