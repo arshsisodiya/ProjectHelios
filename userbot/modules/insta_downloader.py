@@ -1,10 +1,15 @@
+#Copyright @arshsisodiya
+#https://github.com/arshsisodiya
+#https://twitter.com/arshsisodiya
+
+#Created by arshsisodiya for ProjectHelios
+
 import asyncio
 from asyncio.exceptions import TimeoutError
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from userbot import CMD_HELP, bot
 from userbot.events import register
-from userbot.utils import progress
 
 @register(outgoing=True, pattern=r"^\.insta(?: |$)(.*)")
 async def _(event):
@@ -14,8 +19,8 @@ async def _(event):
     d_link = event.pattern_match.group(1)
 
     if msg_link:
-        d_link != msg_link.text
-        await event.edit("`Please reply to valid link or use` `.insta <link>`")
+        d_link = msg_link.text
+        await event.edit("`Fetching Data from instagram`")
     elif ".com" not in d_link:
         await event.edit("`Enter a valid link to download from`")
 
@@ -46,11 +51,11 @@ async def _(event):
             )
             await event.delete()
     except TimeoutError:
-        return await event.edit("`Error:")
+        return await event.edit("`Error: `@allsaverbot` is not responding or you are trying to downloading instagram stories")
 CMD_HELP.update(
     {
-        "ird": ".ird <link>"
-        "\nUsage: Download files using (Instasaverbotbot)"
-
+        "insta": ".insta <instagram link>"
+                "\nUsage: Reply to a instagram link or paste instagram link to "
+                "download the file using `@allsaverbot`"
     }
 )
