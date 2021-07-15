@@ -89,7 +89,7 @@ async def _(event):
         return await event.edit("`Error: `@WooMaiBot` is not responding!.`")
 
 
-@register(outgoing=True, pattern=r"^\.sp)(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.s(ongl|potify|p)(?: |$)(.*)")
 async def _(event):
     if event.fwd_from:
         return
