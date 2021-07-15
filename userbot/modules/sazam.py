@@ -97,10 +97,6 @@ async def _(event):
         except YouBlockedUserError:
             await event.edit("```Please unblock (@SongIDbot) and try again```")
             return
-    namem = f"**Song Name : **`{result.text.splitlines()[0]}`\
-        \n\n**Details : **__{result.text.splitlines()[2]}__"
-    await event.edit(namem)
-
 
 @register(outgoing=True, pattern=r"^\.sid2(?: |$)(.*)")
 async def _(event):
