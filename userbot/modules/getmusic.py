@@ -18,7 +18,7 @@ from bs4 import BeautifulSoup
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from pylast import User
-from telethon import events
+from telethon import TelegramClient, events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl.types import DocumentAttributeVideo
 
@@ -121,7 +121,10 @@ async def _(event):
             except YouBlockedUserError:
                 await event.edit("`Unblock `@MusicsHunterBot` and retry`")
                 return
-            await bot.send_file(event.chat_id, song, caption=details.text)
+            await client.send_message(event.chat_id, song, caption=details.text)
+            client.start()
+            client.run_until_disconnected()
+
             await event.client.delete_messages(
                 conv.chat_id, [msg_start.id, response.id, msg.id, details.id, song.id]
             )
