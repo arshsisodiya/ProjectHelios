@@ -13,7 +13,7 @@ from userbot.utils import media_type
 from userbot.utils.logger import logging
 
 @register(outgoing=True, pattern=r"^\.szm(?: |$)(.*)")
-async def _(event):
+async def shazamcmd(event):
     "To reverse search song."
     reply = await event.get_reply_message()
     mediatype = media_type(reply)
@@ -25,7 +25,7 @@ async def _(event):
             if isinstance(attr, types.DocumentAttributeFilename):
                 name = attr.file_name
         dl = io.FileIO(name, "a")
-        await event.client.download_file(
+        await event.client.fast_download_file(
             location=reply.document,
             out=dl,
         )
@@ -70,7 +70,7 @@ async def _(event):
             return
     namem = f"**Song Name : **`{result.text.splitlines()[0]}`\
         \n\n**Details : **__{result.text.splitlines()[2]}__\
-       \n\n ** Links: ** __{result.text.splitlines()[5]}__"
+       \n\n ** Links: ** __{result.text.splitlines()[8]}__"
     await event.edit(namem)
 
 
