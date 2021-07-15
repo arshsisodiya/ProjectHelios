@@ -6,7 +6,7 @@ from userbot import CMD_HELP
 from userbot.events import register
 from userbot.utils import progress
 
-@register(outgoing=True, pattern=r"^\.reel (?:(now)|(.*) - (.*))")
+@register(outgoing=True, pattern=r"^\.allsave (?:(now)|(.*) - (.*))")
 async def _(event):
     if event.fwd_from:
         return
@@ -45,3 +45,11 @@ async def _(event):
             await event.delete()
     except TimeoutError:
         return await event.edit("`Error:")
+
+    CMD_HELP.update(
+        {
+            "allsave": ".reel <lonk> "
+                        "\nUsage: Download reels"
+
+        }
+    )
