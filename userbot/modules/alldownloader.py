@@ -30,6 +30,7 @@ async def _(event):
                 return
             if response.text.startswith("Follow to @allsavernews channel, in order to keep up to date with all the bot news."):
                 response = conv.wait_event(
+                    events.NewMessage(incoming=True, from_user="@allsaverbot")
                 )
                 response = await response
                 msg = response.message
