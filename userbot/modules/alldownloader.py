@@ -12,8 +12,8 @@ async def _(event):
         if not event.reply_to_msg_id:
             return await event.edit("Reply to any user's media message.")
         reply_message = await event.get_reply_message()
-        if not reply_message.media:
-            return await event.edit(event, "reply to media file")
+        if not reply_message:
+            return await event.edit("reply to a link")
         chat = "@allsaverbot"
         if reply_message.sender.bot:
             return await event.edit(event, "Reply to actual users message.")
@@ -35,7 +35,7 @@ async def _(event):
                 conv.chat_id, [msg_start.id, response.id, msg.id, details.id, song.id]
             )
             await event.delete()
-    
+
 
 
 CMD_HELP.update(
