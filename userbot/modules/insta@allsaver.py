@@ -6,7 +6,7 @@ from userbot import CMD_HELP, bot
 from userbot.events import register
 from userbot.utils import progress
 
-@register(outgoing=True, pattern=r"^\.ird2(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.insta(?: |$)(.*)")
 async def _(event):
     if event.fwd_from:
         return
@@ -14,8 +14,8 @@ async def _(event):
     d_link = event.pattern_match.group(1)
 
     if msg_link:
-        d_link = msg_link.text
-        await event.edit("`Downloading...`")
+        d_link != msg_link.text
+        await event.edit("`Please reply to valid link or use` `.insta <link>`")
     elif ".com" not in d_link:
         await event.edit("`Enter a valid link to download from`")
 
