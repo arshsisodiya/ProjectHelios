@@ -8,6 +8,14 @@ from userbot.utils import progress
 
 @register(outgoing=True, pattern=r"^\.rd(?: |$)(.*)")
 async def _(event):
+    if event.fwd_from:
+        return
+    msg_link = await event.get_reply_message()
+    d_link = event.pattern_match.group(1)
+
+    if msg_link:
+        d_link = msg_link.text
+        await event.edit("`Downloading...`")
         "To recognize a image."
         if not event.reply_to_msg_id:
             return await event.edit("Reply to any user's media message.")
