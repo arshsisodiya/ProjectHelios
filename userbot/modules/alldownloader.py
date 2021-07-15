@@ -21,20 +21,20 @@ async def _(event):
         async with event.client.conversation(chat) as conv:
             try:
                 response = conv.wait_event(
-                    events.NewMessage(incoming=True, from_users=461083923)
+                    events.NewMessage(incoming=True, )
                 )
                 await event.client.forward_messages(chat, reply_message)
                 response = await response
             except YouBlockedUserError:
                 await event.edit("unblock @allsaverbot and try again")
                 return
-            if response.text.startswith("Follow to @allsavernews channel, in order to keep up to date with all the bot news.."):
+            if response.text.startswith("📥 @allsaverbot"):
                 response = conv.wait_event(
-                    events.NewMessage(incoming=True, from_users=461083923)
+                    events.client.download_media(message)
                 )
                 response = await response
-                msg = response.message.message
-                await event.edit(msg)
+                msg = response.message
+                await event.edit("kuch ho jaye bas")
             else:
                 await event.edit("sorry, I couldnt find it")
             await event.client.send_read_acknowledge(conv.chat_id)
