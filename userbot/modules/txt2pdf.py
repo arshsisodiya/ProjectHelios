@@ -27,6 +27,7 @@ async def _(event):
                 text = await conv.send_message("/text")
                 response2 = await conv.get_response()
                 msg = await conv.send_message(d_link)
+                response3 = await conv.get_response()
                 font = await conv.send_message("Roboto")
                 cnfrm = await conv.get_response()
                 pdf = await conv.get_response()
@@ -37,7 +38,7 @@ async def _(event):
                 return
             await bot.send_file(event.chat_id, pdf)
             await event.client.delete_messages(
-                conv.chat_id, [msg_start.id, response.id, msg.id,text.id, response.id, response2.id, cnfrm.id, pdf.id]
+                conv.chat_id, [msg_start.id, response.id, msg.id,text.id, response.id, response2.id, response3.id, cnfrm.id, pdf.id]
             )
             await event.delete()
     except TimeoutError:
