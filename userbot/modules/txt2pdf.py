@@ -11,10 +11,9 @@ from telethon.errors.rpcerrorlist import YouBlockedUserError
 from userbot import CMD_HELP, bot
 from userbot.events import register
 
-@register(outgoing=True, pattern=r"^\.ptxt (?:(eng)|(.*) - (.*))")
+@register(outgoing=True, pattern=r"^\.ptxte(?: |$)(.*)")
 async def _(event):
-    if event.pattern_match.group(1) == "eng":
-     if event.fwd_from:
+    if event.fwd_from:
         return
     msg_link = await event.get_reply_message()
     d_link = event.pattern_match.group(1)
@@ -49,10 +48,9 @@ async def _(event):
         return await event.edit(
                 "`Error: ")
 
-@register(outgoing=True, pattern=r"^\.ptxt (?:(hindi)|(.*) - (.*))")
+@register(outgoing=True, pattern=r"^\.ptxth(?: |$)(.*)")
 async def _(event):
-    if event.pattern_match.group(1) == "hindi":
-     if event.fwd_from:
+    if event.fwd_from:
         return
     msg_link = await event.get_reply_message()
     d_link = event.pattern_match.group(1)
