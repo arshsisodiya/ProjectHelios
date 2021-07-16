@@ -21,7 +21,7 @@ async def _(event):
 
     if msg_link:
         d_link = msg_link.text
-        await event.edit("`fetching torrents...`")
+        await event.edit("`Fetching torrents...`")
     chat = "@TorrentHuntBot"
     try:
         async with bot.conversation(chat) as conv:
@@ -42,7 +42,7 @@ async def _(event):
             )
             await event.delete()
     except TimeoutError:
-        return await event.edit("`Error: `@TorrentHuntBot` is not responding")
+        return await event.edit("`Error: `@TorrentHuntBot` is not responding please try again later")
 
 @register(outgoing=True, pattern=r"^\.tmag(?: |$)(.*)")
 async def _(event):
@@ -68,8 +68,18 @@ async def _(event):
                 return
             await event.client.send_message(event.chat_id, torrent,)
             await event.client.delete_messages(
-                conv.chat_id, [msg_start.id, response.id, msg.id, torrent.id]
+                conv.chat_id, [msg.id, torrent.id]
             )
             await event.delete()
     except TimeoutError:
-        return await event.edit("`Error: `@TorrentHuntBot` is not responding")
+        return await event.edit("`Error: `@TorrentHuntBot` is not responding please try again later")
+
+    CMD_HELP.update(
+        {
+            "Text2PDF": ".torrent"
+                        "\nUsage: Search Torrents "
+                        "\n\n.tmag"
+                        "\nUsage:reply to getLink<id> to get Magnet Links or getInfo<id> for information about the torrent"
+
+        }
+    )
