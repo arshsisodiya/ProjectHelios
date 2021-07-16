@@ -11,17 +11,17 @@ from telethon.errors.rpcerrorlist import YouBlockedUserError
 from userbot import CMD_HELP, bot
 from userbot.events import register
 
-@register(outgoing=True, pattern=r"^\.t2pdf(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.pdf (?:(eng)|(.*) - (.*))")
 async def _(event):
-    if event.fwd_from:
-        return
-    msg_link = await event.get_reply_message()
-    d_link = event.pattern_match.group(1)
-    if msg_link:
-     d_link = msg_link.text
-
-     await event.edit("`Converting your English Text into PDF...`")
+    "."
+    if event.pattern_match.group(1) == "eng":
+     if not event.reply_to_msg_id:
+        return await event.edit("Reply to any text message.")
+    reply_message = await event.get_reply_message()
+    if not reply_message.text:
+        return await event.edit(event, "reply to text message")
     chat = "@pdfbot"
+    await event.edit("converting your text into pdf........`")
     try:
         async with bot.conversation(chat) as conv:
             try:
@@ -91,7 +91,7 @@ CMD_HELP.update(
         "\nUsage: Convert Given English Text into PDF file "
         "\n\n.t2pdfhi"
         "\nUsage:Convert Given Hindi Text into PDF file"
-      
+
     }
 )
 
