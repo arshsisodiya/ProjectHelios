@@ -16,6 +16,7 @@ from userbot.events import register
 async def _(event):
  await event.edit("`Getting your temporary email`")
  if event.pattern_match.group(1) == "n":
+    chat = "@TempMail_org_bot"
     try:
         async with bot.conversation(chat) as conv:
             try:
