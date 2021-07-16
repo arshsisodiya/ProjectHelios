@@ -32,6 +32,7 @@ async def _(event):
                 msg = await conv.send_message(reply_message)
                 response3 = await conv.get_response()
                 font = await conv.send_message("Roboto")
+                await event.edit("Getting PDF from Server, Just A bit more.....`")
                 cnfrm = await conv.get_response()
                 pdf = await conv.get_response()
                 """- don't spam notif -"""
@@ -58,6 +59,7 @@ async def _(event):
     if not reply_message.text:
         return await event.edit("Reply to text message")
     chat = "@pdfbot"
+    await event.edit("Converting Your Hindi Text into PDF.....`")
     try:
         async with bot.conversation(chat) as conv:
             try:
@@ -68,6 +70,7 @@ async def _(event):
                 msg = await conv.send_message(reply_message)
                 response3 = await conv.get_response()
                 font = await conv.send_message("Noto Sans")
+                await event.edit("Getting PDF from Server, Just A bit more.....`")
                 cnfrm = await conv.get_response()
                 pdf = await conv.get_response()
                 """- don't spam notif -"""
