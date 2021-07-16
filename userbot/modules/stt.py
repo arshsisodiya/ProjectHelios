@@ -1,5 +1,6 @@
 # Copyright (C) 2021 arshsisodiya
 import asyncio
+from asyncio import sleep
 from asyncio.exceptions import TimeoutError
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
@@ -23,6 +24,7 @@ async def _(event):
             msg_start = await conv.send_message("/start")
             await event.client.forward_messages(chat, reply_message)
             response = await conv.get_response()
+            await sleep(4)
             result = await conv.get_response()
             """- don't spam notif -"""
             await bot.send_read_acknowledge(conv.chat_id)
