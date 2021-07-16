@@ -31,7 +31,6 @@ async def _(event):
         except YouBlockedUserError:
             await event.edit("`Unblock `@voicybot` and retry`")
             return
-        await event.edit('Powered by Todorant')
         await event.client.send_message(event.chat_id, result)
         await event.client.delete_messages(
             conv.chat_id, [msg_start.id, response.id, result.id, speech.id]
