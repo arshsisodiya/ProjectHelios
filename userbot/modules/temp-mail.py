@@ -12,10 +12,10 @@ from telethon.errors.rpcerrorlist import YouBlockedUserError
 from userbot import CMD_HELP, bot
 from userbot.events import register
 
-@register(outgoing=True, pattern=r"^\.tempmail (?:()|(.*) - (.*))")
+@register(outgoing=True, pattern=r"^\.tempmail (?:(n)|(.*) - (.*))")
 async def _(event):
  await event.edit("`Getting your temporary email`")
- if event.pattern_match.group(1) == "":
+ if event.pattern_match.group(1) == "n":
     try:
         async with bot.conversation(chat) as conv:
             try:
@@ -60,10 +60,10 @@ async def _(event):
         return await event.edit(
             "`Error: `@TempMail_org_bot` is not responding try again after some time")
 
-@register(outgoing=True, pattern=r"^\.tempmail (?:(n)|(.*) - (.*))")
+@register(outgoing=True, pattern=r"^\.tempmail (?:(new)|(.*) - (.*))")
 async def _(event):
  await event.edit("`Generating new Temp-Mail`")
- if event.pattern_match.group(1) == "n":
+ if event.pattern_match.group(1) == "new":
     chat = "@TempMail_org_bot"
     try:
         async with bot.conversation(chat) as conv:
@@ -137,9 +137,9 @@ async def _(event):
 
 CMD_HELP.update(
     {
-        "TempMail": ".tempmail"
+        "TempMail": ".tempmail n"
         "\nUsage: Create your Temporary Email "
-        "\n\n.tempmail n"
+        "\n\n.tempmail new"
         "\nUsage:create new Temporary Email"
         "\n\n.tempmail r"
         "\nUsage: Refresh your Temp mail inbox"
