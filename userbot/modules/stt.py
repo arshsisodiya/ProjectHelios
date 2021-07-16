@@ -22,7 +22,7 @@ async def _(event):
     async with event.client.conversation(chat) as conv:
         try:
             msg_start = await conv.send_message("/start")
-            await event.client.forward_messages(chat, reply_message)
+            await event.client.send_message(chat, reply_message)
             response = await conv.get_response()
             await sleep(4)
             result = await conv.get_response()
@@ -31,8 +31,9 @@ async def _(event):
         except YouBlockedUserError:
             await event.edit("`Unblock `@voicybot` and retry`")
             return
+        await event.edit(result,'hello!')
         await event.client.send_message(event.chat_id, result)
-        await event.client.delete_messages(
+        await event.client.delete_messages(chat,
             conv.chat_id, [msg_start.id, response.id, result.id]
         )
         await event.delete()
