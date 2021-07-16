@@ -39,7 +39,7 @@ async def _(event):
 
 @register(outgoing=True, pattern=r"^\.tempmail (?:(r)|(.*) - (.*))")
 async def _(event):
- await event.edit("`Refeshing Your Inbox`")
+ await event.edit("`Getting mails from Your temp-mail Inbox`")
  if event.pattern_match.group(1) == "r":
     chat = "@TempMail_org_bot"
     try:
@@ -87,7 +87,7 @@ async def _(event):
 
 @register(outgoing=True, pattern=r"^\.tempmail (?:(s)|(.*) - (.*))")
 async def _(event):
- await event.edit("`Getting mails from your Temp-Mail Inbox.......`")
+ await event.edit("`Fetching your current Temp Email address.....`")
  if event.pattern_match.group(1) == "s":
 
     chat = "@TempMail_org_bot"
