@@ -1,3 +1,9 @@
+# Copyright (C) 2021 arshsisodiya
+#https://github.com/arshsisodiya
+#https://twitter.com/arshsisodiya
+
+#Created by arshsisodiya for ProjectHelios
+
 import asyncio
 from asyncio import sleep
 from asyncio.exceptions import TimeoutError
@@ -6,11 +12,10 @@ from telethon.errors.rpcerrorlist import YouBlockedUserError
 from userbot import CMD_HELP, bot
 from userbot.events import register
 
-@register(outgoing=True, pattern=r"^\.tempmail (?:(new|n)|(.*) - (.*))")
+@register(outgoing=True, pattern=r"^\.tempmail(?: |$)(.*)")
 
 async def _(event):
- await event.edit("`Getting your Temp mail`")
- if event.pattern_match.group(1) == "new" "n":
+    await event.edit("`Getting your Temporary Email`")
     chat = "@TempMail_org_bot"
     try:
         async with bot.conversation(chat) as conv:
@@ -29,12 +34,13 @@ async def _(event):
             await event.delete()
     except TimeoutError:
         return await event.edit(
-            "`Error: `@TempMail_org_bot` is not responding or you are trying to downloading instagram stories")
+            "`Error: `@TempMail_org_bot` is not responding try again after some time")
 
 
-@register(outgoing=True, pattern=r"^\.tmr(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.tempmail (?:(r)|(.*) - (.*))")
 async def _(event):
-    await event.edit("`Refeshing Your Inbox`")
+ await event.edit("`Refeshing Your Inbox`")
+ if event.pattern_match.group(1) == "r":
     chat = "@TempMail_org_bot"
     try:
         async with bot.conversation(chat) as conv:
@@ -48,16 +54,17 @@ async def _(event):
                 return
             await event.client.send_message(event.chat_id, response)
             await event.client.delete_messages(
-                conv.chat_id, [msg_start.id, response.id,]
+                conv.chat_id, [msg_start.id, response.id, ]
             )
             await event.delete()
     except TimeoutError:
         return await event.edit(
-            "`Error: `@TempMail_org_bot` is not responding")
+            "`Error: `@TempMail_org_bot` is not responding try again after some time")
 
-@register(outgoing=True, pattern=r"^\.tmn(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.tempmail (?:(n)|(.*) - (.*))")
 async def _(event):
-    await event.edit("`Generating new Temp-Mail`")
+ await event.edit("`Generating new Temp-Mail`")
+ if event.pattern_match.group(1) == "n":
     chat = "@TempMail_org_bot"
     try:
         async with bot.conversation(chat) as conv:
@@ -76,11 +83,13 @@ async def _(event):
             await event.delete()
     except TimeoutError:
         return await event.edit(
-            "`Error: `@TempMail_org_bot` is not responding")
+            "`Error: `@TempMail_org_bot` is not responding try again after some time")
 
-@register(outgoing=True, pattern=r"^\.tms(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.tempmail (?:(s)|(.*) - (.*))")
 async def _(event):
-    await event.edit("`Getting mails from your Temp-Mail Inbox.......`")
+ await event.edit("`Getting mails from your Temp-Mail Inbox.......`")
+ if event.pattern_match.group(1) == "s":
+
     chat = "@TempMail_org_bot"
     try:
         async with bot.conversation(chat) as conv:
@@ -99,11 +108,13 @@ async def _(event):
             await event.delete()
     except TimeoutError:
         return await event.edit(
-            "`Error: `@TempMail_org_bot` is not responding")
+            "`Error: `@TempMail_org_bot` is not responding try again after some time")
 
-@register(outgoing=True, pattern=r"^\.tmd(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.tempmail (?:(d)|(.*) - (.*))")
 async def _(event):
-    await event.edit("`Deleting your old Temp-Mail and Creating new`")
+ await event.edit("`Deleting your old Temp-Mail and Creating new`")
+ if event.pattern_match.group(1) == "d":
+
     chat = "@TempMail_org_bot"
     try:
         async with bot.conversation(chat) as conv:
@@ -122,13 +133,21 @@ async def _(event):
             await event.delete()
     except TimeoutError:
         return await event.edit(
-            "`Error: `@TempMail_org_bot` is not responding")
+            "`Error: `@TempMail_org_bot` is not responding try again after some time")
 
 
 CMD_HELP.update(
     {
-        "Temp-Mail": ".tmail"
-        "\nUsage: Create Temporary Email "
+        "TempMail": ".tempmail"
+        "\nUsage: Create your Temporary Email "
+        "\n\n.tempmail n"
+        "\nUsage:create new Temporary Email"
+        "\n\n.tempmail r"
+        "\nUsage: Refresh your Temp mail inbox"
+        "\n\n.tempmail s"
+        "\nUsage: Show emails from your Temp mail inbox"
+        "\n\n.tempmail d"
+        "\nUsage: delete your current temporary email and create a new one\n"
 
     }
 )
