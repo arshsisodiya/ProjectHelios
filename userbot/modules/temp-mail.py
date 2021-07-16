@@ -6,11 +6,11 @@ from telethon.errors.rpcerrorlist import YouBlockedUserError
 from userbot import CMD_HELP, bot
 from userbot.events import register
 
-@register(outgoing=True, pattern=r"^\.tmail(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.tempmail (?:(new)|(.*) - (.*))")
 
 async def _(event):
-    await event.edit("`Getting your Temp mail`")
-    conf = event.pattern_match.group(1)
+ await event.edit("`Getting your Temp mail`")
+ if event.pattern_match.group(1) == "new":
     chat = "@TempMail_org_bot"
     try:
         async with bot.conversation(chat) as conv:
@@ -34,9 +34,7 @@ async def _(event):
 
 @register(outgoing=True, pattern=r"^\.tmr(?: |$)(.*)")
 async def _(event):
-    if event.fwd_from:
-        return
-    conf = event.pattern_match.group(1)
+    await event.edit("`Refeshing Your Inbox`")
     chat = "@TempMail_org_bot"
     try:
         async with bot.conversation(chat) as conv:
@@ -59,9 +57,7 @@ async def _(event):
 
 @register(outgoing=True, pattern=r"^\.tmn(?: |$)(.*)")
 async def _(event):
-    if event.fwd_from:
-        return
-    conf = event.pattern_match.group(1)
+    await event.edit("`Generating new Temp-Mail`")
     chat = "@TempMail_org_bot"
     try:
         async with bot.conversation(chat) as conv:
@@ -84,9 +80,7 @@ async def _(event):
 
 @register(outgoing=True, pattern=r"^\.tms(?: |$)(.*)")
 async def _(event):
-    if event.fwd_from:
-        return
-    conf = event.pattern_match.group(1)
+    await event.edit("`Getting mails from your Temp-Mail Inbox.......`")
     chat = "@TempMail_org_bot"
     try:
         async with bot.conversation(chat) as conv:
@@ -109,9 +103,7 @@ async def _(event):
 
 @register(outgoing=True, pattern=r"^\.tmd(?: |$)(.*)")
 async def _(event):
-    if event.fwd_from:
-        return
-    conf = event.pattern_match.group(1)
+    await event.edit("`Deleting your old Temp-Mail and Creating new`")
     chat = "@TempMail_org_bot"
     try:
         async with bot.conversation(chat) as conv:
@@ -135,9 +127,9 @@ async def _(event):
 
 CMD_HELP.update(
     {
-        "Temp-Mail": ".tmail "
-                 "\nUsage: Get a Temp mail "
-                 "from `@TempMail_org_bot`"
+        "Temp-Mail": ".tmail"
+        "\nUsage: Create Temporary Email "
+       
     }
 )
 
