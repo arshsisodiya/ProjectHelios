@@ -11,7 +11,7 @@ from telethon.errors.rpcerrorlist import YouBlockedUserError
 from userbot import CMD_HELP, bot
 from userbot.events import register
 
-@register(outgoing=True, pattern=r"^\.ptxte(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.t2pdf(?: |$)(.*)")
 async def _(event):
     if event.fwd_from:
         return
@@ -20,7 +20,7 @@ async def _(event):
     if msg_link:
      d_link = msg_link.text
 
-     await event.edit("`Converting your Text into PDF...`")
+     await event.edit("`Converting your English Text into PDF...`")
     chat = "@pdfbot"
     try:
         async with bot.conversation(chat) as conv:
@@ -46,15 +46,16 @@ async def _(event):
             await event.delete()
     except TimeoutError:
         return await event.edit(
-                "`Error: ")
+                "`Error: Sorry `@pdfbot` is not responding please try again later` ")
 
-@register(outgoing=True, pattern=r"^\.ptxth(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.t2pdfhi(?: |$)(.*)")
 async def _(event):
     if event.fwd_from:
         return
     msg_link = await event.get_reply_message()
     d_link = event.pattern_match.group(1)
-    await event.edit("`Converting your Text into PDF...`")
+    if msg_link:
+     d_link = msg_link.text
     await event.edit("`Converting your hindi Text into PDF...`")
     chat = "@pdfbot"
     try:
@@ -81,4 +82,16 @@ async def _(event):
             await event.delete()
     except TimeoutError:
         return await event.edit(
-                "`Error: ")
+                "`Error: Sorry `@pdfbot` is not responding please try again later` ")
+
+
+CMD_HELP.update(
+    {
+        "Text2PDF": ".t2pdf"
+        "\nUsage: Convert Given English Text into PDF file "
+        "\n\n.t2pdfhi"
+        "\nUsage:Convert Given Hindi Text into PDF file"
+      
+    }
+)
+
