@@ -12,7 +12,7 @@ from telethon.errors.rpcerrorlist import YouBlockedUserError
 from userbot import CMD_HELP, bot
 from userbot.events import register
 
-@register(outgoing=True, pattern=r"^\.t(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.torrent(?: |$)(.*)")
 async def _(event):
     if event.fwd_from:
         return
@@ -55,6 +55,7 @@ async def _(event):
         d_link = msg_link.text
         await event.edit("`fetching magnet links...`")
     chat = "@TorrentHuntBot"
+    await event.edit("`Fetching magnet link from physics book...`")
     try:
         async with bot.conversation(chat) as conv:
             try:
