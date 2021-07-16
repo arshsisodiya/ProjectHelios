@@ -6,11 +6,11 @@ from telethon.errors.rpcerrorlist import YouBlockedUserError
 from userbot import CMD_HELP, bot
 from userbot.events import register
 
-@register(outgoing=True, pattern=r"^\.tempmail (?:(new)|(.*) - (.*))")
+@register(outgoing=True, pattern=r"^\.tempmail (?:(new|n)|(.*) - (.*))")
 
 async def _(event):
  await event.edit("`Getting your Temp mail`")
- if event.pattern_match.group(1) == "new":
+ if event.pattern_match.group(1) == "new" "n":
     chat = "@TempMail_org_bot"
     try:
         async with bot.conversation(chat) as conv:
@@ -129,7 +129,7 @@ CMD_HELP.update(
     {
         "Temp-Mail": ".tmail"
         "\nUsage: Create Temporary Email "
-       
+
     }
 )
 
