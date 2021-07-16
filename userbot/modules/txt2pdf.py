@@ -13,13 +13,13 @@ from userbot.events import register
 
 @register(outgoing=True, pattern=r"^\.ptxt (?:(eng)|(.*) - (.*))")
 async def _(event):
-    if event.fwd_from:
+    if event.pattern_match.group(1) == "eng":
+     if event.fwd_from:
         return
     msg_link = await event.get_reply_message()
     d_link = event.pattern_match.group(1)
-    if event.pattern_match.group(1) == "eng":
-     if msg_link:
-        d_link = msg_link.text
+    if msg_link:
+     d_link = msg_link.text
 
      await event.edit("`Converting your Text into PDF...`")
     chat = "@pdfbot"
@@ -51,14 +51,14 @@ async def _(event):
 
 @register(outgoing=True, pattern=r"^\.ptxt (?:(hindi)|(.*) - (.*))")
 async def _(event):
-    if event.fwd_from:
+    if event.pattern_match.group(1) == "hindi":
+     if event.fwd_from:
         return
     msg_link = await event.get_reply_message()
     d_link = event.pattern_match.group(1)
     await event.edit("`Converting your Text into PDF...`")
-    if event.pattern_match.group(1) == "hindi":
-     await event.edit("`Converting your hindi Text into PDF...`")
-     chat = "@pdfbot"
+    await event.edit("`Converting your hindi Text into PDF...`")
+    chat = "@pdfbot"
     try:
         async with bot.conversation(chat) as conv:
             try:
