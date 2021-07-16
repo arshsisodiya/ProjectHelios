@@ -12,11 +12,10 @@ from telethon.errors.rpcerrorlist import YouBlockedUserError
 from userbot import CMD_HELP, bot
 from userbot.events import register
 
-@register(outgoing=True, pattern=r"^\.tempmail(?: |$)(.*)")
-
+@register(outgoing=True, pattern=r"^\.tempmail (?:()|(.*) - (.*))")
 async def _(event):
-    await event.edit("`Getting your Temporary Email`")
-    chat = "@TempMail_org_bot"
+ await event.edit("`Getting your temporary email`")
+ if event.pattern_match.group(1) == "":
     try:
         async with bot.conversation(chat) as conv:
             try:
