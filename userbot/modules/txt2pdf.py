@@ -29,7 +29,7 @@ async def _(event):
                 response = await conv.get_response()
                 text = await conv.send_message("/text")
                 response2 = await conv.get_response()
-                msg = await conv.send_message(d_link)
+                msg = await conv.send_message(chat, reply_message)
                 response3 = await conv.get_response()
                 font = await conv.send_message("Roboto")
                 cnfrm = await conv.get_response()
