@@ -29,12 +29,17 @@ async def _(event):
                 msg_start = await conv.send_message("/start")
                 response = await conv.get_response()
                 msg = await conv.send_message(d_link)
-                await sleep(1)
                 magic = await conv.get_response()
+                await event.edit(magic)
+                magic2 = await conv.get_response()
+                await event.edit(magic2)
+                magic3 = await conv.get_response()
+                await event.edit(magic3)
+
                 """- don't spam notif -"""
                 await bot.send_read_acknowledge(conv.chat_id)
             except YouBlockedUserError:
-                await event.edit("`Unblock `@TorrentHuntBot` and retry`")
+                await event.edit("`Unblock `@TextMagicBot` and retry`")
                 return
             await event.client.send_message(event.chat_id, magic,)
             await event.client.delete_messages(
