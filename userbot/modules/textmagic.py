@@ -35,7 +35,7 @@ async def _(event):
             except YouBlockedUserError:
                 await event.edit("`Unblock `@TextMagicBot` and retry`")
                 return
-            await event.client.send_message(event.chat_id, magic)
+            await event.client.send_messages(event.chat_id, magic)
             await event.client.delete_messages(
                 conv.chat_id, [msg_start.id, response.id, msg.id, magic.id]
             )
