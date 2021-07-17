@@ -28,7 +28,7 @@ async def _(event):
                 msg_start = await conv.send_message("/start")
                 response = await conv.get_response()
                 msg = await conv.send_message(d_link)
-                magic = await conv.get_response()
+                magic = [await conv.get_response(),await conv.get_response(),await conv.get_response(),await conv.get_response(),await conv.get_response(),await conv.get_response(),await conv.get_response(),await conv.get_response(),await conv.get_response(),await conv.get_response(),]
 
                 """- don't spam notif -"""
                 await bot.send_read_acknowledge(conv.chat_id)
