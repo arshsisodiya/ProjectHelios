@@ -115,7 +115,7 @@ async def _(event):
                 response = await conv.get_response()
                 msg = await conv.send_message(d_link)
                 details = await conv.get_response()
-                song = await conv.get_response.response(), await conv.get_response(), await conv.get_response(), await conv.get_response()
+                song = await conv.get_response(), await conv.get_response(), await conv.get_response(), await conv.get_response()
                 """- don't spam notif -"""
                 await bot.send_read_acknowledge(conv.chat_id)
             except YouBlockedUserError:
