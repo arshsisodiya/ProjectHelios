@@ -116,13 +116,7 @@ async def _(event):
                 msg = await conv.send_message(d_link)
                 details = await conv.get_response()
                 messages= [await conv.get_response(),await conv.get_response(), await conv.get_response(), await conv.get_response(), await conv.get_response(),
-                           await conv.get_response(), await conv.get_response(), await conv.get_response(), await conv.get_response(), await conv.get_response(),
-                           await conv.get_response(), await conv.get_response(), await conv.get_response(), await conv.get_response(), await conv.get_response(),
-                           await conv.get_response(), await conv.get_response(), await conv.get_response(),await conv.get_response(), await conv.get_response(),
-                           await conv.get_response(), await conv.get_response(), await conv.get_response(),await conv.get_response(), await conv.get_response(),
-                           await conv.get_response(), await conv.get_response(), await conv.get_response(),await conv.get_response(), await conv.get_response(),
-                           await conv.get_response(), await conv.get_response(), await conv.get_response(),await conv.get_response(), await conv.get_response(),
-                           await conv.get_response(), await conv.get_response(), await conv.get_response(),await conv.get_response(), await conv.get_response(),
+                           await conv.get_response(),
                            ]
                 loop.run_until_complete(await conv.get_response())
 
