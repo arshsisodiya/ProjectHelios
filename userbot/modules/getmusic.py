@@ -118,8 +118,6 @@ async def _(event):
                 messages= [await conv.get_response(),await conv.get_response(), await conv.get_response(), await conv.get_response(), await conv.get_response(),
                            await conv.get_response(),
                            ]
-                loop.run_until_complete(await conv.get_response())
-
                 """- don't spam notif -"""
                 await bot.send_read_acknowledge(conv.chat_id)
             except YouBlockedUserError:
