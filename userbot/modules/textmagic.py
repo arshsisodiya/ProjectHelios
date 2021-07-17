@@ -30,9 +30,9 @@ async def _(event):
                 response = await conv.get_response()
                 msg = await conv.send_message(d_link)
                 magic = await conv.get_response()
-                await event.edit(magic)
+                await event.edit([magic])
                 magic2 = await conv.get_response()
-                await event.edit(magic2)
+                await event.edit([magic2])
                 magic3 = await conv.get_response()
                 await event.edit(magic3)
 
