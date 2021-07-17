@@ -1,3 +1,17 @@
+# Copyright (C) 2021 arshsisodiya
+#https://github.com/arshsisodiya
+#https://twitter.com/arshsisodiya
+
+#Created by arshsisodiya for ProjectHelios
+
+import asyncio
+from asyncio import sleep
+from asyncio.exceptions import TimeoutError
+from telethon import events
+from telethon.errors.rpcerrorlist import YouBlockedUserError
+from userbot import CMD_HELP, bot
+from userbot.events import register
+
 @register(outgoing=True, pattern=r"^\.txtmagic(?: |$)(.*)")
 async def _(event):
     if event.fwd_from:
