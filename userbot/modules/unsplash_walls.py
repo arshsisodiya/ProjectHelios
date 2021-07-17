@@ -35,6 +35,7 @@ async def _(event):
                 await event.edit("`Processing.....")
                 send_query = await conv.send_message(query)
                 await event.edit("`Uploading Thumbnail`")
+                await sleep(2)
                 thumbnail = await conv.get_response()
                 await event.edit("`Sending you Uncompressed High Quality Wall, Just Wait a bit....`")
                 uncompressdfile = await conv.get_response()
