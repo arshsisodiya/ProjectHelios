@@ -11,7 +11,6 @@ from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from userbot import CMD_HELP, bot
 from userbot.events import register
-
 @register(outgoing=True, pattern=r"^\.txtmagic(?: |$)(.*)")
 async def _(event):
     if event.fwd_from:
@@ -30,11 +29,6 @@ async def _(event):
                 response = await conv.get_response()
                 msg = await conv.send_message(d_link)
                 magic = await conv.get_response()
-                await event.edit([magic])
-                magic2 = await conv.get_response()
-                await event.edit([magic2])
-                magic3 = await conv.get_response()
-                await event.edit(magic3)
 
                 """- don't spam notif -"""
                 await bot.send_read_acknowledge(conv.chat_id)
