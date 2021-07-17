@@ -122,9 +122,9 @@ async def _(event):
             except YouBlockedUserError:
                 await event.edit("`Unblock `@MusicsHunterBot` and retry`")
                 return
-            await bot.forward_messages(event.chat_id, messages)
+            await bot.send_messages(event.chat_id, messages)
             await event.client.delete_messages(
-                conv.chat_id, [msg_start.id, response.id, msg.id, details.id, messages.id]
+                conv.chat_id, [msg_start.id, response.id, msg.id, details.id,
             )
             await event.delete()
     except TimeoutError:
