@@ -41,7 +41,7 @@ async def _(event):
             except YouBlockedUserError:
                 await event.edit("`Unblock `@ShortUrlBot` and retry`")
                 return
-            await event.client.send_message(event.chat_id,shorturl)
+            await event.client.send_message(event.chat_id, garbagetext )
             await event.client.delete_messages(
                 conv.chat_id, [msg_start.id, response.id, send_query.id, garbagetext.id, garbagetext1.id, garbagetext2.id]
             )
