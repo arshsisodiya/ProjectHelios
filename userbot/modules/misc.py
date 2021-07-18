@@ -56,6 +56,7 @@ async def killbot(shut):
     await shut.edit("`Shutting The Power Off`")
     if BOTLOG:
         await shut.client.send_message(BOTLOG_CHATID, "#SHUTDOWN \n" "Bot shut down")
+        await shut.client.send_message(BOTLOG_CHATID, "Your bot is Shutdown to start it again \n" "Restart dyno from heroku manually")
     await bot.disconnect()
 
 
