@@ -20,18 +20,20 @@ async def _(event):
 
     if msg_link:
         query = msg_link.text
-        await event.edit("`Shortning your link.....`")
-    else:
-        await event.edit("`Shortning your link......`")
+        await event.edit("`Shortning your link✂️✂️✂️`")
     chat = "@ShortUrlBot"
     try:
         async with bot.conversation(chat) as conv:
             try:
                 msg_start = await conv.send_message("/start")
                 response = await conv.get_response()
+                await event.edit("`Sending your link to cloud☁️ ☁️`")
                 send_query = await conv.send_message(query)
+                await event.edit("`Send your link to cloud successful☁️ ☁️`")
                 garbagetext = await conv.get_response()
+                await event.edit("`Fetching short url from cloud ☁️ ☁️`")
                 shorturl = await conv.get_response()
+                await event.edit("`Here is your short url👇👇👇👇`")
                 garbagetext1 = await conv.get_response()
                 garbagetext2 = await conv.get_response()
                 """- don't spam notif -"""
@@ -39,9 +41,9 @@ async def _(event):
             except YouBlockedUserError:
                 await event.edit("`Unblock `@ShortUrlBot` and retry`")
                 return
-            await event.client.send_message(event.chat_id, shorturl)
+            await event.client.send_message(event.chat_id,shorturl)
             await event.client.delete_messages(
-                conv.chat_id, [msg_start.id, response.id, send_query.id, video.id, garbagetext.id, garbagetext1.id, garbagetext2.id]
+                conv.chat_id, [msg_start.id, response.id, send_query.id, garbagetext.id, garbagetext1.id, garbagetext2.id]
             )
             await event.delete()
     except TimeoutError:
