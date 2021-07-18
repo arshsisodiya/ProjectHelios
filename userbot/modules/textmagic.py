@@ -43,3 +43,7 @@ async def _(event):
             await event.delete()
     except TimeoutError:
         return await event.edit("`Error: `@TextMagicBot` is not responding please try again later")
+
+
+
+
