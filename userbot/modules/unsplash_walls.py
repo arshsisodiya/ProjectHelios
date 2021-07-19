@@ -21,27 +21,24 @@ async def _(event):
 
     if msg_link:
         query = msg_link.text
-        await event.edit("`Fetching awesome wallpapers from unsplash`")
+        await event.edit("`Fetching awesome wallpaper from unsplash`")
     chat = "@awesomewallsbot"
     try:
         async with bot.conversation(chat) as conv:
             try:
                 msg_start = await conv.send_message("/start")
-                await event.edit("`Processing")
-                await event.edit("`Processing.")
+                await event.edit("Processing")
                 response = await conv.get_response()
-                await event.edit("`Processing..")
-                await event.edit("`Processing...")
-                await event.edit("`Processing.....")
+                await event.edit(f"Getting {query} wallpaper from unsplash.......")
                 send_query = await conv.send_message(query)
-                await event.edit("`Uploading Thumbnail`")
+                await event.edit(f"Getting {query} wallpaper from unsplash")
                 thumbnail = await conv.get_response()
                 await event.edit("`Sending you Uncompressed High Quality Wall, Just Wait a bit....`")
                 uncompressdfile = await conv.get_response()
                 """- don't spam notif -"""
                 await bot.send_read_acknowledge(conv.chat_id)
             except YouBlockedUserError:
-                await event.edit("`Unblock `@awesomewallsbot` and retry`")
+                await event.edit("Unblock `@awesomewallsbot` and retry")
                 return
             await bot.send_file(event.chat_id, uncompressdfile, caption=thumbnail.text)
             await event.client.delete_messages(
@@ -49,14 +46,14 @@ async def _(event):
             )
             await event.delete()
     except TimeoutError:
-        return await event.edit("`Error: `@awesomewallsbot` is not responding! please try again later.`")
+        return await event.edit("Error: `@awesomewallsbot` is not responding! please try again later.")
 
     CMD_HELP.update(
         {
-            "UnSplash": ".unsplash <query>"
-                        "\nUsage: Get Awesome Wallpapers from Unsplash"
+            "unsplash": ".unsplash <query>"
+                        "\nUsage: Get Awesome Wallpaper from Unsplash"
                         "\n\n.unsplash Random"
-                        "\nUsage: To get Random wallpapers"
+                        "\nUsage: To get Random wallpaper"
 
         }
     )
