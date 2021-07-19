@@ -41,6 +41,7 @@ async def _(event):
                 await event.edit("`Your short url is on the way`")
                 url = await conv.get_response()
                 sponser = await conv.get_response()
+                thanks = await conv.get_response()
 
                 """- don't spam notif -"""
                 await bot.send_read_acknowledge(conv.chat_id)
@@ -50,7 +51,7 @@ async def _(event):
                 return
             await event.client.send_message(event.chat_id,  url)
             await event.client.delete_messages(
-                conv.chat_id, [msg_start.id, response.id, msg.id, bot_reply.id, sponser.id, url.id]
+                conv.chat_id, [msg_start.id, response.id, msg.id, bot_reply.id, sponser.id, url.id, thanks.id]
             )
             await event.delete()
     except TimeoutError:
