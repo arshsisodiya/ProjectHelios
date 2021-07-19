@@ -52,7 +52,7 @@ async def _(event):
             await event.client.delete_messages(
                 conv.chat_id, [msg_start.id, response.id, msg.id, bot_reply.id, sponser.id, url.id]
             )
-            await event.delete(chat)
+            await event.delete()
     except TimeoutError:
         return await event.edit("`Error: `@ShortUrlBot` is not responding please try again later")
 
