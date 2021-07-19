@@ -70,11 +70,11 @@ async def get_media(event):
     )
 
 CMD_HELP.update({
-    "`channeldownload`":
-    "`.geta channel_username`"
+    "channeldownload":
+    ".geta channel_username"
     "\nUsage: will get all media from channel/group, tho there is limit of 3000 there to prevent API limits.."
-    "\n\n`.getc number_of_messsages channel_username`"
+    "\n\n.getc number_of_messsages channel_username"
     "\nUsage: download media only from given number of last messages."
-    "\n\n Use `.gd <tempdir path>` to upload downloaded files to your google drive."
+    "\n\n Use .gd <tempdir path> to upload downloaded files to your google drive."
 
 })
