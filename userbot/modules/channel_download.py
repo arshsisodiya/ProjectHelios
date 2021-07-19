@@ -5,7 +5,7 @@ from asyncio import create_subprocess_shell as asyncSubprocess
 from userbot import CMD_HELP,TEMP_DOWNLOAD_DIRECTORY
 from userbot.events import register
 
-@register(outgoing=True, pattern=r"^\.getch (?:(now)|(.*) - (.*))")
+@register(outgoing=True, pattern=r"^.getch(?: |$)([\s\S]*)")
 async def get_media(event):
     catty = event.pattern_match.group(1)
     limit = int(catty.split(" ")[0])
@@ -37,7 +37,7 @@ async def get_media(event):
     )
 
 
-@register(outgoing=True, pattern=r"^\.geta (?:(now)|(.*) - (.*))")
+@register(outgoing=True, pattern=r"^.geta(?: |$)([\s\S]*)")
 async def get_media(event):
     channel_username = event.pattern_match.group(1)
     tempdir = os.path.join(userbot.TEMP_DOWNLOAD_DIRECTORY, channel_username)
