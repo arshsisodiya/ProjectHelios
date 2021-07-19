@@ -18,10 +18,11 @@ async def _(event):
     chat = "@voicybot"
     if reply_message.sender.bot:
         return await event.edit(event, "Reply to actual users message.")
-    await event.edit("recognizeing this media")
+    await event.edit("identifying the media")
     async with event.client.conversation(chat) as conv:
         try:
             msg_start = await conv.send_message("/start")
+            await event.edit("voice recognition is initiated.....")
             speech = await event.client.send_message(chat, reply_message)
             response = await conv.get_response()
             await sleep(4)
