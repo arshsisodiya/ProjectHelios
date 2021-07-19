@@ -38,7 +38,7 @@ async def _(event):
                 msg = await conv.send_message(d_link)
                 await event.edit("`Fetching short url from server☁️☁️☁️`")
                 response = await conv.get_response()
-                await event.edit("`here is your short url👇👇👇👇`")
+                await event.edit("`Your short url is on the way`")
                 url = await conv.get_response()
                 sponser = await conv.get_response()
 
@@ -50,9 +50,9 @@ async def _(event):
                 return
             await event.client.send_message(event.chat_id,  url)
             await event.client.delete_messages(
-                conv.chat_id, [msg_start.id, response.id, msg.id, bot_reply.id, sponser.id]
+                conv.chat_id, [msg_start.id, response.id, msg.id, bot_reply.id, sponser.id, url.id]
             )
-            await event.delete()
+            await event.delete(chat)
     except TimeoutError:
         return await event.edit("`Error: `@ShortUrlBot` is not responding please try again later")
 
