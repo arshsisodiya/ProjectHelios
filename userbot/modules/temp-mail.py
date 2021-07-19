@@ -138,7 +138,7 @@ async def _(event):
 
 CMD_HELP.update(
     {
-        "TempMail": ".tempmail n"
+        "tempmail": ".tempmail n"
         "\nUsage: Create your Temporary Email "
         "\n\n.tempmail new"
         "\nUsage:create new Temporary Email"
