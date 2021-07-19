@@ -61,12 +61,9 @@ async def setlang(prog):
     CARBONLANG = prog.pattern_match.group(1)
     await prog.edit(f"Language for carbon.now.sh set to {CARBONLANG}")
 
-<<<<<<< HEAD
 @register(outgoing=True, pattern=r"^\.carbon")
 @register(outgoing=True, pattern=r"^\.crb")
-=======
 @register(outgoing=True, pattern=r"^\.c(arbon|rb)(?: |$)(.*)")
->>>>>>> 588041d (migrated to new Trnslator API)
 async def carbon_api(e):
     """ A Wrapper for carbon.now.sh """
     await e.edit("`Processing...`")
