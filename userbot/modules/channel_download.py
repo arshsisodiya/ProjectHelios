@@ -2,7 +2,7 @@
 import os
 import subprocess
 from asyncio import create_subprocess_shell as asyncSubprocess
-from userbot import CMD_HELP,TEMP_DOWNLOAD_DIRECTORY
+from userbot import CMD_HELP, TEMP_DOWNLOAD_DIRECTORY
 from userbot.events import register
 
 @register(outgoing=True, pattern=r"^.getch(?: |$)([\s\S]*)")
@@ -10,7 +10,7 @@ async def get_media(event):
     catty = event.pattern_match.group(1)
     limit = int(catty.split(" ")[0])
     channel_username = str(catty.split(" ")[1])
-    tempdir = os.path.join(userbot.TEMP_DOWNLOAD_DIRECTORY, channel_username)
+    tempdir = os.path.join(TEMP_DOWNLOAD_DIRECTORY, channel_username)
     try:
         os.makedirs(tempdir)
     except BaseException:
@@ -40,7 +40,7 @@ async def get_media(event):
 @register(outgoing=True, pattern=r"^.geta(?: |$)([\s\S]*)")
 async def get_media(event):
     channel_username = event.pattern_match.group(1)
-    tempdir = os.path.join(userbot.TEMP_DOWNLOAD_DIRECTORY, channel_username)
+    tempdir = os.path.join(TEMP_DOWNLOAD_DIRECTORY, channel_username)
     try:
         os.makedirs(tempdir)
     except BaseException:
