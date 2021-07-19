@@ -4,6 +4,7 @@ import subprocess
 from asyncio import create_subprocess_shell as asyncSubprocess
 from userbot import CMD_HELP, TEMP_DOWNLOAD_DIRECTORY
 from userbot.events import register
+from userbot.utils import media_type
 
 @register(outgoing=True, pattern=r"^.getch(?: |$)([\s\S]*)")
 async def get_media(event):
