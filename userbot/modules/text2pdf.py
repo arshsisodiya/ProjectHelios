@@ -52,7 +52,7 @@ async def _(event):
 
 CMD_HELP.update(
     {
-        "Text2PDF": ".pdf eng"
+        "text2PDF": ".pdf eng"
         "\nUsage: Convert Given English Text into PDF file "
         "\n\n.pdf hi"
         "\nUsage:Convert Given Hindi Text into PDF file"
