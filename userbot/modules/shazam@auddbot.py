@@ -1,4 +1,5 @@
 #by arshsisodiya
+#https://github.com/arshsisodiya
 
 import io
 import os
@@ -14,12 +15,13 @@ async def _(event):
         return await event.edit("```Reply to an audio message.```")
     reply_message = await event.get_reply_message()
     chat = "@auddbot"
-    await event.edit("```Identifying the song```")
-    async with event.client.conversation(chat) as conv:
+    try:
+      async with event.client.conversation(chat) as conv:
         try:
-            await conv.send_message("/start")
+            await event.edit("```Identifying the song```")
+            start_msg = await conv.send_message("/start")
             await conv.get_response()
-            await conv.send_message(reply_message)
+            send_audio = await conv.send_message(reply_message)
             check = await conv.get_response()
             if not check.text.startswith("Audio received"):
                 return await event.edit(
@@ -31,10 +33,14 @@ async def _(event):
         except YouBlockedUserError:
             await event.edit("```Please unblock (@auddbot) and try again```")
             return
-    namem = f"**Song Name : **`{result.text.splitlines()[0]}`\
+        namem = f"**Song Name : **`{result.text.splitlines()[0]}`\
         \n\n**Details : **__{result.text.splitlines()[2]}__"
-    await event.edit(namem)
-
+        await event.edit(namem)
+        await event.client.delete_messages(
+                conv.chat_id, [start_msg.id, send_audio.id, check.id, result.id]
+            )
+    except TimeoutError:
+        return await event.edit("`Error: `@auddbot` is not responding please try again later")
 
 CMD_HELP.update(
     {
