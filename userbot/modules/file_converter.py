@@ -9,6 +9,7 @@ from telethon.tl.types import DocumentAttributeAudio
 from telethon.utils import get_attributes
 from userbot.events import register
 from userbot.utils import media_type
+from userbot import CMD_HELP,bot
 
 
 @register(outgoing=True, pattern=r"^\.nfc(?: |$)(.*)")
@@ -24,7 +25,7 @@ async def _(event):
     try:
         start = datetime.now()
         c_time = time.time()
-        downloaded_file_name = await borg.download_media(
+        downloaded_file_name = await bot.download_media(
             reply_message,
             Config.TMP_DOWNLOAD_DIRECTORY,
             progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
