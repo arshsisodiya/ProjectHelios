@@ -9,7 +9,7 @@ from telethon.tl.types import DocumentAttributeAudio
 from telethon.utils import get_attributes
 from userbot.events import register
 from userbot.utils import media_type
-from userbot import CMD_HELP,bot
+from userbot import CMD_HELP, bot, TEMP_DOWNLOAD_DIRECTORY
 
 
 @register(outgoing=True, pattern=r"^\.nfc(?: |$)(.*)")
@@ -27,7 +27,7 @@ async def _(event):
         c_time = time.time()
         downloaded_file_name = await bot.download_media(
             reply_message,
-            Config.TMP_DOWNLOAD_DIRECTORY,
+            TEMP_DOWNLOAD_DIRECTORY,
             progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
                 slitu.progress(d, t, event, c_time, "trying to download")
             )
@@ -45,7 +45,7 @@ async def _(event):
         supports_streaming = False
         if input_str == "voice":
             new_required_file_caption = "NLFC_" + str(round(time.time())) + ".opus"
-            new_required_file_name = Config.TMP_DOWNLOAD_DIRECTORY + "/" + new_required_file_caption
+            new_required_file_name = TEMP_DOWNLOAD_DIRECTORY + "/" + new_required_file_caption
             command_to_run = [
                 "ffmpeg",
                 "-i",
@@ -64,7 +64,7 @@ async def _(event):
             supports_streaming = True
         elif input_str == "mp3":
             new_required_file_caption = "NLFC_" + str(round(time.time())) + ".mp3"
-            new_required_file_name = Config.TMP_DOWNLOAD_DIRECTORY + "/" + new_required_file_caption
+            new_required_file_name = TEMP_DOWNLOAD_DIRECTORY + "/" + new_required_file_caption
             command_to_run = [
                 "ffmpeg",
                 "-i",
