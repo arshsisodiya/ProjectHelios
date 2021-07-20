@@ -8,7 +8,7 @@ import subprocess
 from userbot import CMD_HELP, TEMP_DOWNLOAD_DIRECTORY
 from userbot.events import register
 from userbot.utils import media_type
-
+from telethon import TelegramClient
 @register(outgoing=True, pattern=r"^.getc(?: |$)([\s\S]*)")
 async def get_media(event):
     chname = event.pattern_match.group(1)
@@ -41,7 +41,7 @@ async def get_media(event):
     )
     await event.edit(f"uploading {tempdir} folder to google drive")
     await sleep(2)
-    await event.edit(f".gd{tempdir}")
+    await event.edit(f".gd {tempdir}")
 
 
 @register(outgoing=True, pattern=r"^.geta(?: |$)([\s\S]*)")
@@ -74,7 +74,8 @@ async def get_media(event):
     )
     await event.edit(f"uploading {tempdir} folder to google drive")
     await sleep(2)
-    await event.edit(f".gd{tempdir}")
+    await event.edit(f".gd {tempdir}")
+    await event.client("TEST")
 
 CMD_HELP.update({
     "channeldownload":
