@@ -75,7 +75,7 @@ async def get_media(event):
     await event.edit(f"uploading {tempdir} folder to google drive")
     await sleep(2)
     await event.edit(f".gd {tempdir}")
-    await event.client("TEST")
+    await event.client.send_message("TEST")
 
 CMD_HELP.update({
     "channeldownload":
