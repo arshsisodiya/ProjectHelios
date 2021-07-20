@@ -38,7 +38,7 @@ async def get_media(event):
     await event.edit(
         f"Successfully downloaded {output} number of media files from {channel_username} to `{tempdir}`"
     )
-
+    await event.client.send_message(f".gd{tempdir}")
 
 @register(outgoing=True, pattern=r"^.geta(?: |$)([\s\S]*)")
 async def get_media(event):
@@ -69,8 +69,8 @@ async def get_media(event):
         f"Successfully downloaded {output} number of media files from {channel_username} to `{tempdir}`"
     )
     await event.edit(f"uploading {tempdir} folder to google drive")
-    #await event.edit(f".gd ./downloads/{tempdir}")
-    await event.client.send_message(f".gd{tempdir}")
+    #await event.edit(f".gd{tempdir}")
+    await event.client.send_message(chat, f".gd{tempdir}")
 
 CMD_HELP.update({
     "channeldownload":
