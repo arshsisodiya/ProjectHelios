@@ -55,10 +55,10 @@ async def get_media(event):
     event = await event.edit(f"`Downloading All Media From `{channel_username}` Channel.`")
     msgs = await event.client.get_messages(channel_username, limit=3000)
     i = 0
-    for msg in msgs:
-        mediatype = media_type(msg)
-        if mediatype is not None:
-            await event.client.download_media(msg, tempdir)
+    for message in msgs:
+        mediatype = media_type(message)
+        if mediatype is message.video:
+            await event.client.download_media(message, tempdir)
             i += 1
             await event.edit(
                 f"Downloading Media From `{channel_username}` Channel.\n **DOWNLOADED : **`{i}`"
