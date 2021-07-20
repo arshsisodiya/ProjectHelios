@@ -29,7 +29,7 @@ async def _(event):
             reply_message,
             TEMP_DOWNLOAD_DIRECTORY,
             progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                slitu.progress(d, t, event, c_time, "trying to download")
+                helios.progress(d, t, event, c_time, "trying to download")
             )
         )
     except Exception as e:  # pylint:disable=C0103,W0703
@@ -79,7 +79,7 @@ async def _(event):
             os.remove(downloaded_file_name)
             return
         logger.info(command_to_run)
-        t_response, e_response = await slitu.run_command(command_to_run)
+        t_response, e_response = await helios.run_command(command_to_run)
         os.remove(downloaded_file_name)
         if os.path.exists(new_required_file_name):
             end_two = datetime.now()
@@ -87,7 +87,7 @@ async def _(event):
             file_handle = await event.client.upload_file(
                 new_required_file_name,
                 progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                    slitu.progress(d, t, event, c_time, "trying to upload")
+                    helios.progress(d, t, event, c_time, "trying to upload")
                 )
             )
             attributes, mime_type = get_attributes(
