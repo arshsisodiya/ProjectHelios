@@ -72,9 +72,7 @@ async def get_media(event):
     await event.edit(
         f"Successfully downloaded {output} number of media files from {channel_username} to `{tempdir}`"
     )
-    await event.edit(f"uploading {tempdir} folder to google drive")
-    await sleep(2)
-    await event.edit(f".gd {tempdir}")
+    await event.edit(f'.gd {tempdir}')
 
 CMD_HELP.update({
     "channeldownload":
