@@ -37,7 +37,8 @@ async def get_media(event):
     output = output.replace("b'", " ")
     output = output.replace("\\n'", " ")
     await event.edit(
-        f"Successfully downloaded {output} number of media files from {channel_username} to `{tempdir}`"
+        f"Successfully downloaded {output} number of media files from {channel_username} to `{tempdir}`\n"
+        f"Use `.gd {tempdir}` to upload it on Google Drive"
     )
 
 @register(outgoing=True, pattern=r"^.geta(?: |$)([\s\S]*)")
@@ -51,10 +52,10 @@ async def get_media(event):
     event = await event.edit(f"`Downloading All Media From `{channel_username}` Channel.`")
     msgs = await event.client.get_messages(channel_username, limit=3000)
     i = 0
-    for message in msgs:
-        mediatype = media_type(message)
-        if mediatype is message.video:
-            await event.client.download_media(message, tempdir)
+    for msg in msgs:
+        mediatype = media_type(msg)
+        if mediatype is not None:
+            await event.client.download_media(msg, tempdir)
             i += 1
             await event.edit(
                 f"Downloading Media From `{channel_username}` Channel.\n **DOWNLOADED : **`{i}`"
@@ -66,7 +67,8 @@ async def get_media(event):
     output = output.replace("b'", "")
     output = output.replace("\\n'", "")
     await event.edit(
-        f"Successfully downloaded {output} number of media files from {channel_username} to `{tempdir}`"
+        f"Successfully downloaded {output} number of media files from {channel_username} to `{tempdir}`\n"
+        f"Use `.gd {tempdir}` to upload it on Google Drive"
     )
 
 CMD_HELP.update({
