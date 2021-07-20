@@ -7,6 +7,8 @@ from datetime import datetime
 from telethon.tl.types import InputMediaUploadedDocument
 from telethon.tl.types import DocumentAttributeAudio
 from telethon.utils import get_attributes
+from userbot.events import register
+from userbot.utils import media_type
 
 
 @register(outgoing=True, pattern=r"^\.nfc(?: |$)(.*)")
