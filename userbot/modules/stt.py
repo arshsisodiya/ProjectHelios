@@ -52,7 +52,7 @@ async def _(event):
         try:
             msg_start = await conv.send_message("/start")
             await event.edit("hindi voice recognition is initiated.....")
-            langsettohindi = await event.client.send_message("/l hindi")
+            langsettohindi = await conv.send_message("/l hindi")
             thumpsup = await conv.get_response()
             speech = await event.client.send_message(chat, reply_message)
             response = await conv.get_response()
