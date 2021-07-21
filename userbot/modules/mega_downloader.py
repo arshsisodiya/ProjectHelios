@@ -146,8 +146,9 @@ async def mega_downloader(megadl):
             await megadl.edit(
                 f"`{file_name}`\n\n"
                 f"Successfully downloaded in: `{file_path}`.\n"
+                f"Size: {humanbytes(total_length)} \n"
                 f"Download took: {time_formatter(download_time)}.\n\n"
-                f"Use `.gd {file_path}` to upload {file_name} on Google Drive"
+                f"Use `.gd {file_path}` to upload {file_name} to Google Drive"
             )
             return None
     else:
