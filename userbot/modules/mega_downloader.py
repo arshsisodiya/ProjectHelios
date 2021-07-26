@@ -39,6 +39,7 @@ async def subprocess_run(megadl, cmd):
 
 
 @register(outgoing=True, pattern=r"^.mega(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^.m(?: |$)(.*)")
 async def mega_downloader(megadl):
     await megadl.edit("`Collecting information...`")
     if not os.path.isdir(TEMP_DOWNLOAD_DIRECTORY):
@@ -148,7 +149,6 @@ async def mega_downloader(megadl):
                 f"Successfully downloaded in: `{file_path}`.\n"
                 f"Size: {humanbytes(total_length)} \n"
                 f"Download took: {time_formatter(download_time)}.\n\n"
-                f"Use `.gd {file_path}` to upload {file_name} to Google Drive"
             )
             return None
     else:
