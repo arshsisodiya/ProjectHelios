@@ -9,8 +9,7 @@ from asyncio import sleep
 from asyncio.exceptions import TimeoutError
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
-from userbot import bot
-from userbot import CMD_HELP
+from userbot import CMD_HELP, bot
 from userbot.events import register
 
 
@@ -80,7 +79,7 @@ async def _(event):
 
     CMD_HELP.update(
         {
-            "torrents": ".ts"
+            "torrent": ".ts"
                         "\nUsage: Search Torrents "
                         "\n\n.tos"
                         "\nUsage:reply to getLink<id> to get Magnet Link\n"
