@@ -12,6 +12,7 @@ from telethon.errors.rpcerrorlist import YouBlockedUserError
 from userbot import CMD_HELP, bot
 from userbot.events import register
 
+
 @register(outgoing=True, pattern=r"^\.torrent(?: |$)(.*)")
 async def _(event):
     if event.fwd_from:
@@ -21,8 +22,8 @@ async def _(event):
 
     if msg_link:
         d_link = msg_link.text
-        await event.edit("`Fetching torrents...`")
     chat = "@TorrentHuntBot"
+    await event.edit("`Fetching torrents...`")
     try:
         async with bot.conversation(chat) as conv:
             try:
@@ -40,11 +41,12 @@ async def _(event):
             await event.client.delete_messages(
                 conv.chat_id, [msg_start.id, response.id, msg.id, torrent.id]
             )
-            await event.delete()
+            await event.edit("`reply .get <link_id> to get magnet link`")
     except TimeoutError:
         return await event.edit("`Error: `@TorrentHuntBot` is not responding please try again later")
 
-@register(outgoing=True, pattern=r"^\.tmag(?: |$)(.*)")
+
+@register(outgoing=True, pattern=r"^\.get(?: |$)(.*)")
 async def _(event):
     if event.fwd_from:
         return
@@ -77,10 +79,11 @@ async def _(event):
 
     CMD_HELP.update(
         {
-            "Text2PDF": ".torrent"
+            "torrent": ".torrent"
                         "\nUsage: Search Torrents "
-                        "\n\n.tmag"
-                        "\nUsage:reply to getLink<id> to get Magnet Links or getInfo<id> for information about the torrent"
+                        "\n\n.get"
+                        "\nUsage:reply to getLink<id> to get Magnet Links\n"
+                        " or getInfo<id> for information about the torrent"
 
         }
     )
