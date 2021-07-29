@@ -13,7 +13,7 @@ from userbot import CMD_HELP, bot
 from userbot.events import register
 
 
-@register(outgoing=True, pattern=r"^\.ts(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.torrent(?: |$)(.*)")
 async def _(event):
     if event.fwd_from:
         return
@@ -23,7 +23,7 @@ async def _(event):
     if msg_link:
         d_link = msg_link.text
     chat = "@TorrentHuntBot"
-    await event.edit("`Fetching torrents...`")
+    await event.edit("Searching.....")
     try:
         async with bot.conversation(chat) as conv:
             try:
@@ -55,9 +55,8 @@ async def _(event):
 
     if msg_link:
         d_link = msg_link.text
-        await event.edit("`fetching magnet links...`")
     chat = "@TorrentHuntBot"
-    await event.edit("`Fetching magnet link from physics book...`")
+    await event.edit("Fetching magnet link...")
     try:
         async with bot.conversation(chat) as conv:
             try:
@@ -79,7 +78,7 @@ async def _(event):
 
     CMD_HELP.update(
         {
-            "torrent": ".ts"
+            "torrent": ".torrent"
                         "\nUsage: Search Torrents "
                         "\n\n.get"
                         "\nUsage:reply to getLink<id> to get Magnet Links\n"
