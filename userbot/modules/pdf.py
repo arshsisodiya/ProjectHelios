@@ -13,18 +13,17 @@ from userbot.events import register
 
 @register(outgoing=True, pattern=r"^\.pdf(?: |$)(.*)")
 async def _(event):
-    if not event.reply_to_msg_id:
-        return await event.edit("Reply to any text/media.")
-    reply_message = await event.get_reply_message()
-    chat = "@office2pdf_bot"
-    await event.edit("Converting into PDF.....`")
+    if event.reply_to_msg_id:
+     reply_message = await event.get_reply_message()
+     chat = "@office2pdf_bot"
+     await event.edit("Converting into PDF.....`")
     try:
         async with bot.conversation(chat) as conv:
             try:
                 msg_start = await conv.send_message("/start")
                 response = await conv.get_response()
                 msg = await conv.send_message(reply_message)
-                response2 = await conv.get_response()
+                #response2 = await conv.get_response()
                 convert = await conv.send_message("/ready2conv")
                 cnfrm = await conv.get_response()
                 editfilename = await conv.send_message("Yes")
@@ -39,7 +38,7 @@ async def _(event):
                 return
             await event.client.send_message(event.chat_id, pdf)
             await event.client.delete_messages(
-                conv.chat_id, [msg_start.id, response.id, msg.id, started.id, filename.id, editfilename.id, enterfilename.id, response2.id, cnfrm.id, pdf.id, convert.id]
+                conv.chat_id, [msg_start.id, response.id, msg.id, started.id, filename.id, editfilename.id, enterfilename.id, cnfrm.id, pdf.id, convert.id]
             )
             await event.delete()
     except TimeoutError:
