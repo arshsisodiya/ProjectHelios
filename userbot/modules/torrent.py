@@ -50,7 +50,7 @@ async def torrent(event):
 
     CMD_HELP.update(
         {
-            "torrent": ".ts"
+            "torrent2": ".ts"
                         "\nUsage: Search Torrents "
                         "\n\n.tos"
                         "\nUsage:reply to getLink<id> to get Magnet Link\n"
