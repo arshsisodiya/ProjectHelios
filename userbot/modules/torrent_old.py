@@ -64,19 +64,6 @@ async def torrent(event):
     await event.edit(caption, link_preview=False)
 
 
-def dogbin(magnets):
-    counter = 0
-    urls = []
-    while counter != len(magnets):
-        message = magnets[counter]
-        url = "https://del.dog/documents"
-        r = requests.post(url, data=message.encode("UTF-8")).json()
-        url = f"https://del.dog/raw/{r['key']}"
-        urls.append(url)
-        counter = counter + 1
-    return urls
-
-
 @register(outgoing=True, pattern=r"^.tos(?: |$)(.*)")
 async def tor_search(event):
     if event.fwd_from:
