@@ -42,6 +42,8 @@ async def _(event):
                 conv.chat_id, [msg_start.id, response.id, msg.id, torrent.id]
             )
             await event.edit("`reply .get <link_id> to get magnet link`")
+            await sleep (4)
+            await event.delete()
     except TimeoutError:
         return await event.edit("`Error: `@TorrentHuntBot` is not responding please try again later")
 
