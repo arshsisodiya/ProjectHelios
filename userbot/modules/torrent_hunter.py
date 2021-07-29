@@ -23,7 +23,7 @@ async def _(event):
     if msg_link:
         d_link = msg_link.text
     chat = "@TorrentHuntBot"
-    await event.edit("Searching.....")
+    await event.edit("Searching....")
     try:
         async with bot.conversation(chat) as conv:
             try:
@@ -45,7 +45,7 @@ async def _(event):
             await sleep (4)
             await event.delete()
     except TimeoutError:
-        return await event.edit("`Error: `@TorrentHuntBot` is not responding please try again later")
+        return await event.edit("`Error: @TorrentHuntBot is not responding please try again later")
 
 
 @register(outgoing=True, pattern=r"^\.get(?: |$)(.*)")
@@ -65,7 +65,6 @@ async def _(event):
                 msg = await conv.send_message(d_link)
                 await sleep(2)
                 torrent = await conv.get_response()
-                """- don't spam notif -"""
                 await bot.send_read_acknowledge(conv.chat_id)
             except YouBlockedUserError:
                 await event.edit("`Unblock `@TorrentHuntBot` and retry`")
@@ -76,15 +75,14 @@ async def _(event):
             )
             await event.delete()
     except TimeoutError:
-        return await event.edit("`Error: `@TorrentHuntBot` is not responding please try again later")
+        return await event.edit("`Error: @TorrentHuntBot is not responding please try again later")
 
     CMD_HELP.update(
         {
             "torrent": ".torrent"
                         "\nUsage: Search Torrents "
                         "\n\n.get"
-                        "\nUsage:reply to getLink<id> to get Magnet Links\n"
-                        " or getInfo<id> for information about the torrent"
+                        "\nUsage:reply to getLink<id> to get Magnet Link\n"
 
         }
     )
