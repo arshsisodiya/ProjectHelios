@@ -51,12 +51,12 @@ async def torrent(event):
     fd = codecs.open(tsfileloc, "r", encoding="utf-8")
     data = fd.read()
     key = (
-        requests.post("https://api.katb.in/api/paste", json={"content": data})
+        requests.post("https://nekobin.com/api/documents", json={"content": data})
         .json()
         .get("result")
         .get("key")
     )
-    url = f"https://katb.in/{key}"
+    url = f"https://nekobin.com/raw/{key}"
     caption = (
         f"`Here the results for the query: {query}`\n\nPasted to: [Nekobin]({url})"
     )
@@ -71,7 +71,7 @@ def dogbin(magnets):
         message = magnets[counter]
         url = "https://api.katb.in/api/paste"
         r = requests.post(url, data=message.encode("UTF-8")).json()
-        url = f"https://katb.in/{r['key']}"
+        url = f"https://katb.in/{r['paste_id']}"
         urls.append(url)
         counter = counter + 1
     return urls
