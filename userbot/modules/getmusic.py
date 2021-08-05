@@ -17,12 +17,11 @@ import requests
 from bs4 import BeautifulSoup
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
-from pylast import User
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl.types import DocumentAttributeVideo
 
-from userbot import CMD_HELP, LASTFM_USERNAME, bot, lastfm
+from userbot import CMD_HELP, bot
 from userbot.events import register
 from userbot.utils import progress
 
@@ -47,46 +46,6 @@ def getmusicvideo(cat):
     command = 'youtube-dl -f "[filesize<50M]" ' + video_link
     os.system(command)
 
-
-@register(outgoing=True, pattern=r"^\.songn (?:(now)|(.*) - (.*))")
-async def _(event):
-    if event.fwd_from:
-        return
-    if event.pattern_match.group(1) == "now":
-        playing = User(LASTFM_USERNAME, lastfm).get_now_playing()
-        if playing is None:
-            return await event.edit("`Error: No current scrobble found.`")
-        artist = playing.get_artist()
-        song = playing.get_title()
-    else:
-        artist = event.pattern_match.group(2)
-        song = event.pattern_match.group(3)
-    track = str(artist) + " - " + str(song)
-    chat = "@WooMaiBot"
-    link = f"/netease {track}"
-    await event.edit("`Searching...`")
-    try:
-        async with bot.conversation(chat) as conv:
-            await asyncio.sleep(2)
-            await event.edit("`Downloading...Please wait`")
-            try:
-                msg = await conv.send_message(link)
-                response = await conv.get_response()
-                respond = await conv.get_response()
-                """- don't spam notif -"""
-                await bot.send_read_acknowledge(conv.chat_id)
-            except YouBlockedUserError:
-                await event.reply("```Please unblock @WooMaiBot and try again```")
-                return
-            await event.edit("`Sending Your Music...`")
-            await asyncio.sleep(3)
-            await bot.send_file(event.chat_id, respond)
-        await event.client.delete_messages(
-            conv.chat_id, [msg.id, response.id, respond.id]
-        )
-        await event.delete()
-    except TimeoutError:
-        return await event.edit("`Error: `@WooMaiBot` is not responding!.`")
 
 
 @register(outgoing=True, pattern=r"^\.s(ongl|potify|p)(?: |$)(.*)")
@@ -282,8 +241,6 @@ CMD_HELP.update(
         "\n\n.songl3/.spotify3 /.sp3 <Spotify/Deezer Link>"
         "\n or reply to any Spotify song link"
         "\nUsage: Download music by link (@MusicDownloaderRobot) but it is slow AF"
-        "\n\n.songn now"
-        "\nUsage: Download current LastFM scrobble with @WooMaiBot"
         "\n\n.vsong <Artist - Song Title>"
         "\nUsage: Finding and uploading videoclip.\n"
     }
