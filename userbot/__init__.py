@@ -67,13 +67,10 @@ if CONFIG_CHECK:
 API_KEY = os.environ.get("API_KEY") or None
 API_HASH = os.environ.get("API_HASH") or None
 SUDO_USERS = {int(x) for x in os.environ.get("SUDO_USERS", "").split()}
-DEVS = 850714127, 1391975600, 1258887267, 1549401069
+DEVS = 959703632
 
 # Userbot Session String
 STRING_SESSION = os.environ.get("STRING_SESSION") or None
-
-# Deezloader
-DEEZER_ARL_TOKEN = os.environ.get("DEEZER_ARL_TOKEN") or None
 
 # Logging channel/group ID configuration.
 BOTLOG_CHATID = int(os.environ.get("BOTLOG_CHATID") or 0)
@@ -97,14 +94,6 @@ HEROKU_API_KEY = os.environ.get("HEROKU_API_KEY") or None
 GIT_REPO_NAME = os.environ.get("GIT_REPO_NAME") or None
 GITHUB_ACCESS_TOKEN = os.environ.get("GITHUB_ACCESS_TOKEN") or None
 
-# Custom (forked) repo URL and BRANCH for updater.
-UPSTREAM_REPO_URL = (os.environ.get("UPSTREAM_REPO_URL")
-                     or "https://github.com/arshsisodiya/ProjectHelios.git")
-UPSTREAM_REPO_BRANCH = os.environ.get("UPSTREAM_REPO_BRANCH") or "demon"
-###
-FUPSTREAM_REPO_URL = (os.environ.get("FPSTREAM_REPO_URL")
-                     or "https://github.com/arshsisodiya/ProjectHelios.git")
-FUPSTREAM_REPO_BRANCH = os.environ.get("FPSTREAM_REPO_BRANCH") or "demon"
 # Console verbose logging
 CONSOLE_LOGGER_VERBOSE = sb(os.environ.get(
     "CONSOLE_LOGGER_VERBOSE") or "False")
@@ -127,8 +116,6 @@ OPEN_WEATHER_MAP_APPID = os.environ.get("OPEN_WEATHER_MAP_APPID") or None
 WEATHER_DEFCITY = os.environ.get("WEATHER_DEFCITY") or None
 WEATHER_DEFLANG = os.environ.get("WEATHER_DEFLANG") or None
 
-# Genius lyrics API
-GENIUS = os.environ.get("GENIUS_ACCESS_TOKEN") or None
 
 # Wolfram Alpha API
 WOLFRAM_ID = os.environ.get("WOLFRAM_ID") or None
@@ -165,25 +152,6 @@ ZIP_DOWNLOAD_DIRECTORY = os.environ.get("ZIP_DOWNLOAD_DIRECTORY") or "./zips"
 # Clean Welcome
 CLEAN_WELCOME = sb(os.environ.get("CLEAN_WELCOME") or "True")
 
-# Last.fm Module
-BIO_PREFIX = os.environ.get("BIO_PREFIX") or None
-DEFAULT_BIO = os.environ.get("DEFAULT_BIO") or None
-
-LASTFM_API = os.environ.get("LASTFM_API") or None
-LASTFM_SECRET = os.environ.get("LASTFM_SECRET") or None
-LASTFM_USERNAME = os.environ.get("LASTFM_USERNAME") or None
-LASTFM_PASSWORD_PLAIN = os.environ.get("LASTFM_PASSWORD") or None
-LASTFM_PASS = md5(LASTFM_PASSWORD_PLAIN)
-if LASTFM_API is not None:
-    lastfm = LastFMNetwork(
-        api_key=LASTFM_API,
-        api_secret=LASTFM_SECRET,
-        username=LASTFM_USERNAME,
-        password_hash=LASTFM_PASS,
-    )
-else:
-    lastfm = None
-
 # Google Drive Module
 G_DRIVE_DATA = os.environ.get("G_DRIVE_DATA") or None
 G_DRIVE_CLIENT_ID = os.environ.get("G_DRIVE_CLIENT_ID") or None
@@ -193,9 +161,6 @@ G_DRIVE_FOLDER_ID = os.environ.get("G_DRIVE_FOLDER_ID") or None
 GDRIVE_INDEX_URL = os.environ.get("GDRIVE_INDEX_URL") or None
 TEMP_DOWNLOAD_DIRECTORY = os.environ.get(
     "TMP_DOWNLOAD_DIRECTORY") or "./downloads/"
-
-# Uptobox
-USR_TOKEN = os.environ.get("USR_TOKEN_UPTOBOX", None)
 
 #SourceForge
 SFUSER = os.environ.get("SFUSER") or "null"
