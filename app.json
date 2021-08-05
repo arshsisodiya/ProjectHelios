@@ -121,16 +121,6 @@
       "description": "When a new person joins, the old welcome message is deleted.",
       "value": "True"
     },
-
-    "BIO_PREFIX": {
-      "description": "Prefix for Last.FM Module Bio.",
-      "required": false
-    },
-    "DEFAULT_BIO": {
-      "description": "Default profile bio.",
-      "value": "I ❤ ️Helios",
-      "required": false
-    },
     "ALIVE_NAME": {
       "description": "Name to show in .alive message",
       "required": false
