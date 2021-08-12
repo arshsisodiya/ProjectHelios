@@ -54,7 +54,9 @@ For further guide you can head to [Arsh Sisodiya](https://t.me/NmberSeven) or re
 ## Myself Arsh
 Have a look at my [Repo](https://github.com/arshsisodiya/ProjectHelios) to deploy Helios USERBOT. 
 To use user bot we should have an idea about vars.
-## envoirnment VARS.
+## Envoirnment VARS.
+<details> 
+<summary><b>Click Here For More Details</b></summary>
 
 **API_KEY**: you can get this value from the link given below [here](https://telegram.dog/UseTGXBot).
 
@@ -124,6 +126,7 @@ To use user bot we should have an idea about vars.
 **WEATHER_DEFCITY**: City name for weather module.
 
 **LOGSPAMMER**: Set this to True in case you want the error logs to be stored in the userbot log group, instead of spitting out the file in the current chat, requires a valid BOTLOG_CHATID to be set.
+</details>
 
 # HEROKU
 What is Heroku?
@@ -223,7 +226,7 @@ Gdrive is now ready to use.
 
 #Gdrve Index
 
-Refer to This Gilab Repo for Creating and hosting Index
+Refer to This Gitlab Repo for Creating and hosting Index
 [Gdrive Index Repo](https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index)
 
 ## Youtube
