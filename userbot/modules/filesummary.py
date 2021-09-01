@@ -101,9 +101,9 @@ async def _(event):  # sourcery no-metrics
         str(round((weird_division((endtime - starttime), totalcount)) * 1000, 2))
         + " ms"
     )
-    totalstring = f"<code><b>Total files : </b>       | {totalcount}\\\x1f                  \nTotal file size :    | {humanbytes(totalsize)}\\\x1f                  \nAvg. file size :     | {avghubytes}\\\x1f                  \n</code>"
+    totalstring = f"<code><b>Total files : </b>    | {totalcount}\\\x1f \nTotal file size :  | {humanbytes(totalsize)}\\\x1f      \nAvg. file size :  | {avghubytes}\\\x1f   \n</code>"
 
-    runtimestring = f"<code>Runtime :            | {runtime}\
+    runtimestring = f"<code>Runtime :      | {runtime}\
                     \nRuntime per file :   | {avgruntime}\
                     \n</code>"
     line = "<code>----------------------------------</code>\n"
