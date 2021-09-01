@@ -6,6 +6,18 @@ from userbot.events import register
 from userbot.utils import humanbytes, time_formatter, media_type, edit_delete, edit_or_reply
 from userbot.utils import format
 
+
+TYPES = [
+    "Photo",
+    "Audio",
+    "Video",
+    "Document",
+    "Sticker",
+    "Gif",
+    "Voice",
+    "Round Video",
+]
+
 def weird_division(n, d):
     return n / d if d else 0
 
