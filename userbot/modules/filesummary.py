@@ -117,7 +117,7 @@ async def _(event):  # sourcery no-metrics
 
 
 
-@register(outgoing=True, pattern=r"^.userfs(?: |$)(.*)")
+@register(outgoing=True, pattern="^.userfs(?: |$)(.*)")
 async def _(event):  # sourcery no-metrics
     "Shows you the complete media/file summary of the that user in that group."
     reply = await event.get_reply_message()
