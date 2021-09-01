@@ -4,7 +4,7 @@ from prettytable import PrettyTable
 from userbot import CMD_HELP, LOGS
 from userbot.events import register
 from userbot.utils import humanbytes, time_formatter, media_type, edit_delete, edit_or_reply
-from ..helpers.utils import format
+from userbot.helpers.utils import format
 
 def weird_division(n, d):
     return n / d if d else 0
