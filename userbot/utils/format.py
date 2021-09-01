@@ -8,6 +8,18 @@ from telethon.utils import add_surrogate
 def reformattext(text):
     return text.replace("~", "").replace("_", "").replace("*", "").replace("`", "")
 
+def md_to_text(md):
+    html = markdown(md)
+    soup = BeautifulSoup(html, features="html.parser")
+    return soup.get_text()
+
+
+def mentionuser(name, userid):
+    return f"[{name}](tg://user?id={userid})"
+
+
+def htmlmentionuser(name, userid):
+    return f"<a href='tg://user?id={userid}'>{name}</a>"
 
 def replacetext(text):
     return (
