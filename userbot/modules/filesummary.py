@@ -106,7 +106,7 @@ async def _(event):  # sourcery no-metrics
     runtimestring = f"<code>Runtime :            | {runtime}\
                     \nRuntime per file :   | {avgruntime}\
                     \n</code>"
-    line = "<code>+--------------------+-----------+</code>\n"
+    line = "<code>----------------------------------</code>\n"
     result = f"<b>Group : {link}</b>\n\n"
     result += f"<code>Total Messages: {msg_count}</code>\n"
     result += "<b>File Summary : </b>\n"
@@ -172,7 +172,7 @@ async def _(event):  # sourcery no-metrics
         link = f"<a href='tg://user?id={chatdata.id}'>{chatdata.first_name}</a>"
     event = await edit_or_reply(
         event,
-        f"<code>Counting files and file size by </code>{_format.htmlmentionuser(userdata.first_name,userdata.id)}<code> in Group </code><b>{link}</b>\n<code>This may take some time also depends on number of user messages</code>",
+        f"<code>Counting files and file size by </code>{format.htmlmentionuser(userdata.first_name,userdata.id)}<code> in Group </code><b>{link}</b>\n<code>This may take some time also depends on number of user messages</code>",
         parse_mode="HTML",
     )
 
@@ -225,8 +225,8 @@ async def _(event):  # sourcery no-metrics
     runtimestring = f"<code>Runtime :            | {runtime}\
                     \nRuntime per file :   | {avgruntime}\
                     \n</code>"
-    line = "<code>+--------------------+-----------+</code>\n"
-    result = f"<b>Group : {link}\nUser : {_format.htmlmentionuser(userdata.first_name,userdata.id)}\n\n"
+    line = "<code>----------------------------------</code>\n"
+    result = f"<b>Group : {link}\nUser : {format.htmlmentionuser(userdata.first_name,userdata.id)}\n\n"
     result += f"<code>Total Messages: {msg_count}</code>\n"
     result += "<b>File Summary : </b>\n"
     result += f"<code>{x}</code>\n"
