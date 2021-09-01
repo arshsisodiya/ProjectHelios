@@ -104,16 +104,8 @@ async def _(event):  # sourcery no-metrics
     await catevent.edit(result, parse_mode="HTML", link_preview=False)
 
 
-@catub.cat_cmd(
-    pattern="userfs(?:\s|$)([\s\S]*)",
-    command=("userfs", plugin_category),
-    info={
-        "header": "Shows you the complete media/file summary of the that user in that group.",
-        "description": "As of now limited to last 10000 messages of that person in the group u used",
-        "usage": "{tr}userfs <reply/username/id>",
-        "examples": "{tr}userfs @MissRose_bot",
-    },
-)
+
+@register(outgoing=True, pattern=r"^.userfs(?: |$)(.*)")
 async def _(event):  # sourcery no-metrics
     "Shows you the complete media/file summary of the that user in that group."
     reply = await event.get_reply_message()
