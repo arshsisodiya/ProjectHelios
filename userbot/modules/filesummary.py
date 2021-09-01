@@ -1,5 +1,5 @@
+#File summary module for Project Helios Ported from catuserbot by @arshsisodiya
 import time
-
 from prettytable import PrettyTable
 from userbot import CMD_HELP, LOGS
 from userbot.events import register
@@ -54,7 +54,7 @@ async def _(event):  # sourcery no-metrics
             link = chatdata.title
     else:
         link = f"<a href='tg://user?id={chatdata.id}'>{chatdata.first_name}</a>"
-    catevent = await edit_or_reply(
+    event = await edit_or_reply(
         event,
         f"<code>Counting files and file size of </code><b>{link}</b>\n<code>This may take some time also depends on number of group messages</code>",
         parse_mode="HTML",
@@ -113,7 +113,7 @@ async def _(event):  # sourcery no-metrics
     result += f"<code>{x}</code>\n"
     result += f"{largest}"
     result += line + totalstring + line + runtimestring + line
-    await catevent.edit(result, parse_mode="HTML", link_preview=False)
+    await event.edit(result, parse_mode="HTML", link_preview=False)
 
 
 
@@ -170,7 +170,7 @@ async def _(event):  # sourcery no-metrics
             link = chatdata.title
     else:
         link = f"<a href='tg://user?id={chatdata.id}'>{chatdata.first_name}</a>"
-    catevent = await edit_or_reply(
+    event = await edit_or_reply(
         event,
         f"<code>Counting files and file size by </code>{_format.htmlmentionuser(userdata.first_name,userdata.id)}<code> in Group </code><b>{link}</b>\n<code>This may take some time also depends on number of user messages</code>",
         parse_mode="HTML",
@@ -232,4 +232,13 @@ async def _(event):  # sourcery no-metrics
     result += f"<code>{x}</code>\n"
     result += f"{largest}"
     result += line + totalstring + line + runtimestring + line
-    await catevent.edit(result, parse_mode="HTML", link_preview=False)
+    await event.edit(result, parse_mode="HTML", link_preview=False)
+CMD_HELP.update(
+    {
+        "file-summery": ".chatfs <Username/id>"
+        "\nUsage: Shows you the complete media/file summary of the that group "
+        "\n As of now limited to last 10000 in the group u used"
+        "\n\n.userfs <reply/username/id>"
+        "\nUsage: Shows you the complete media/file summary of the that user in that group."
+    }
+)
