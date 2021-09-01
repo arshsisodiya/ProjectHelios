@@ -4,7 +4,6 @@ from markdown import markdown
 from telethon.tl.tlobject import TLObject
 from telethon.tl.types import MessageEntityPre
 from telethon.utils import add_surrogate
-from .utils import utc_to_local
 
 def reformattext(text):
     return text.replace("~", "").replace("_", "").replace("*", "").replace("`", "")
