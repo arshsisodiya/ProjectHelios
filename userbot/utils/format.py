@@ -6,6 +6,7 @@ from telethon.tl.tlobject import TLObject
 from telethon.tl.types import MessageEntityPre
 from telethon.utils import add_surrogate
 from .paste import pastetext
+from .utils import utc_to_local
 
 
 async def paste_message(text, pastetype="p", extension=None, markdown=True):
