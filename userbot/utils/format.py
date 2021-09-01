@@ -1,40 +1,10 @@
 import datetime
-
 from bs4 import BeautifulSoup
 from markdown import markdown
 from telethon.tl.tlobject import TLObject
 from telethon.tl.types import MessageEntityPre
 from telethon.utils import add_surrogate
-from .paste import pastetext
 from .utils import utc_to_local
-
-
-async def paste_message(text, pastetype="p", extension=None, markdown=True):
-    if markdown:
-        text = md_to_text(text)
-    response = await pastetext(text, pastetype, extension)
-    if "url" in response:
-        return response["url"]
-    return "Error while pasting text to site"
-
-
-def md_to_text(md):
-    html = markdown(md)
-    soup = BeautifulSoup(html, features="html.parser")
-    return soup.get_text()
-
-
-def mentionuser(name, userid):
-    return f"[{name}](tg://user?id={userid})"
-
-
-def htmlmentionuser(name, userid):
-    return f"<a href='tg://user?id={userid}'>{name}</a>"
-
-
-# kanged from uniborg @spechide
-# https://github.com/SpEcHiDe/UniBorg/blob/d8b852ee9c29315a53fb27055e54df90d0197f0b/uniborg/utils.py#L250
-
 
 def reformattext(text):
     return text.replace("~", "").replace("_", "").replace("*", "").replace("`", "")
