@@ -6,8 +6,6 @@ from userbot.events import register
 from userbot.utils import humanbytes, time_formatter, media_type, edit_delete, edit_or_reply
 from userbot.utils import format
 
-def weird_division(n, d):
-    return n / d if d else 0
 @register(outgoing=True, pattern=r"^.chatfs(?: |$)(.*)")
 async def _(event):  # sourcery no-metrics
     "Shows you the complete media/file summary of the that group"
