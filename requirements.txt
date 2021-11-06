@@ -43,7 +43,7 @@ pyfiglet
 pySmartDL
 python-barcode
 python-dotenv
-https://github.com/yt-dlp/yt-dlp/archive/master.zip
+
 pytz
 pymongo[srv]
 prettytable
