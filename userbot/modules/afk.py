@@ -55,7 +55,7 @@ async def mention_afk(mention):
             is_bot = sender.bot
         if not is_bot and mention.sender_id not in USERS:
             if AFKREASON:
-                await mention.reply("I'm AFK right now." f"\nBecause `{AFKREASON}`")
+                await mention.reply("I'm AFK right now." f"\nBecause {AFKREASON}")
             else:
                 await mention.reply(str(choice(AFKSTR)))
             USERS.update({mention.sender_id: 1})
@@ -65,7 +65,7 @@ async def mention_afk(mention):
                     if AFKREASON:
                         await mention.reply(
                             f"I'm still AFK.\
-                                \nReason: `{AFKREASON}`"
+                                \nReason: {AFKREASON}"
                         )
                     else:
                         await mention.reply(str(choice(AFKSTR)))
@@ -99,7 +99,7 @@ async def afk_on_pm(sender):
                 if AFKREASON:
                     await sender.reply(
                         f"I'm AFK right now.\
-                    \nReason: `{AFKREASON}`"
+                    \nReason: {AFKREASON}"
                     )
                 else:
                     await sender.reply(str(choice(AFKSTR)))
@@ -109,7 +109,7 @@ async def afk_on_pm(sender):
                     if AFKREASON:
                         await sender.reply(
                             f"I'm still AFK.\
-                        \nReason: `{AFKREASON}`"
+                        \nReason: {AFKREASON}"
                         )
                     else:
                         await sender.reply(str(choice(AFKSTR)))
@@ -126,11 +126,11 @@ async def set_afk(afk_e):
     global AFKREASON
     if string:
         AFKREASON = string
-        await afk_e.edit("Going AFK!" f"\nReason: `{string}`")
+        await afk_e.edit("Going AFK!" f"\nReason: {string}")
     else:
         await afk_e.edit("Going AFK!")
     if BOTLOG:
-        await afk_e.client.send_message(BOTLOG_CHATID, "#AFK\nYou went AFK!")
+        await afk_e.client.send_message(BOTLOG_CHATID, "#AFK\nYou went AFK!\nReason: {AFKREASON}")
     ISAFK = True
     raise StopPropagation
 
