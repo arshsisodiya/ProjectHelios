@@ -1,4 +1,4 @@
-#by arshsisodiya
+# Copyright (C) 2021 arshsisodiya
 #https://github.com/arshsisodiya
 
 import io
@@ -20,7 +20,7 @@ async def _(event):
         try:
             await event.edit("```Identifying the song```")
             start_msg = await conv.send_message("/start")
-            response = await conv.get_response()
+            await conv.get_response()
             send_audio = await conv.send_message(reply_message)
             check = await conv.get_response()
             if not check.text.startswith("Audio received"):
@@ -37,7 +37,7 @@ async def _(event):
         \n\n**Details : **__{result.text.splitlines()[2]}__"
         await event.edit(namem)
         await event.client.delete_messages(
-                conv.chat_id, [start_msg.id, send_audio.id, check.id, result.id, response.id]
+                conv.chat_id, [start_msg.id, send_audio.id, check.id, result.id]
             )
     except TimeoutError:
         return await event.edit("`Error: `@auddbot` is not responding please try again later")

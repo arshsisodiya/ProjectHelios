@@ -13,13 +13,13 @@ from userbot import CMD_HELP
 from userbot.events import register
 
 
-@register(outgoing=True, pattern="^.add(?: |$)(.*)")
+@register(outgoing=True, pattern="^.invite(?: |$)(.*)")
 async def _(event):
     if event.fwd_from:
         return
     to_add_users = event.pattern_match.group(1)
     if event.is_private:
-        await event.edit("`.add` users to a chat, not to a Private Message")
+        await event.edit("`.invite` users to a chat, not to a Private Message")
     else:
         if not event.is_channel and event.is_group:
             # https://lonamiwebs.github.io/Telethon/methods/messages/add_chat_user.html
@@ -33,7 +33,7 @@ async def _(event):
                 except Exception as e:
                     await event.edit(str(e))
                     return
-            await event.edit("`Added Successfully`")
+            await event.edit("`Invited Successfully`")
             await sleep(2)
             await event.delete()
         else:
@@ -48,14 +48,14 @@ async def _(event):
                 except Exception as e:
                     await event.edit(str(e))
                     return
-            await event.edit("`Added Successfully`")
+            await event.edit("`Invited Successfully`")
             await sleep(2)
             await event.delete()
 
 
 CMD_HELP.update(
     {
-        "add": ".add <username> \
-        \nUsage: add some user or bots if u want to groups."
+        "invite": ".invite <username> \
+        \nUsage: Invite some user or bots if u want."
     }
 )

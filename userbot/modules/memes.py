@@ -1071,14 +1071,12 @@ async def pressf(f):
             out += (arg * c) + "\n"
         await f.edit("`" + out + "`")
 
-
-@register(outgoing=True, pattern="^oof$")
-async def oof(woof):
-    t = "oof"
-    for j in range(25):
+@register(outgoing=True, pattern="^Oof$")
+async def Oof(woof):
+    t = "Oof"
+    for j in range(10):
         t = t[:-1] + "of"
         await woof.edit(t)
-
 
 @register(outgoing=True, pattern="^yeee$")
 async def yeee(plus):
@@ -1099,8 +1097,8 @@ async def Pro(proo):
 @register(outgoing=True, pattern="^Brr$")
 async def Brr(burr):
     t = "Brr"
-    for j in range(20):
-        t = t[:-1] + "rr"
+    for j in range(10):
+        t = t + "rr"
         await burr.edit(t)
 
 
@@ -1122,7 +1120,7 @@ async def Noo(nooo):
 @register(outgoing=True, pattern="^Eww$")
 async def Eww(Ewe):
     t = "Eww"
-    for j in range(20):
+    for j in range(7):
         t = t[:-1] + "ww"
         await Ewe.edit(t)                      
                       
@@ -1272,6 +1270,11 @@ async def bluetext(bt_e):
             "/ARE /YOU /A /STUPID /ANIMAL /WHICH /IS /ATTRACTED /TO /COLOURS?"
         )
 
+@register(outgoing=True, pattern=".fakepromote")
+async def fprom(event):
+    await event.edit("`Promoting...`")
+    time.sleep(3.0)
+    await event.edit("`Promoted Successfully! Now gib party!`")
 
 @register(outgoing=True, pattern=r"^.f (.*)")
 async def payf(event):

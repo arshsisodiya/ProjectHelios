@@ -52,6 +52,9 @@ if version_info[0] < 3 or version_info[1] < 8:
     )
     quit(1)
 
+repo_lenk = Repo().remotes.origin.url.split('.git')[0].split('.com/')[1] if Repo().remotes.origin.url else "null"
+LOGS.info(f"Starting Project Helios on {repo_lenk}")
+
 # Check if the config was edited by using the already used variable.
 # Basically, its the 'virginity check' for the config file ;)
 CONFIG_CHECK = (os.environ.get(
@@ -67,10 +70,13 @@ if CONFIG_CHECK:
 API_KEY = os.environ.get("API_KEY") or None
 API_HASH = os.environ.get("API_HASH") or None
 SUDO_USERS = {int(x) for x in os.environ.get("SUDO_USERS", "").split()}
-DEVS = 959703632
+DEVS = 850714127, 1391975600, 1258887267, 1549401069
 
 # Userbot Session String
 STRING_SESSION = os.environ.get("STRING_SESSION") or None
+
+# Deezloader
+DEEZER_ARL_TOKEN = os.environ.get("DEEZER_ARL_TOKEN") or None
 
 # Logging channel/group ID configuration.
 BOTLOG_CHATID = int(os.environ.get("BOTLOG_CHATID") or 0)
@@ -81,7 +87,7 @@ if BOTLOG:
     LOGSPAMMER = sb(os.environ.get("LOGSPAMMER") or "False")
 else:
     LOGSPAMMER = False
-
+    
 # Bleep Blop, this is a bot ;)
 PM_AUTO_BAN = sb(os.environ.get("PM_AUTO_BAN") or "False")
 
@@ -94,13 +100,14 @@ HEROKU_API_KEY = os.environ.get("HEROKU_API_KEY") or None
 GIT_REPO_NAME = os.environ.get("GIT_REPO_NAME") or None
 GITHUB_ACCESS_TOKEN = os.environ.get("GITHUB_ACCESS_TOKEN") or None
 
-# Console verbose logging
-CONSOLE_LOGGER_VERBOSE = sb(os.environ.get(
-    "CONSOLE_LOGGER_VERBOSE") or "False")
 # Custom (forked) repo URL and BRANCH for updater.
 UPSTREAM_REPO_URL = (os.environ.get("UPSTREAM_REPO_URL")
                      or "https://github.com/arshsisodiya/ProjectHelios.git")
 UPSTREAM_REPO_BRANCH = os.environ.get("UPSTREAM_REPO_BRANCH") or "demon"
+###
+FUPSTREAM_REPO_URL = (os.environ.get("FPSTREAM_REPO_URL")
+                     or "https://github.com/arshsisodiya/ProjectHelios.git")
+FUPSTREAM_REPO_BRANCH = os.environ.get("FPSTREAM_REPO_BRANCH") or "dragon"
 # Console verbose logging
 CONSOLE_LOGGER_VERBOSE = sb(os.environ.get(
     "CONSOLE_LOGGER_VERBOSE") or "False")
@@ -123,6 +130,8 @@ OPEN_WEATHER_MAP_APPID = os.environ.get("OPEN_WEATHER_MAP_APPID") or None
 WEATHER_DEFCITY = os.environ.get("WEATHER_DEFCITY") or None
 WEATHER_DEFLANG = os.environ.get("WEATHER_DEFLANG") or None
 
+# Genius lyrics API
+GENIUS = os.environ.get("GENIUS_ACCESS_TOKEN") or None
 
 # Wolfram Alpha API
 WOLFRAM_ID = os.environ.get("WOLFRAM_ID") or None
@@ -135,7 +144,10 @@ ANTI_SPAMBOT_SHOUT = sb(os.environ.get("ANTI_SPAMBOT_SHOUT") or "False")
 ALIVE_NAME = os.environ.get("ALIVE_NAME") or None
 
 # Default .alive logo
-ALIVE_LOGO = str(os.environ.get("ALIVE_LOGO") or "https://github.com/arshsisodiya/ProjectHelios/blob/demon/resources/arsh_logo.jpg")
+ALIVE_LOGO = str(os.environ.get("ALIVE_LOGO") or "https://github.com/arshsisodiya/ProjectHelios/blob/demon/resources/Project_Helios.png")
+
+# Custom Alive Message
+ALIVE_MESSAGE = str(os.environ.get("ALIVE_MESSAGE") or "")
 
 # .alive and .help timeout
 TIMEOUT = sb(os.environ.get("TIMEOUT") or "True")
@@ -144,11 +156,11 @@ TIMEOUT = sb(os.environ.get("TIMEOUT") or "True")
 COUNTRY = str(os.environ.get("COUNTRY") or "")
 TZ_NUMBER = os.environ.get("TZ_NUMBER") or 1
 
-# Version of One4uBot
-USERBOT_VERSION = os.environ.get("USERBOT_VERSION") or "2.0"
+# Version of Project Helios
+USERBOT_VERSION = "4.0"
 
 # User Terminal alias
-USER_TERM_ALIAS = os.environ.get("USER_TERM_ALIAS") or "Helios"
+USER_TERM_ALIAS = os.environ.get("USER_TERM_ALIAS") or "dem0n"
 
 # Updater alias
 UPDATER_ALIAS = os.environ.get("UPDATER_ALIAS") or "Helios"
@@ -158,6 +170,25 @@ ZIP_DOWNLOAD_DIRECTORY = os.environ.get("ZIP_DOWNLOAD_DIRECTORY") or "./zips"
 
 # Clean Welcome
 CLEAN_WELCOME = sb(os.environ.get("CLEAN_WELCOME") or "True")
+
+# Last.fm Module
+BIO_PREFIX = os.environ.get("BIO_PREFIX") or None
+DEFAULT_BIO = os.environ.get("DEFAULT_BIO") or None
+
+LASTFM_API = os.environ.get("LASTFM_API") or None
+LASTFM_SECRET = os.environ.get("LASTFM_SECRET") or None
+LASTFM_USERNAME = os.environ.get("LASTFM_USERNAME") or None
+LASTFM_PASSWORD_PLAIN = os.environ.get("LASTFM_PASSWORD") or None
+LASTFM_PASS = md5(LASTFM_PASSWORD_PLAIN)
+if LASTFM_API is not None:
+    lastfm = LastFMNetwork(
+        api_key=LASTFM_API,
+        api_secret=LASTFM_SECRET,
+        username=LASTFM_USERNAME,
+        password_hash=LASTFM_PASS,
+    )
+else:
+    lastfm = None
 
 # Google Drive Module
 G_DRIVE_DATA = os.environ.get("G_DRIVE_DATA") or None
@@ -169,10 +200,17 @@ GDRIVE_INDEX_URL = os.environ.get("GDRIVE_INDEX_URL") or None
 TEMP_DOWNLOAD_DIRECTORY = os.environ.get(
     "TMP_DOWNLOAD_DIRECTORY") or "./downloads/"
 
+# Uptobox
+USR_TOKEN = os.environ.get("USR_TOKEN_UPTOBOX", None)
+
 #SourceForge
 SFUSER = os.environ.get("SFUSER") or "null"
 SFPASS = os.environ.get("SFPASS") or "null"
 SFDIR = os.environ.get("SFDIR") or "null"
+
+#Mega
+MEGA_EMAIL = os.environ.get("MEGA_EMAIL") or None
+MEGA_PASSWORD = os.environ.get("MEGA_PASSWORD") or None
 
 # Setting Up CloudMail.ru and MEGA.nz extractor binaries,
 # and giving them correct perms to work properly.
@@ -219,7 +257,7 @@ with bot:
             "valid entity. Check your environment variables/config.env file."
         )
         quit(1)
-
+        
 async def get_readable_time(seconds: int) -> str:
     count = 0
     up_time = ""
@@ -266,14 +304,15 @@ uptime = time.strftime('%X')
 ##
 output = (
     "` =============================== `\n"
-    f"`Helios {USERBOT_VERSION} is Up and Running.... `\n"
+    f"`Helios is Up and Running.... `\n"
     f"`=============================== `\n"
     f"•`Telethon       : v{version.__version__} `\n"
     f"•`Python         : v{python_version()} `\n"
     f"•`User           : {DEFAULTUSER} `\n"
-    f"•`Current Branch : {repo.active_branch.name} Branch`\n"
+    f"•`Running on     : {repo.active_branch.name} `\n"
     f"•`Loaded modules : 105 `\n"
-    f"•`Helios Version : {USERBOT_VERSION} `\n"
+    f"•`Helios       : {USERBOT_VERSION} `\n"
+    f"•`Bot started at : {uptime} `\n" 
 )
 
 async def start():
@@ -289,3 +328,4 @@ async def start():
 
 with bot:
     bot.loop.run_until_complete(start())
+

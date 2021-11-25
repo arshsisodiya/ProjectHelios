@@ -12,7 +12,7 @@ from asyncio import subprocess as asyncsub
 from os import remove
 from time import gmtime, strftime
 from traceback import format_exc
-from asyncio import sleep
+from asyncio import sleep 
 from telethon import events
 
 from userbot import LOGSPAMMER, BOTLOG, BOTLOG_CHATID, bot
@@ -23,7 +23,7 @@ def register(**args):
     pattern = args.get('pattern', None)
     disable_edited = args.get('disable_edited', False)
     ignore_unsafe = args.get('ignore_unsafe', False)
-    unsafe_pattern = r'^[^/!#@\$A-Za-z,?]'
+    unsafe_pattern = r'^[^/!#@\$A-Za-z0-9,?İşŞğĞüÜöÖIıÇç]'
     groups_only = args.get('groups_only', False)
     trigger_on_fwd = args.get('trigger_on_fwd', False)
     disable_errors = args.get('disable_errors', False)
@@ -98,7 +98,7 @@ def register(**args):
                     date = strftime("%Y-%m-%d %H:%M:%S", gmtime())
 
                     text = "**USERBOT ERROR REPORT**\n"
-                    link = "[Userbot Support](https://t.me/ProjectHelios)"
+                    link = "[Userbot Support](https://t.me/ProjectFizilion)"
                     text += "If you want to, you can report it"
                     text += f". Head and forward this message to Support Group.\n"
                     text += "Nothing is logged except the fact of error and date\n"
@@ -141,12 +141,12 @@ def register(**args):
 
                     if LOGSPAMMER:
                        await check.client.send_file(BOTLOG_CHATID, "error.log", caption=text)
-
-
-                    else:
+                                                 
+                                                 
+                    else: 
                        await check.client.send_file(BOTLOG_CHATID, "error.log", caption=text)
-
-
+                                                 
+                                                 
                     remove("error.log")
             else:
                 pass

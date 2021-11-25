@@ -14,10 +14,10 @@ from userbot.events import register
 @register(outgoing=True, pattern=r"^\.pdf(?: |$)(.*)")
 async def _(event):
     if not event.reply_to_msg_id:
-        return await event.edit("Reply to any text/media.")
+        return await event.edit("Reply to any text/image.")
     reply_message = await event.get_reply_message()
     chat = "@office2pdf_bot"
-    await event.edit("Converting into PDF.....`")
+    await event.edit("Converting into PDF..")
     try:
         async with bot.conversation(chat) as conv:
             try:
@@ -28,13 +28,13 @@ async def _(event):
                 cnfrm = await conv.get_response()
                 editfilename = await conv.send_message("Yes")
                 enterfilename = await conv.get_response()
-                filename = await conv.send_message("Project Helios")
+                filename = await conv.send_message("Project Fizilion")
                 started = await conv.get_response()
                 pdf = await conv.get_response()
                 """- don't spam notif -"""
                 await bot.send_read_acknowledge(conv.chat_id)
             except YouBlockedUserError:
-                await event.edit("`Unblock `@office2pdf_bot` and retry`")
+                await event.edit("`Unblock @office2pdf_bot and retry")
                 return
             await event.client.send_message(event.chat_id, pdf)
             await event.client.delete_messages(
@@ -43,7 +43,7 @@ async def _(event):
             await event.delete()
     except TimeoutError:
         return await event.edit(
-                "`Error: Sorry `@office2pdf_bot` is not responding please try again later` ")
+                "Error: Sorry @office2pdf_bot is not responding please try again later ")
 
 CMD_HELP.update(
     {

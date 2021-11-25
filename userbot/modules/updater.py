@@ -1,4 +1,3 @@
-
 # Copyright (C) 2019 The Raphielscape Company LLC.
 #
 # Licensed under the Raphielscape Public License, Version 1.d (the "License");
@@ -77,7 +76,7 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
                 f"{txt}\n`Invalid Heroku credentials for deploying userbot dyno.`"
             )
             return repo.__del__()
-        await event.edit("**Perfoming a full update...**\nThis usually takes less than 5 minutes, please wait.")
+        await event.edit("`Userbot dyno build in progress, please wait...`")
         ups_rem.fetch(ac_br)
         repo.git.reset("--hard", "FETCH_HEAD")
         heroku_git_url = heroku_app.git_url.replace(
@@ -93,11 +92,11 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
         except GitCommandError as error:
             await event.edit(f"{txt}\n`Here is the error log:\n{error}`")
             return repo.__del__()
-        await event.edit("**Successfully updated!**\nBot is restarting, will be back up in a few seconds.")
+        await event.edit("`Successfully Updated!\n" "Restarting, please wait...`")
 
         if BOTLOG:
             await event.client.send_message(
-                BOTLOG_CHATID, "#UPDATE \n" "Your Helios was successfully updated"
+                BOTLOG_CHATID, "#UPDATE \n" "Your Fizilion was successfully updated"
             )
 
     else:
@@ -117,7 +116,7 @@ async def update(event, repo, ups_rem, ac_br):
 
     if BOTLOG:
         await event.client.send_message(
-            BOTLOG_CHATID, "#UPDATE \n" "Your Helios was successfully updated"
+            BOTLOG_CHATID, "#UPDATE \n" "Your Fizilion was successfully updated"
         )
 
     # Spin a new instance of bot
@@ -126,7 +125,7 @@ async def update(event, repo, ups_rem, ac_br):
     return
 
 
-@register(outgoing=True, pattern=r"^.update(?: |$)(now|deploy)?")
+@register(outgoing=True, pattern=r"^.ota(?: |$)(now|deploy)?")
 async def upstream(event):
     "For .update command, check if the bot is up to date, update if specified"
     await event.edit("`Checking for updates, please wait....`")
@@ -179,13 +178,13 @@ async def upstream(event):
 
     if changelog == "" and force_update is False:
         await event.edit(
-            f"\n`{UPDATER_ALIAS} is`  **up-to-date**  `with`  **{UPSTREAM_REPO_BRANCH}** Branch\n"
+            f"\n`{UPDATER_ALIAS} is`  **up-to-date**  `with`  **{UPSTREAM_REPO_BRANCH}**\n"
         )
         return repo.__del__()
 
     if conf is None and force_update is False:
         changelog_str = (
-            f"**New UPDATE available for HeliosBot in [{ac_br}] Branch:\n\nCHANGELOG:**\n`{changelog}`"
+            f"**New UPDATE available for [{ac_br}]:\n\nCHANGELOG:**\n`{changelog}`"
         )
         if len(changelog_str) > 4096:
             await event.edit("`Changelog is too big, view the file to see it.`")
@@ -200,29 +199,24 @@ async def upstream(event):
             remove("output.txt")
         else:
             await event.edit(changelog_str)
-        return await event.respond('`do ".update now/deploy" to update`')
+        return await event.respond('`do ".ota deploy" to update`')
 
     if force_update:
         await event.edit(
             "`Force-Syncing to latest stable userbot code, please wait...`"
         )
     else:
-        await event.edit("`Updating Helios, please wait....`")
-    if conf == "now":
-        await update(event, repo, ups_rem, ac_br)
-    elif conf == "deploy":
+        await event.edit("`Updating Fizilion, please wait....`")
+    if conf == "deploy":
         await deploy(event, repo, ups_rem, ac_br, txt)
     return
 
+
 CMD_HELP.update(
     {
-        "update": ">`.update`"
-        "\nUsage: Checks if the main userbot repository has any updates "
-        "and shows a changelog if so."
-        "\n\n>`.update now`"
-        "\nUsage: Performs a quick update."
-        "\nHeroku resets updates performed using this method after a while. Use `deploy` instead."
-        "\n\n>`.update deploy`"
-        "\nUsage: Performs a full update (recommended)."
+        "ota": ".ota"
+        "\nUsage: Checks if the main userbot repository has any updates and shows a changelog if so."
+        "\n\n.ota deploy"
+        "\nUsage: Deploy your userbot at heroku, if there are any updates in your userbot repository."
     }
 )

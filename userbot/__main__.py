@@ -7,9 +7,9 @@
 
 from importlib import import_module
 from sys import argv
-
+from asyncio import sleep
 from telethon.errors.rpcerrorlist import PhoneNumberInvalidError
-from userbot import LOGS, bot
+from userbot import LOGS, bot, HEROKU_APP_NAME, HEROKU_API_KEY, repo_lenk
 from userbot.modules import ALL_MODULES
 
 
@@ -26,13 +26,14 @@ except PhoneNumberInvalidError:
 for module_name in ALL_MODULES:
     imported_module = import_module("userbot.modules." + module_name)
 
-LOGS.info("You are running Project Helios")
+LOGS.info(f"You are running Project Helios on {repo_lenk}")
 
 LOGS.info(
     "Congratulations, your userbot is now running !! Test it by typing .alive / .on in any chat."
-    "If you need assistance, head to https://t.me/NmberSEVEN")
-
-if len(argv) not in (1, 3, 4):
-    bot.disconnect()
-else:
+    "If you need assistance, head to https://t.me/ProjectFizilionChat")
+if HEROKU_APP_NAME is not None and HEROKU_API_KEY is not None:
+    print("HEROKU detected, sleeping for 5 minutes to prevent String Session Error")
+    LOGS.info("HEROKU detected, sleeping for 5 minutes to prevent String Session Error")
+    sleep(300)
     bot.run_until_disconnected()
+bot.run_until_disconnected()

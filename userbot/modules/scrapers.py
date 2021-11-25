@@ -14,7 +14,6 @@ import shutil
 import time
 from asyncio import sleep
 from urllib.parse import quote_plus
-import async_google_trans_new
 import asyncurban
 from bs4 import BeautifulSoup
 from emoji import get_emoji_regexp
@@ -24,7 +23,6 @@ from gpytranslate import Translator as tr
 from gtts import gTTS
 from gtts.lang import tts_langs
 from requests import get
-from search_engine_parser import GoogleSearch
 from search_engine_parser.core.engines.google import Search as GoogleSearch
 from search_engine_parser.core.exceptions import NoResultsOrTrafficError
 from telethon.tl.types import DocumentAttributeAudio, DocumentAttributeVideo
@@ -46,13 +44,13 @@ from youtube_search import YoutubeSearch
 from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP, TEMP_DOWNLOAD_DIRECTORY
 from userbot.events import register
 from userbot.modules.upload_download import get_video_thumb
-from userbot.utils import chrome, googleimagesdownload, progress
+from userbot.utils import chrome, duckduckgoscraper, progress
 from userbot.utils.FastTelethon import upload_file
 
 CARBONLANG = "auto"
 TTS_LANG = "en"
 TRT_LANG = os.environ.get("TRT_LANG") or "en"
-TEMP_DOWNLOAD_DIRECTORY = "/Helios/.bin/"
+TEMP_DOWNLOAD_DIRECTORY = "/Fizilion/.bin/"
 
 
 @register(outgoing=True, pattern=r"^\.crblang (.*)")
@@ -62,8 +60,6 @@ async def setlang(prog):
     await prog.edit(f"Language for carbon.now.sh set to {CARBONLANG}")
 
 @register(outgoing=True, pattern=r"^\.carbon")
-@register(outgoing=True, pattern=r"^\.crb")
-@register(outgoing=True, pattern=r"^\.c(arbon|rb)(?: |$)(.*)")
 async def carbon_api(e):
     """ A Wrapper for carbon.now.sh """
     await e.edit("`Processing...`")
@@ -118,53 +114,29 @@ async def carbon_api(e):
 
 
 
-@register(outgoing=True, pattern=r"^\.img(?: |$)(\d*)? ?(.*)")
+@register(outgoing=True, pattern="^.img (.*)")
 async def img_sampler(event):
-    """For .img command, search and return images matching the query."""
-
-    if event.is_reply and not event.pattern_match.group(2):
-        query = await event.get_reply_message()
-        query = str(query.message)
+    """ For .img command, search and return images matching the query. """
+    await event.edit("`Processing...\n please wait for a moment...`")
+    query = event.pattern_match.group(1)
+    scraper = duckduckgoscraper.DuckDuckGoScraper()
+    
+    #The out directory
+    os.system("mkdir -p /tmp/out/images")
+    out = ("/tmp/out/images")
+    
+    if 'query' not in locals():
+        await event.edit("Please specify a query to get images,\n like .img duck")
     else:
-        query = str(event.pattern_match.group(2))
-
-    if not query:
-        return await event.edit("**Reply to a message or pass a query to search!**")
-
-    await event.edit("**Processing...**")
-
-    if event.pattern_match.group(1) != "":
-        counter = int(event.pattern_match.group(1))
-        if counter > 10:
-            counter = int(10)
-        if counter <= 0:
-            counter = int(1)
-    else:
-        counter = int(3)
-
-    response = googleimagesdownload()
-
-    # creating list of arguments
-    arguments = {
-        "keywords": query,
-        "limit": counter,
-        "format": "png",
-        "no_directory": "no_directory",
-    }
-
-    # if the query contains some special characters, googleimagesdownload errors out
-    # this is a temporary workaround for it (maybe permanent)
-    try:
-        paths = response.download(arguments)
-    except Exception as e:
-        return await event.edit(f"**Error:** `{e}`")
-
-    lst = paths[0][query]
-    await event.client.send_file(
-        await event.client.get_input_entity(event.chat_id), lst
-    )
-    shutil.rmtree(os.path.dirname(os.path.abspath(lst[0])))
-    await event.delete()
+        #TODO: add a limit to the images being downloaded
+        scraper.scrape(query,1,out)
+        await asyncio.sleep(4)
+        files = glob.glob("/tmp/out/images/*.jpg")
+        await event.client.send_file(
+            await event.client.get_input_entity(event.chat_id), files
+                )
+        await event.delete()
+        os.system("rm -rf /tmp/out/images")
 
 @register(outgoing=True, pattern=r"^\.currency ([\d\.]+) ([a-zA-Z]+) ([a-zA-Z]+)")
 async def moni(event):
@@ -187,53 +159,52 @@ async def moni(event):
     c_to_val = round(c_from_val * response["rates"][c_to], 2)
     await event.edit(f"`{c_from_val} {c_from} = {c_to_val} {c_to}`")
 
-@register(outgoing=True, pattern=r"^\.google(?: |$)(\d*)? ?(.*)")
-async def gsearch(event):
+@register(outgoing=True, pattern=r"^.google(?: |$)(.*)")
+async def gsearch(q_event):
     """For .google command, do a Google search."""
+    textx = await q_event.get_reply_message()
+    query = q_event.pattern_match.group(1)
 
-    if event.is_reply and not event.pattern_match.group(2):
-        match = await event.get_reply_message()
-        match = str(match.message)
+    if query:
+        pass
+    elif textx:
+        query = textx.text
     else:
-        match = str(event.pattern_match.group(2))
-
-    if not match:
-        return await event.edit("**Reply to a message or pass a query to search!**")
-
-    await event.edit("**Processing...**")
-
-    if event.pattern_match.group(1) != "":
-        counter = int(event.pattern_match.group(1))
-        if counter > 10:
-            counter = int(10)
-        if counter <= 0:
-            counter = int(1)
-    else:
-        counter = int(3)
-
-    search_args = (str(match), int(1))
-    gsearch = GoogleSearch()
-
-    try:
-        gresults = await gsearch.async_search(*search_args)
-    except Exception:
-        return await event.edit(
-            "**Error: Your query could not be found or it was flagged as unusual traffic.**"
+        await q_event.edit(
+            "`Pass a query as an argument or reply " "to a message for Google search!`"
         )
-    msg = ""
+        return
 
-    for i in range(counter):
-        try:
-            title = gresults["titles"][i]
-            link = gresults["links"][i]
-            desc = gresults["descriptions"][i]
-            msg += f"[{title}]({link})\n`{desc}`\n\n"
-        except IndexError:
-            break
+    await q_event.edit("`Searching...`")
 
-    await event.edit(
-        "**Search Query:**\n`" + match + "`\n\n**Results:**\n" + msg, link_preview=False
-    )
+    search_args = (str(query), 1)
+    googsearch = GoogleSearch()
+    try:
+        gresults = await googsearch.async_search(*search_args)
+        msg = ""
+        for i in range(0, 5):
+            try:
+                title = gresults["titles"][i]
+                link = gresults["links"][i]
+                desc = gresults["descriptions"][i]
+                msg += f"{i+1}. [{title}]({link})\n`{desc}`\n\n"
+            except IndexError:
+                break
+        await q_event.edit(
+            "**Search Query:**\n`" + query + "`\n\n**Results:**\n" + msg,
+            link_preview=False,
+        )
+    except NoResultsOrTrafficError as error:
+        if BOTLOG:
+            await q_event.client.send_message(
+                BOTLOG_CHATID, f"`GoogleSearch error: {error}`"
+            )
+        return
+    if BOTLOG:
+        await q_event.client.send_message(
+            BOTLOG_CHATID,
+            "Google Search query `" + query + "` was executed successfully",
+        )
 
 @register(outgoing=True, pattern=r"^\.wiki(?: |$)(.*)")
 async def wiki(wiki_q):
@@ -279,14 +250,14 @@ async def wiki(wiki_q):
 async def ipinfo(event):
     #Thanks to https://ipinfo.io for this api
     ip = event.pattern_match.group(1)
-    os.system("curl ipinfo.io/{0} --silent > /Helios/ip.txt".format(ip))
-    rinfo = open("/Helios/ip.txt","r")
+    os.system("curl ipinfo.io/{0} --silent > /Fizilion/ip.txt".format(ip))
+    rinfo = open("/Fizilion/ip.txt","r")
     info = json.load(rinfo)
     rinfo.close()
-    os.system("rm /Helios/ip.txt")
-
+    os.system("rm /Fizilion/ip.txt")
+    
     if "error" in info:
-        await event.edit("Invalid IP address")
+        await event.edit("Invalid IP address")        
     elif "country" in info:
         await event.edit(
             "`IP CREDENTIALS FOUND!`\n\n"
@@ -306,7 +277,7 @@ async def ipinfo(event):
         )
     else:
         await event.edit("Invalid Information Provided")
-
+        
 @register(outgoing=True, pattern=r"^\.ud(?: |$)(.*)")
 async def urban_dict(event):
     """Output the definition of a word from Urban Dictionary"""
@@ -500,7 +471,7 @@ async def imdb(e):
 
 
 
-
+        
 @register(pattern=r"\.lang (trt|tts) (.*)", outgoing=True)
 async def lang(value):
     """ For .lang command, change the default langauge of userbot scrapers. """
@@ -528,16 +499,15 @@ async def lang(value):
                 f"`Invalid Language code !!`\n`Available language codes for TTS`:\n\n`{tts_langs()}`"
             )
     await value.edit(f"`Language for {scraper} changed to {LANG.title()}.`")
-    """if BOTLOG:
+    if BOTLOG:
         await value.client.send_message(
             BOTLOG_CHATID, f"`Language for {scraper} changed to {LANG.title()}.`"
-        )"""
+        )
 
 @register(outgoing=True, pattern=r"^.trt(?: |$)([\s\S]*)")
 async def translateme(trans):
     """ For .trt command, translate the given text using Google Translate. """
     translator = Translator()
-    g = async_google_trans_new.AsyncTranslator()
     detector = tr()
     textx = await trans.get_reply_message()
     message = trans.pattern_match.group(1)
@@ -549,8 +519,8 @@ async def translateme(trans):
         await trans.edit("`Give a text or reply to a message to translate!`")
         return
     try:
-        reply_text = await g.translate(deEmojify(message),
-                                          TRT_LANG)
+        reply_text = await detector.translate(deEmojify(message),
+                                          targetlang=TRT_LANG)
     except ValueError:
         await trans.edit("Invalid destination language.")
         return
@@ -558,11 +528,11 @@ async def translateme(trans):
     try:
         source_lan = await detector.detect(deEmojify(message))
         source_lan = LANGUAGES.get(source_lan).title()
-
+        
     except:
         source_lan = "(Google didn't provide this info.)"
 
-    reply_text = f"From: **{source_lan}**\nTo: **{LANGUAGES.get(TRT_LANG).title()}**\n\n{reply_text}"
+    reply_text = f"From: **{source_lan}**\nTo: **{LANGUAGES.get(TRT_LANG).title()}**\n\n{reply_text.text}"
 
     await trans.edit(reply_text)
     if BOTLOG:
@@ -798,7 +768,6 @@ CMD_HELP.update(
         "\nUsage: Gets the info of given ipaddress, send .ipinfo for bot's server ip info",
         "carbon": ">`.carbon <text> [or reply]`"
         "\nUsage: Beautify your code using carbon.now.sh\n"
-        "Go to [Carbon](https://carbon.now.sh) for different lang/style names and previews."
         "Use .crblang <text> to set language for your code.",
         "google": ">`.google [count] <query> [or reply]`"
         "\nUsage: Does a search on Google."
@@ -818,7 +787,7 @@ CMD_HELP.update(
         "\nCan specify the number of results needed (default is 3).",
         "imdb": ">`.imdb <movie-name>`"
         "\nUsage: Shows movie info and other stuff.",
-        "rip": ">`.ra <url> [or reply] (for audio) or .rv <url> [or reply](for video)`"
-        "\nUsage: Download videos and songs from YouTube  "
-        "(and [many other sites](https://ytdl-org.github.io/youtube-dl/supportedsites.html)) --> Use .ra <url> for downloading audio only and .rv <url> for downloading video.",
+        "rip": ">`.ra <url> [or reply] or .rv <url> [or reply]`"
+        "\nUsage: Download videos and songs from YouTube "
+        "(and [many other sites](https://ytdl-org.github.io/youtube-dl/supportedsites.html)).",
     })

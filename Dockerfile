@@ -1,19 +1,7 @@
-# inherit prebuilt image
-FROM prajwals3/projectfizilion:latest
+FROM frost2k5/dragonheart:master
 
-# env setup
-RUN mkdir /Helios && chmod 777 /Helios
-ENV PATH="/Helios/bin:$PATH"
-WORKDIR /Helios
+RUN mkdir /Fizilion && chmod 777 /Fizilion && git clone https://github.com/arshsisodiya/ProjectHelios -b demon /Fizilion
+ENV PATH="/Fizilion/bin:$PATH"
+WORKDIR /Fizilion
 
-# clone repo
-RUN git clone https://github.com/arshsisodiya/ProjectHelios.git -b demon /Helios
-
-# Copies session and config(if it exists)
-COPY ./sample_config.env ./userbot.session* ./config.env* /Helios/
-
-# install required pypi modules
-RUN pip3 install -r requirements.txt
-
-# Finalization
 CMD ["python3","-m","userbot"]

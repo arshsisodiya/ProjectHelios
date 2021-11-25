@@ -24,10 +24,10 @@ from userbot.events import register
 # ========================= CONSTANTS ============================
 DEF_UNAPPROVED_MSG = (
     "Hey there :)\n"
-    "I am Helios, my Master's assistant.\n"
+    "I am Fizilion, my Master's assistant.\n"
     "Please wait for my Master to read your PMs.\n"
     "Have patience, otherwise spamming my Master's pm will result in a block.\n\n\n"
-    "*This PM is Powered by Helios Ai")
+    "*This PM is Powered by Fizilion Ai")
 # =================================================================
 
 
@@ -72,9 +72,9 @@ async def permitpm(event):
                         event.chat_id, from_user="me", search=UNAPPROVED_MSG
                     ):
                         await message.delete()
-                    await event.reply(f"`{UNAPPROVED_MSG}`")
+                    await event.reply(f"{UNAPPROVED_MSG}")
             else:
-                await event.reply(f"`{UNAPPROVED_MSG}`")
+                await event.reply(f"{UNAPPROVED_MSG}")
             LASTMSG.update({event.chat_id: event.text})
             if notifsoff:
                 await event.client.send_read_acknowledge(event.chat_id)

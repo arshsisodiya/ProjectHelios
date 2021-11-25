@@ -77,12 +77,12 @@ async def _(event):
     except TimeoutError:
         return await event.edit("`Error: @TorrentHuntBot is not responding please try again later")
 
-    CMD_HELP.update(
+CMD_HELP.update(
         {
-            "torrent": ".ts"
-                        "\nUsage: Search Torrents "
-                        "\n\n.tos"
-                        "\nUsage:reply to getLink<id> to get Magnet Link\n"
+            "torrent": ".ts \
+            \nUsage: Search Torrents \
+            \n\n.tos \
+            \nUsage:reply to getLink<id> to get Magnet Link\n"
 
         }
     )
