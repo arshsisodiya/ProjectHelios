@@ -52,6 +52,9 @@ if version_info[0] < 3 or version_info[1] < 8:
     )
     quit(1)
 
+repo_lenk = Repo().remotes.origin.url.split('.git')[0].split('.com/')[1] if Repo().remotes.origin.url else "null"
+LOGS.info(f"Starting Project Helios on {repo_lenk}")
+
 # Check if the config was edited by using the already used variable.
 # Basically, its the 'virginity check' for the config file ;)
 CONFIG_CHECK = (os.environ.get(
@@ -84,7 +87,7 @@ if BOTLOG:
     LOGSPAMMER = sb(os.environ.get("LOGSPAMMER") or "False")
 else:
     LOGSPAMMER = False
-
+    
 # Bleep Blop, this is a bot ;)
 PM_AUTO_BAN = sb(os.environ.get("PM_AUTO_BAN") or "False")
 
@@ -141,7 +144,10 @@ ANTI_SPAMBOT_SHOUT = sb(os.environ.get("ANTI_SPAMBOT_SHOUT") or "False")
 ALIVE_NAME = os.environ.get("ALIVE_NAME") or None
 
 # Default .alive logo
-ALIVE_LOGO = str(os.environ.get("ALIVE_LOGO") or "https://github.com/arshsisodiya/ProjectHelios/blob/demon/resources/arsh_logo.jpg")
+ALIVE_LOGO = str(os.environ.get("ALIVE_LOGO") or "https://github.com/arshsisodiya/ProjectHelios/blob/demon/resources/Project_Helios.png")
+
+# Custom Alive Message
+ALIVE_MESSAGE = str(os.environ.get("ALIVE_MESSAGE") or "")
 
 # .alive and .help timeout
 TIMEOUT = sb(os.environ.get("TIMEOUT") or "True")
@@ -150,11 +156,11 @@ TIMEOUT = sb(os.environ.get("TIMEOUT") or "True")
 COUNTRY = str(os.environ.get("COUNTRY") or "")
 TZ_NUMBER = os.environ.get("TZ_NUMBER") or 1
 
-# Version of One4uBot
-USERBOT_VERSION = os.environ.get("USERBOT_VERSION") or "2.0"
+# Version of Project Helios
+USERBOT_VERSION = "4.0"
 
 # User Terminal alias
-USER_TERM_ALIAS = os.environ.get("USER_TERM_ALIAS") or "Helios"
+USER_TERM_ALIAS = os.environ.get("USER_TERM_ALIAS") or "dem0n"
 
 # Updater alias
 UPDATER_ALIAS = os.environ.get("UPDATER_ALIAS") or "Helios"
@@ -202,6 +208,10 @@ SFUSER = os.environ.get("SFUSER") or "null"
 SFPASS = os.environ.get("SFPASS") or "null"
 SFDIR = os.environ.get("SFDIR") or "null"
 
+#Mega
+MEGA_EMAIL = os.environ.get("MEGA_EMAIL") or None
+MEGA_PASSWORD = os.environ.get("MEGA_PASSWORD") or None
+
 # Setting Up CloudMail.ru and MEGA.nz extractor binaries,
 # and giving them correct perms to work properly.
 if not os.path.exists("bin"):
@@ -247,7 +257,7 @@ with bot:
             "valid entity. Check your environment variables/config.env file."
         )
         quit(1)
-
+        
 async def get_readable_time(seconds: int) -> str:
     count = 0
     up_time = ""
@@ -294,14 +304,15 @@ uptime = time.strftime('%X')
 ##
 output = (
     "` =============================== `\n"
-    f"`Helios {USERBOT_VERSION} is Up and Running.... `\n"
+    f"`Helios is Up and Running.... `\n"
     f"`=============================== `\n"
     f"•`Telethon       : v{version.__version__} `\n"
     f"•`Python         : v{python_version()} `\n"
     f"•`User           : {DEFAULTUSER} `\n"
-    f"•`Current Branch : {repo.active_branch.name} Branch`\n"
+    f"•`Running on     : {repo.active_branch.name} `\n"
     f"•`Loaded modules : 105 `\n"
-    f"•`Helios Version : {USERBOT_VERSION} `\n"
+    f"•`Helios       : {USERBOT_VERSION} `\n"
+    f"•`Bot started at : {uptime} `\n" 
 )
 
 async def start():
@@ -317,3 +328,4 @@ async def start():
 
 with bot:
     bot.loop.run_until_complete(start())
+

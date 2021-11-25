@@ -1,13 +1,13 @@
 #Modified by @arshsisodiya
 #thanks to @Zero_cool7870
 #https://github.com/arshsisodiya
+
 import os
-from asyncio import sleep
 import subprocess
 from userbot import CMD_HELP, TEMP_DOWNLOAD_DIRECTORY
 from userbot.events import register
 from userbot.utils import media_type
-from telethon import TelegramClient
+
 @register(outgoing=True, pattern=r"^.getc(?: |$)([\s\S]*)")
 async def get_media(event):
     chname = event.pattern_match.group(1)
@@ -36,9 +36,9 @@ async def get_media(event):
     output = output.replace("b'", " ")
     output = output.replace("\\n'", " ")
     await event.edit(
-        f"Successfully downloaded {output} number of media files from {channel_username} to `{tempdir}`\n"
-        f"Use `.gd {tempdir}` to upload it on Google Drive"
+        f"Successfully downloaded {output} number of media files from {channel_username} to `{tempdir}`"
     )
+
 
 @register(outgoing=True, pattern=r"^.geta(?: |$)([\s\S]*)")
 async def get_media(event):
@@ -66,15 +66,14 @@ async def get_media(event):
     output = output.replace("b'", "")
     output = output.replace("\\n'", "")
     await event.edit(
-        f"Successfully downloaded {output} number of media files from {channel_username} to `{tempdir}`\n"
-        f"Use `.gd {tempdir}` to upload it on Google Drive"
+        f"Successfully downloaded {output} number of media files from {channel_username} to `{tempdir}`"
     )
 
 CMD_HELP.update({
     "channeldownload":
-    ".geta channel_username"
+    ".geta <channel_username>"
     "\nUsage: will get all media from channel/group, tho there is limit of 3000 there to prevent API limits.."
-    "\n\n.getc number_of_messsages channel_username"
+    "\n\n.getc <number_of_messsages> <channel_username>"
     "\nUsage: download media only from given number of last messages."
     "\n\n Use .gd <tempdir path> to upload downloaded files to your google drive."
 

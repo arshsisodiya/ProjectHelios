@@ -108,7 +108,7 @@ async def _(event):  # sourcery no-metrics
                         \n</code>"
     line = "<code>----------------------------------</code>\n"
     result = f"<b>Group : {link}</b>\n\n"
-    result += f"Total Messages: {msg_count}\n"
+    result += f"<code>Total Messages: {msg_count}</code>\n"
     result += "<b>File Summary : </b>\n"
     result += f"<code>{x}</code>\n"
     result += f"{largest}"

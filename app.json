@@ -1,7 +1,7 @@
 {
-  "name": "Project Helios",
+  "name": "Project Fizilion",
   "description": "A modular Telegram userbot running on Python 3.8+ with an sqlalchemy database.",
-  "logo": "https://github.com/arshsisodiya/ProjectHelios/blob/demon/arsh_logo.jpg",
+  "logo": "https://github.com/PrajjUS/ProjectFizilion/raw/demon/resources/Fizilion.png",
   "keywords": [
     "telegram",
     "userbot",
@@ -9,9 +9,9 @@
     "modular",
     "productivity"
   ],
-  "repository": "https://github.com/arshsisodiya/ProjectHelios",
-  "website": "https://t.me/NmberSeven",
-  "success_url": "https://github.com/arshsisodiya/ProjectHelios",
+  "repository": "https://github.com/PrajjuS/ProjectFizilion",
+  "website": "https://t.me/PrajjuS",
+  "success_url": "https://t.me/ProjectFizilion",
   "stack": "container",
   "env": {
     "API_KEY": {
@@ -166,11 +166,11 @@
     },
     "BIO_PREFIX": {
       "description": "Prefix for Last.FM Module Bio.",
-      "required": false
+      "required": false 
     },
     "DEFAULT_BIO": {
       "description": "Default profile bio.",
-      "value": "I ❤ ️Helios",
+      "value": "[PM = Report Spam] I ❤ ️Fizilion",
       "required": false
     },
     "ALIVE_NAME": {
@@ -204,6 +204,14 @@
     },
     "USR_TOKEN_UPTOBOX": {
       "description": "API for direct link uptobox, https://docs.uptobox.com/#how-to-find-my-api-token",
+      "required": false
+    },
+    "MEGA_EMAIL": {
+      "description": "mega.nz email to upload files to mega",
+      "required": false
+    },
+    "MEGA_PASSWORD": {
+      "description": "mega.nz password to upload files to mega",
       "required": false
     },
     "LOGSPAMMER": {

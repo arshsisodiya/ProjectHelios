@@ -25,4 +25,4 @@ async def _(event):
 
 CMD_HELP.update({
     "hl":
-    "Use :- add hyperlink into text -->> .hl <word> <link>"})
+    "Use :- .hl <word> <link>"})

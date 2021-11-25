@@ -39,22 +39,49 @@ async def word_spam(wspammer):
 
 @register(outgoing=True, pattern="^.spam (.*)")
 async def spammer(spamm):
-    counter = int(spamm.pattern_match.group(1).split(" ", 1)[0])
-    spam_message = str(spamm.pattern_match.group(1).split(" ", 1)[1])
-    await spamm.delete()
-    await asyncio.wait([spamm.respond(spam_message) for i in range(counter)])
-    if BOTLOG:
-        await spamm.client.send_message(
-            BOTLOG_CHATID, "#SPAM\n" "Spam was executed successfully"
-        )
+    try:
+        counter = int(spamm.pattern_match.group(1).split(" ", 1)[0])
+    except IndexError:
+        await spamm.edit("The usage of this command is .spam <count> <text> or .spam <count> replyiing to a message")
+        await sleep(5)
+        await spamm.delete()
+        return
+    textx = await spamm.get_reply_message()
+    if not textx:
+        try:
+            spam_message = str(spamm.pattern_match.group(1).split(" ", 1)[1])
+        except IndexError:
+            await spamm.edit("The usage of this command is .spam <count> <text> or .spam <count> replyiing to a message")
+            await sleep(5)
+            await spamm.delete()
+            return
+        await spamm.delete()
+        await asyncio.wait([spamm.respond(spam_message) for i in range(counter)])
+        if BOTLOG:
+            await spamm.client.send_message(
+                BOTLOG_CHATID, "#SPAM\n" "Spam was executed successfully"
+            )
+    elif (textx and textx.text):
+        await spamm.delete()
+        await asyncio.wait([spamm.respond(textx) for i in range(counter)])
+        if BOTLOG:
+            await spamm.client.send_message(
+                BOTLOG_CHATID, "#SPAM\n" "Spam was executed successfully"
+            )
 
 
 @register(outgoing=True, pattern="^.picspam")
 async def tiny_pic_spam(pspam):
     message = pspam.text
     text = message.split()
-    counter = int(text[1])
-    link = str(text[2])
+    try:
+        counter = int(text[1])
+        link = str(text[2])
+    except IndexError:
+        await pspam.edit("The usage of this command is .picspam <count> <link to image/gif>")
+        await sleep(5)
+        await pspam.delete()
+        return
     await pspam.delete()
     for _ in range(1, counter):
         await pspam.client.send_file(pspam.chat_id, link)
@@ -66,9 +93,15 @@ async def tiny_pic_spam(pspam):
 
 @register(outgoing=True, pattern="^.delayspam (.*)")
 async def dspammer(dspam):
-    spamDelay = float(dspam.pattern_match.group(1).split(" ", 2)[0])
-    counter = int(dspam.pattern_match.group(1).split(" ", 2)[1])
-    spam_message = str(dspam.pattern_match.group(1).split(" ", 2)[2])
+    try:
+        spamDelay = float(dspam.pattern_match.group(1).split(" ", 2)[0])
+        counter = int(dspam.pattern_match.group(1).split(" ", 2)[1])
+        spam_message = str(dspam.pattern_match.group(1).split(" ", 2)[2])
+    except IndexError:
+        await dspam.edit("The usage of this command is .delayspam <delay> <count> <text>")
+        await sleep(5)
+        await dspam.delete()
+        return
     await dspam.delete()
     for _ in range(1, counter):
         await dspam.respond(spam_message)

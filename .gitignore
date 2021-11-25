@@ -1,5 +1,4 @@
 config.env
-.idea
 __pycache__/*
 userbot.db
 userbot.session
@@ -10,4 +9,3 @@ userbot/modules/sql_helper/__pycache__/*
 .progress
 .vscode/*
 bin/*
-.idea

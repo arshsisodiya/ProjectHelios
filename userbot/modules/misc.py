@@ -6,7 +6,7 @@
 # You can find misc modules, which dont fit in anything xD
 #
 #
-#Modified by @arshsisodiya
+#Modified by @PrajjuS
 """ Userbot module for other small commands. """
 
 import io
@@ -56,7 +56,6 @@ async def killbot(shut):
     await shut.edit("`Shutting The Power Off`")
     if BOTLOG:
         await shut.client.send_message(BOTLOG_CHATID, "#SHUTDOWN \n" "Bot shut down")
-        await shut.client.send_message(BOTLOG_CHATID, "Your bot is Shutdown to start it again \n" "Restart dyno from heroku manually")
     await bot.disconnect()
 
 
@@ -76,15 +75,15 @@ async def killdabot(reboot):
 async def reedme(event):
     await event.edit(
         "Here's something for you to read:\n"
-        "\n[Helios's README.md file](https://github.com/arshsisodiya/ProjectHelios/blob/demon/README.md)"
+        "\n[Fizilions README.md file](https://github.com/FrosT2k5/ProjectFizilion/blob/demon/README.md)"
 )
 
 
 @register(outgoing=True, pattern="^.guide$")
 async def guidee(event):
     await event.edit(
-        "*Guide on Deploying Helios*\n"
-        "•[Reading Guide](https://telegra.ph/How-to-host-a-Telegram-Userbot-07-01-2)\n"
+        "*Guide on Deploying Fizilion*\n"
+        "•[Reading Guide](https://elytra8.github.io/ProjectFizilion)\n"
         "•[Yt Guide](https://youtu.be/tJzmrTq09tA)\n"
 )
 
@@ -108,20 +107,20 @@ async def repeat(rep):
 async def repo_is_here(wannasee):
     """ For .repo command, just returns the repo URL. """
     await wannasee.edit(
-        "[Click here](https://github.com/arshsisodiya/ProjectHelios) to open Helios's GitHub Repo."
+        "[Click here](https://github.com/FrosT2k5/ProjectFizilion) to open Fizilion's GitHub Repo."
     )
 
 @register(outgoing=True, pattern="^.deploy$")
 async def repo_is_here(wannasee):
     """ For .deploy command, just returns the heroku deploying URL. """
     await wannasee.edit(
-        "[Click here](https://heroku.com/deploy?template=https://github.com/arshsisodiya/ProjectHelios/blob/demon) to deploy Helios Userbot on Heroku."
+        "[Click here](https://heroku.com/deploy?template=https://github.com/FrosT2k5/ProjectFizilion/tree/demon) to deploy Fizilion Userbot on Heroku."
     )
 
 @register(outgoing=True, pattern="^.support$")
 async def grup(sapot):
-    await sapot.edit("**Author:** @NmberSEVEN\n**for any help DM:** @NmberSEVEN")
-
+    await sapot.edit("**Channel:** @TheProjectFizilion\n**Support Group:** @ProjectFizilionChat")
+    
 @register(outgoing=True, pattern="^.raw$")
 async def raw(rawtext):
     the_real_message = None
@@ -159,7 +158,7 @@ CMD_HELP.update(
 ".readme"
 "\nUsage: Provide links to setup the userbot and it's modules\nAnd .support for support group\n\n"
 ".guide"
-"\nUsage: Provides Full guide to setup and deploy Helios Userbot.\n\n"
+"\nUsage: Provides Full guide to setup Fizilion Userbot.\n\n"
 ".repeat <no.> <text>"
 "\nUsage: Repeats the text for a number of times. Don't confuse this with spam tho.\n\n"
 ".restart"
@@ -167,6 +166,6 @@ CMD_HELP.update(
 ".raw"
 "\nUsage: Get detailed JSON-like formatted data about replied message."
 ".deploy"
-"\nUsage: Get link to deploy Helios Userbot on Heroku."
+"\nUsage: Get link to deploy Fizilion Userbot on Heroku."
      }
 )

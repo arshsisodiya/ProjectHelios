@@ -24,7 +24,7 @@ import psutil
 from git import Repo
 from telethon import __version__, version
 
-from userbot import ALIVE_LOGO, ALIVE_NAME, CMD_HELP, TIMEOUT, USERBOT_VERSION, StartTime, bot
+from userbot import ALIVE_LOGO, ALIVE_MESSAGE, ALIVE_NAME, CMD_HELP, TIMEOUT, USERBOT_VERSION, StartTime, bot
 from userbot.events import register
 
 # ================= CONSTANT =================
@@ -179,81 +179,22 @@ async def bot_ver(event):
                 "Shame that you don't have git, you're running - 'v2.5' anyway!"
             )
 
-
-@register(outgoing=True, pattern="^.pip(?: |$)(.*)")
-async def pipcheck(pip):
-    """ For .pip command, do a pip search. """
-    if not pip.text[0].isalpha() and pip.text[0] not in ("/", "#", "@", "!"):
-        pipmodule = pip.pattern_match.group(1)
-        if pipmodule:
-            await pip.edit("`Searching . . .`")
-            pipc = await asyncrunapp(
-                "pip3",
-                "search",
-                pipmodule,
-                stdout=asyncPIPE,
-                stderr=asyncPIPE,
-            )
-
-            stdout, stderr = await pipc.communicate()
-            pipout = str(stdout.decode().strip()) + str(stderr.decode().strip())
-
-            if pipout:
-                if len(pipout) > 4096:
-                    await pip.edit("`Output too large, sending as file`")
-                    file = open("output.txt", "w+")
-                    file.write(pipout)
-                    file.close()
-                    await pip.client.send_file(
-                        pip.chat_id,
-                        "output.txt",
-                        reply_to=pip.id,
-                    )
-                    remove("output.txt")
-                    return
-                await pip.edit(
-                    "**Query: **\n`"
-                    f"pip3 search {pipmodule}"
-                    "`\n**Result: **\n`"
-                    f"{pipout}"
-                    "`"
-                )
-            else:
-                await pip.edit(
-                    "**Query: **\n`"
-                    f"pip3 search {pipmodule}"
-                    "`\n**Result: **\n`No Result Returned/False`"
-                )
-        else:
-            await pip.edit("`Use .help pip to see an example`")
-
-
 @register(outgoing=True, pattern=r"^.(alive|on)$")
 async def amireallyalive(alive):
     """ For .alive command, check if the bot is running.  """
     uptime = await get_readable_time((time.time() - StartTime))
-    output = (
-        f"`===============================`\n"
-        f"**HELIOS IS UP AND RUNNING...**\n"
-        f"`=============================== `\n"
-        f"**[OS Info]:**\n"
-        f"•`Platform Type   : {os.name}`\n"
-        f"•`Distro          : {distro.name(pretty=False)} {distro.version(pretty=False, best=False)}`\n"
-        f"`===============================`\n"
-        f"**[PYPI Module Versions]:**\n"
-        f"•`Python         : v{python_version()} `\n"
-        f"•`Telethon       : v{version.__version__} `\n"
-        f"•`PIP            : v{pip.__version__} `\n"
-        f"`===============================`\n"
-        f"**[MISC Info]:**\n"
-        f"•`User           : {DEFAULTUSER} `\n"
-        f"•`Current Branch : {repo.active_branch.name} Branch `\n"
-        f"•`Loaded modules : {len(modules)} `\n"
-        f"•`Helios Version : {USERBOT_VERSION} `\n"
-        f"•`Bot Uptime     : {uptime} `\n"
-        f"`===============================`\n"
-
-    )
+    DEFAULT_MESSAGE = (
+        f"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n"
+        f"  **Fizilion** is up and running...\n"
+        f">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n\n"
+        f"• `Owner          : {DEFAULTUSER} `\n"
+        f"• `Loaded modules : {len(modules)} `\n"
+        f"• `Branch         : {repo.active_branch.name} `\n"
+        f"• `Bot Version    : {USERBOT_VERSION} `\n"
+        f"• `Bot Uptime     : {uptime} `\n\n"
+        f"Use `.help` for more info\n"
+        )
+    output = ALIVE_MESSAGE or DEFAULT_MESSAGE
     if ALIVE_LOGO:
         try:
             logo = ALIVE_LOGO
@@ -293,30 +234,19 @@ async def amireallyalivereset(ureset):
     DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
     await ureset.edit("`" "Successfully reset user for alive!" "`")
 
-CMD_HELP.update(
-    {
-        "spc": ".spc\
-    \nUsage: Shows system information such as CPU Info, CPU Usage Per Core,Total CPU Usage, Memory Usage(in GB),Disk Usage, Bandwith Usage,Engine Info."
-    }
-)
+
 CMD_HELP.update(
     {
         "sysd": ".sysd\
     \nUsage: Shows system information using neofetch.\
     \n\n.spc\
-    \nUsage: Show full system specification."
+    \nUsage: Show system specification."
     }
 )
 CMD_HELP.update(
     {
         "botver": ".botver\
     \nUsage: Shows the userbot version."
-    }
-)
-CMD_HELP.update(
-    {
-        "pip": ".pip <module(s)>\
-    \nUsage: Does a search of pip modules(s)."
     }
 )
 CMD_HELP.update(

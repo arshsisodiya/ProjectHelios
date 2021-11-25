@@ -10,7 +10,7 @@ from telethon.tl.types import InputMessagesFilterDocument
 
 from userbot.events import register
 from userbot.utils import edit_or_reply
-from userbot import CMD_HELP
+from userbot import CMD_HELP 
 
 def deEmojify(inputString: str) -> str:
     """Remove emojis and other non-safe characters from string"""
@@ -45,7 +45,7 @@ async def sticklet(event):
     image = Image.new("RGBA", (512, 512), (255, 255, 255, 0))
     draw = ImageDraw.Draw(image)
     fontsize = 230
-    FONT_FILE = await get_font_file(event.client, "@ProjectHeliosFonts")
+    FONT_FILE = await get_font_file(event.client, "@ProjectFizilionFonts")
     font = ImageFont.truetype(FONT_FILE, size=fontsize)
     while draw.multiline_textsize(sticktext, font=font) > (512, 512):
         fontsize -= 3
@@ -55,14 +55,14 @@ async def sticklet(event):
         ((512 - width) / 2, (512 - height) / 2), sticktext, font=font, fill=(R, G, B)
     )
     image_stream = io.BytesIO()
-    image_stream.name = "@ProjectHelios.webp"
+    image_stream.name = "@ProjectFizilion.webp"
     image.save(image_stream, "WebP")
     image_stream.seek(0)
     # finally, reply the sticker
     await event.client.send_file(
         event.chat_id,
         image_stream,
-        caption="Helios's Sticklet",
+        caption="Fizilion's Sticklet",
         reply_to=event.message.reply_to_msg_id,
     )
     # cleanup
