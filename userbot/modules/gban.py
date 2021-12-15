@@ -304,7 +304,7 @@ async def startgmute(event):
     try:
         mute(userid, "gmute")
     except Exception as e:
-        await edit_or_reply(event, f"**Error**\n`{str(e)}`")
+        await edit_or_reply(event, f'**Error**\n`{e}`')
     else:
         if reason:
             await edit_or_reply(
@@ -363,7 +363,7 @@ async def endgmute(event):
     try:
         unmute(userid, "gmute")
     except Exception as e:
-        await edit_or_reply(event, f"**Error**\n`{str(e)}`")
+        await edit_or_reply(event, f'**Error**\n`{e}`')
     else:
         if reason:
             await edit_or_reply(

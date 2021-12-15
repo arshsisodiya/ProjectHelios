@@ -63,17 +63,16 @@ async def updateProfile(userObj, reset=False):
 async def getUserObj(event):
     if event.reply_to_msg_id:
         replyMessage = await event.get_reply_message()
-        if replyMessage.forward:
-            userObj = await event.client(
-                GetFullUserRequest(replyMessage.forward.from_id or replyMessage.forward.channel_id
-                                   )
+        return (
+            await event.client(
+                GetFullUserRequest(
+                    replyMessage.forward.from_id
+                    or replyMessage.forward.channel_id
+                )
             )
-            return userObj
-        else:
-            userObj = await event.client(
-                GetFullUserRequest(replyMessage.from_id)
-            )
-            return userObj
+            if replyMessage.forward
+            else await event.client(GetFullUserRequest(replyMessage.from_id))
+        )
 
 
 CMD_HELP.update({"clone": "\

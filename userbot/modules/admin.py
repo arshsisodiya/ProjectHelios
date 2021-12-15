@@ -154,9 +154,7 @@ async def promote(promt):
     user, rank = await get_user_from_event(promt)
     if not rank:
         rank = "Administrator"  # Just in case.
-    if user:
-        pass
-    else:
+    if not user:
         return
 
     # Try to promote if current user is admin or creator
@@ -197,9 +195,7 @@ async def demote(dmod):
     rank = "admeme"  # dummy rank, lol.
     user = await get_user_from_event(dmod)
     user = user[0]
-    if user:
-        pass
-    else:
+    if not user:
         return
 
     # New rights after demotion
@@ -246,9 +242,7 @@ async def ban(bon):
         return
 
     user, reason = await get_user_from_event(bon)
-    if user:
-        pass
-    else:
+    if not user:
         return
 
     # Announce that we're going to whack the pest
@@ -272,15 +266,14 @@ async def ban(bon):
     # Shout out the ID, so that fedadmins can fban later
     if reason:
         await bon.edit(
-            f"{user.first_name} was banned !!\
-        \nID: `{str(user.id)}`\
-        \nReason: {reason}"
+            f'{user.first_name} was banned !!\\\x1f        \nID: `{user.id}`\\\x1f        \nReason: {reason}'
         )
+
     else:
         await bon.edit(
-            f"{user.first_name} was banned !!\
-        \nID: `{str(user.id)}`"
+            f'{user.first_name} was banned !!\\\x1f        \nID: `{user.id}`'
         )
+
     # Announce to the logging group if we have banned the person
     # successfully!
     if BOTLOG:
@@ -310,9 +303,7 @@ async def nothanos(unbon):
 
     user = await get_user_from_event(unbon)
     user = user[0]
-    if user:
-        pass
-    else:
+    if not user:
         return
 
     try:
@@ -353,9 +344,7 @@ async def spider(spdr):
         return
 
     user, reason = await get_user_from_event(spdr)
-    if user:
-        pass
-    else:
+    if not user:
         return
 
     self_user = await spdr.client.get_me()
@@ -368,26 +357,25 @@ async def spider(spdr):
     await spdr.edit("`Gets a tape!`")
     if mute(spdr.chat_id, user.id) is False:
         return await spdr.edit("`Error! User probably already muted.`")
-    else:
-        try:
-            await spdr.client(EditBannedRequest(spdr.chat_id, user.id, MUTE_RIGHTS))
+    try:
+        await spdr.client(EditBannedRequest(spdr.chat_id, user.id, MUTE_RIGHTS))
 
-            # Announce that the function is done
-            if reason:
-                await spdr.edit(f"`Safely taped !!`\nReason: {reason}")
-            else:
-                await spdr.edit("`Safely taped !!`")
+        # Announce that the function is done
+        if reason:
+            await spdr.edit(f"`Safely taped !!`\nReason: {reason}")
+        else:
+            await spdr.edit("`Safely taped !!`")
 
-            # Announce to logging group
-            if BOTLOG:
-                await spdr.client.send_message(
-                    BOTLOG_CHATID,
-                    "#MUTE\n"
-                    f"USER: [{user.first_name}](tg://user?id={user.id})\n"
-                    f"CHAT: {spdr.chat.title}(`{spdr.chat_id}`)",
-                )
-        except UserIdInvalidError:
-            return await spdr.edit("`Uh oh my mute logic broke!`")
+        # Announce to logging group
+        if BOTLOG:
+            await spdr.client.send_message(
+                BOTLOG_CHATID,
+                "#MUTE\n"
+                f"USER: [{user.first_name}](tg://user?id={user.id})\n"
+                f"CHAT: {spdr.chat.title}(`{spdr.chat_id}`)",
+            )
+    except UserIdInvalidError:
+        return await spdr.edit("`Uh oh my mute logic broke!`")
 
 
 @register(outgoing=True, pattern="^.unmute(?: |$)(.*)")
@@ -414,30 +402,26 @@ async def unmoot(unmot):
     await unmot.edit("```Unmuting...```")
     user = await get_user_from_event(unmot)
     user = user[0]
-    if user:
-        pass
-    else:
+    if not user:
         return
 
     if unmute(unmot.chat_id, user.id) is False:
         return await unmot.edit("`Error! User probably already unmuted.`")
-    else:
+    try:
+        await unmot.client(EditBannedRequest(unmot.chat_id, user.id, UNBAN_RIGHTS))
+        await unmot.edit("```Unmuted Successfully```")
 
-        try:
-            await unmot.client(EditBannedRequest(unmot.chat_id, user.id, UNBAN_RIGHTS))
-            await unmot.edit("```Unmuted Successfully```")
+    except UserIdInvalidError:
+        await unmot.edit("`Uh oh my unmute logic broke!`")
+        return
 
-        except UserIdInvalidError:
-            await unmot.edit("`Uh oh my unmute logic broke!`")
-            return
-
-        if BOTLOG:
-            await unmot.client.send_message(
-                BOTLOG_CHATID,
-                "#UNMUTE\n"
-                f"USER: [{user.first_name}](tg://user?id={user.id})\n"
-                f"CHAT: {unmot.chat.title}(`{unmot.chat_id}`)",
-            )
+    if BOTLOG:
+        await unmot.client.send_message(
+            BOTLOG_CHATID,
+            "#UNMUTE\n"
+            f"USER: [{user.first_name}](tg://user?id={user.id})\n"
+            f"CHAT: {unmot.chat.title}(`{unmot.chat_id}`)",
+        )
 
 
 @register(outgoing=True, pattern="^.zombies(?: |$)(.*)", groups_only=False)
@@ -526,7 +510,7 @@ async def _(event):
     if event.fwd_from:
         return
     info = await event.client.get_entity(event.chat_id)
-    title = info.title if info.title else "this chat"
+    title = info.title or "this chat"
     mentions = "**Admins On {} Group**: \n".format(title)
     should_mention_admins = False
     reply_message = None
@@ -548,20 +532,20 @@ async def _(event):
             return None
     try:
         async for x in bot.iter_participants(chat, filter=ChannelParticipantsAdmins):
-            if not x.deleted:
-                if isinstance(x.participant, ChannelParticipantCreator):
-                    mentions += "\n 👑 [{}](tg://user?id={}) `{}`".format(
-                        x.first_name, x.id, x.id
-                    )
+            if not x.deleted and isinstance(
+                x.participant, ChannelParticipantCreator
+            ):
+                mentions += "\n 👑 [{}](tg://user?id={}) `{}`".format(
+                    x.first_name, x.id, x.id
+                )
         mentions += "\n"
         async for x in bot.iter_participants(chat, filter=ChannelParticipantsAdmins):
-            if not x.deleted:
-                if isinstance(x.participant, ChannelParticipantAdmin):
-                    mentions += "\n 🔰 [{}](tg://user?id={}) `{}`".format(
-                        x.first_name, x.id, x.id
-                    )
-
-    #  mentions += "\n 💘 [Deleted Account](tg://user?id=689811472) `689811472`"
+            if not x.deleted and isinstance(
+                x.participant, ChannelParticipantAdmin
+            ):
+                mentions += "\n 🔰 [{}](tg://user?id={}) `{}`".format(
+                    x.first_name, x.id, x.id
+                )
 
     except Exception as e:
         mentions += " " + str(e) + "\n"
@@ -596,11 +580,7 @@ async def pin(msg):
 
     options = msg.pattern_match.group(1)
 
-    is_silent = True
-
-    if options.lower() == "loud":
-        is_silent = False
-
+    is_silent = options.lower() != "loud"
     try:
         await msg.client(UpdatePinnedMessageRequest(msg.to_id, to_pin, is_silent))
     except BadRequestError:
@@ -645,7 +625,7 @@ async def kick(usr):
         await usr.client.kick_participant(usr.chat_id, user.id)
         await sleep(1)
     except Exception as e:
-        await usr.edit(NO_PERM + f"\n{str(e)}")
+        await usr.edit(NO_PERM + f'\n{e}')
         return
 
     if reason:
@@ -668,7 +648,7 @@ async def kick(usr):
 async def get_users(show):
     """ For .users command, list all of the users in a chat. """
     info = await show.client.get_entity(show.chat_id)
-    title = info.title if info.title else "this chat"
+    title = info.title or "this chat"
     mentions = "**Users in {} Group**: \n".format(title)
     try:
         if not show.pattern_match.group(1):
@@ -696,9 +676,8 @@ async def get_users(show):
         await show.edit(mentions)
     except MessageTooLongError:
         await show.edit("Damn, this is a huge group. Uploading users lists as file.")
-        file = open("userslist.txt", "w+")
-        file.write(mentions)
-        file.close()
+        with open("userslist.txt", "w+") as file:
+            file.write(mentions)
         await show.client.send_file(
             show.chat_id,
             "userslist.txt",
@@ -712,7 +691,7 @@ async def get_user_from_event(event):
     """ Get the user from argument or replied message. """
     args = event.pattern_match.group(1).split(" ", 1)
     extra = None
-    if event.reply_to_msg_id and not len(args) == 2:
+    if event.reply_to_msg_id and len(args) != 2:
         previous_message = await event.get_reply_message()
         user_obj = await event.client.get_entity(previous_message.from_id)
         extra = event.pattern_match.group(1)
@@ -761,7 +740,7 @@ async def get_user_from_id(user, event):
 async def get_usersdel(show):
     """ For .usersdel command, list all of the deleted users in a chat. """
     info = await show.client.get_entity(show.chat_id)
-    title = info.title if info.title else "this chat"
+    title = info.title or "this chat"
     mentions = "deletedUsers in {}: \n".format(title)
     try:
         if not show.pattern_match.group(1):
@@ -791,9 +770,8 @@ async def get_usersdel(show):
         await show.edit(
             "Damn, this is a huge group. Uploading deletedusers lists as file."
         )
-        file = open("userslist.txt", "w+")
-        file.write(mentions)
-        file.close()
+        with open("userslist.txt", "w+") as file:
+            file.write(mentions)
         await show.client.send_file(
             show.chat_id,
             "deleteduserslist.txt",
@@ -807,7 +785,7 @@ async def get_userdel_from_event(event):
     """ Get the deleted user from argument or replied message. """
     args = event.pattern_match.group(1).split(" ", 1)
     extra = None
-    if event.reply_to_msg_id and not len(args) == 2:
+    if event.reply_to_msg_id and len(args) != 2:
         previous_message = await event.get_reply_message()
         user_obj = await event.client.get_entity(previous_message.from_id)
         extra = event.pattern_match.group(1)
@@ -858,7 +836,7 @@ async def _(event):
     if event.fwd_from:
         return
     info = await event.client.get_entity(event.chat_id)
-    title = info.title if info.title else "this chat"
+    title = info.title or "this chat"
     mentions = "**Bots in {} Group**: \n".format(title)
     input_str = event.pattern_match.group(1)
     to_write_chat = await event.get_input_chat()
