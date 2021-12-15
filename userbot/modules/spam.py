@@ -61,7 +61,7 @@ async def spammer(spamm):
             await spamm.client.send_message(
                 BOTLOG_CHATID, "#SPAM\n" "Spam was executed successfully"
             )
-    elif (textx and textx.text):
+    elif textx.text:
         await spamm.delete()
         await asyncio.wait([spamm.respond(textx) for i in range(counter)])
         if BOTLOG:

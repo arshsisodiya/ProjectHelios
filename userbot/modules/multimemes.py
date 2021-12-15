@@ -184,14 +184,11 @@ async def hazz(hazmat):
                 m = f"/hazmat {level}"
                 msg_reply = await conv.send_message(m, reply_to=msg.id)
                 r = await conv.get_response()
-                response = await conv.get_response()
             elif reply_message.gif:
-                m = f"/hazmat"
+                m = '/hazmat'
                 msg_reply = await conv.send_message(m, reply_to=msg.id)
                 r = await conv.get_response()
-                response = await conv.get_response()
-            else:
-                response = await conv.get_response()
+            response = await conv.get_response()
             """ - don't spam notif - """
             await bot.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
@@ -249,9 +246,7 @@ async def fryerrr(fry):
                 m = f"/deepfry {level}"
                 msg_level = await conv.send_message(m, reply_to=msg.id)
                 r = await conv.get_response()
-                response = await conv.get_response()
-            else:
-                response = await conv.get_response()
+            response = await conv.get_response()
             """ - don't spam notif - """
             await bot.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
@@ -335,9 +330,10 @@ async def waifu(animu):
     await sticcers[0].click(
         animu.chat_id,
         reply_to=animu.reply_to_msg_id,
-        silent=True if animu.is_reply else False,
+        silent=bool(animu.is_reply),
         hide_via=True,
     )
+
     await animu.delete()
 
 

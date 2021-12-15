@@ -307,7 +307,10 @@ async def tweet(event):
         await event.edit("`What should i tweet? Give your username and tweet!`"
                          )
     if 'username' not in locals():
-        await event.edit(f"`Send a username to tweet\n like .tweet username.Text to tweet...`")
+        await event.edit(
+            '`Send a username to tweet\n like .tweet username.Text to tweet...`'
+        )
+
     else:  
         await event.edit(f"Requesting {username} to tweet")
         text = deEmojify(text)
@@ -499,7 +502,7 @@ async def phcomment(event):
                 name = user.first_name + " " + user.last_name
             else:
                 name = user.first_name
-            text = text if text else str(reply.message)
+            text = text or str(reply.message)
         elif text:
             user = await bot.get_me()
             if user.last_name:

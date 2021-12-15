@@ -42,10 +42,7 @@ async def get_readable_time(seconds: int) -> str:
 
     while count < 4:
         count += 1
-        if count < 3:
-            remainder, result = divmod(seconds, 60)
-        else:
-            remainder, result = divmod(seconds, 24)
+        remainder, result = divmod(seconds, 60) if count < 3 else divmod(seconds, 24)
         if seconds == 0 and remainder == 0:
             break
         time_list.append(int(result))
@@ -105,11 +102,11 @@ async def psu(event):
     bw = "**Bandwith Usage**\n"
     bw += f"`Upload  : {get_size(psutil.net_io_counters().bytes_sent)}`\n"
     bw += f"`Download: {get_size(psutil.net_io_counters().bytes_recv)}`\n"
-    help_string = f"{str(softw)}\n"
-    help_string += f"{str(cpuu)}\n"
-    help_string += f"{str(memm)}\n"
-    help_string += f"{str(disk)}\n"
-    help_string += f"{str(bw)}\n"
+    help_string = f'{softw}\n'
+    help_string += f'{cpuu}\n'
+    help_string += f'{memm}\n'
+    help_string += f'{disk}\n'
+    help_string += f'{bw}\n'
     help_string += "**Engine Info**\n"
     help_string += f"`Python {sys.version}`\n"
     help_string += f"`Telethon {__version__}`"
@@ -147,37 +144,38 @@ async def sysdetails(sysd):
 @register(outgoing=True, pattern="^.botver$")
 async def bot_ver(event):
     """ For .botver command, get the bot version. """
-    if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
-        if which("git") is not None:
-            ver = await asyncrunapp(
-                "git",
-                "describe",
-                "--all",
-                "--long",
-                stdout=asyncPIPE,
-                stderr=asyncPIPE,
-            )
-            stdout, stderr = await ver.communicate()
-            verout = str(stdout.decode().strip()) + str(stderr.decode().strip())
+    if event.text[0].isalpha() or event.text[0] in ("/", "#", "@", "!"):
+        return
+    if which("git") is not None:
+        ver = await asyncrunapp(
+            "git",
+            "describe",
+            "--all",
+            "--long",
+            stdout=asyncPIPE,
+            stderr=asyncPIPE,
+        )
+        stdout, stderr = await ver.communicate()
+        verout = str(stdout.decode().strip()) + str(stderr.decode().strip())
 
-            rev = await asyncrunapp(
-                "git",
-                "rev-list",
-                "--all",
-                "--count",
-                stdout=asyncPIPE,
-                stderr=asyncPIPE,
-            )
-            stdout, stderr = await rev.communicate()
-            revout = str(stdout.decode().strip()) + str(stderr.decode().strip())
+        rev = await asyncrunapp(
+            "git",
+            "rev-list",
+            "--all",
+            "--count",
+            stdout=asyncPIPE,
+            stderr=asyncPIPE,
+        )
+        stdout, stderr = await rev.communicate()
+        revout = str(stdout.decode().strip()) + str(stderr.decode().strip())
 
-            await event.edit(
-                "`Userbot Version: " f"{verout}" "` \n" "`Revision: " f"{revout}" "`"
-            )
-        else:
-            await event.edit(
-                "Shame that you don't have git, you're running - 'v2.5' anyway!"
-            )
+        await event.edit(
+            "`Userbot Version: " f"{verout}" "` \n" "`Revision: " f"{revout}" "`"
+        )
+    else:
+        await event.edit(
+            "Shame that you don't have git, you're running - 'v2.5' anyway!"
+        )
 
 @register(outgoing=True, pattern=r"^.(alive|on)$")
 async def amireallyalive(alive):
@@ -219,7 +217,7 @@ async def amireallyaliveuser(username):
     """ For .aliveu command, change the username in the .alive command. """
     message = username.text
     output = ".aliveu [new user without brackets] nor can it be empty"
-    if not (message == ".aliveu" or message[7:8] != " "):
+    if message != ".aliveu" and message[7:8] == " ":
         newuser = message[8:]
         global DEFAULTUSER
         DEFAULTUSER = newuser

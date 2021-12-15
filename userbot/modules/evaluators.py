@@ -156,7 +156,7 @@ async def terminal_runner(term):
         if command.find(i) != -1:
             return await term.edit("`That's a dangerous operation! Not Permitted!`")
 
-    if not re.search(r"echo[ \-\w]*\$\w+", command) is None:
+    if re.search(r"echo[ \-\w]*\$\w+", command) is not None:
         return await term.edit("`That's a dangerous operation! Not Permitted!`")
 
     process = await asyncio.create_subprocess_shell(

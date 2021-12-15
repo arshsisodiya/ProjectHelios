@@ -83,19 +83,19 @@ async def mega_downloader(megadl):
         try:
             raise FileExistsError(errno.EEXIST, os.strerror(errno.EEXIST), file_path)
         except FileExistsError as e:
-            await megadl.edit(f"`{str(e)}`")
+            await megadl.edit(f'`{e}`')
             return None
     downloader = SmartDL(file_url, temp_file_path, progress_bar=False)
     display_message = None
     try:
         downloader.start(blocking=False)
     except HTTPError as e:
-        await megadl.edit(f"**HTTPError**: `{str(e)}`")
+        await megadl.edit(f'**HTTPError**: `{e}`')
         return None
     start = time.time()
     while not downloader.isFinished():
         status = downloader.get_status().capitalize()
-        total_length = downloader.filesize if downloader.filesize else None
+        total_length = downloader.filesize or None
         downloaded = downloader.get_dl_size()
         percentage = int(downloader.get_progress() * 100)
         speed = downloader.get_speed(human=True)
@@ -141,7 +141,7 @@ async def mega_downloader(megadl):
             P.start()
             P.join()
         except FileNotFoundError as e:
-            await megadl.edit(f"`{str(e)}`")
+            await megadl.edit(f'`{e}`')
             return None
         else:
             await megadl.edit(

@@ -31,7 +31,7 @@ async def fban(event):
 
     self_user = await event.client.get_me()
 
-    if fban_id == self_user.id or fban_id == "@" + self_user.username:
+    if fban_id in [self_user.id, "@" + self_user.username]:
         return await event.edit(
             "**Error: This action has been prevented by One4uBot self preservation protocols.**"
         )
@@ -64,7 +64,7 @@ async def fban(event):
         except BaseException:
             failed.append(i.fed_name)
 
-    reason = reason if reason else "Not specified."
+    reason = reason or "Not specified."
 
     if failed:
         status = f"Failed to fban in {len(failed)}/{total} feds.\n"
@@ -99,7 +99,7 @@ async def unfban(event):
 
     self_user = await event.client.get_me()
 
-    if unfban_id == self_user.id or unfban_id == "@" + self_user.username:
+    if unfban_id in [self_user.id, "@" + self_user.username]:
         return await event.edit("**Wait, that's illegal**")
 
     if len((fed_list := get_flist())) == 0:
@@ -129,7 +129,7 @@ async def unfban(event):
         except BaseException:
             failed.append(i.fed_name)
 
-    reason = reason if reason else "Not specified."
+    reason = reason or "Not specified."
 
     if failed:
         status = f"Failed to un-fban in {len(failed)}/{total} feds.\n"
@@ -138,7 +138,7 @@ async def unfban(event):
     else:
         status = f"Success! Un-fbanned in {total} feds."
 
-    reason = reason if reason else "Not specified."
+    reason = reason or "Not specified."
     await event.edit(
         f"**Un-fbanned** {user_link}!\n**Reason:** {reason}\n**Status:** {status}"
     )

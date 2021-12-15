@@ -24,7 +24,7 @@ async def fastpurger(purg):
     if purg.reply_to_msg_id is not None:
         async for msg in itermsg:
             msgs.append(msg)
-            count = count + 1
+            count += 1
             msgs.append(purg.reply_to_msg_id)
             if len(msgs) == 100:
                 await purg.client.delete_messages(chat, msgs)
@@ -37,9 +37,9 @@ async def fastpurger(purg):
         await purg.client.delete_messages(chat, msgs)
     done = await purg.client.send_message(
         purg.chat_id,
-        f"`Fast purge complete!`\
-        \nPurged {str(count)} messages",
+        f'`Fast purge complete!`\\\x1f        \nPurged {count} messages',
     )
+
 
     if BOTLOG:
         await purg.client.send_message(
@@ -59,7 +59,7 @@ async def purgeme(delme):
     async for message in delme.client.iter_messages(delme.chat_id, from_user="me"):
         if i > count + 1:
             break
-        i = i + 1
+        i += 1
         await message.delete()
 
     smsg = await delme.client.send_message(
@@ -107,7 +107,7 @@ async def editer(edit):
             await message.edit(string)
             await edit.delete()
             break
-        i = i + 1
+        i += 1
     if BOTLOG:
         await edit.client.send_message(
             BOTLOG_CHATID, "Edit query was executed successfully"
@@ -172,11 +172,11 @@ async def purgto(prgto):
         if pmsgs:
             await prgto.client.delete_messages(chat, pmsgs)
             await prgto.delete()
-        aaa = await prgto.reply(f"`Fast purge complete!`\nPurged {str(msgz)} messages")
+        aaa = await prgto.reply(f'`Fast purge complete!`\nPurged {msgz} messages')
         await sleep(5)
         await aaa.delete()
     except Exception as er:
-        await prgto.edit(f"Umm an issue happened...\nERROR:\n`{str(er)}`")
+        await prgto.edit(f'Umm an issue happened...\nERROR:\n`{er}`')
 
 CMD_HELP.update(
     {

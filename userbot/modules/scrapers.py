@@ -120,14 +120,14 @@ async def img_sampler(event):
     await event.edit("`Processing...\n please wait for a moment...`")
     query = event.pattern_match.group(1)
     scraper = duckduckgoscraper.DuckDuckGoScraper()
-    
+
     #The out directory
     os.system("mkdir -p /tmp/out/images")
-    out = ("/tmp/out/images")
-    
     if 'query' not in locals():
         await event.edit("Please specify a query to get images,\n like .img duck")
     else:
+        out = ("/tmp/out/images")
+
         #TODO: add a limit to the images being downloaded
         scraper.scrape(query,1,out)
         await asyncio.sleep(4)
@@ -182,7 +182,7 @@ async def gsearch(q_event):
     try:
         gresults = await googsearch.async_search(*search_args)
         msg = ""
-        for i in range(0, 5):
+        for i in range(5):
             try:
                 title = gresults["titles"][i]
                 link = gresults["links"][i]
@@ -229,9 +229,8 @@ async def wiki(wiki_q):
         return await wiki_q.edit(f"Page not found.\n\n{pageerror}")
     result = summary(match)
     if len(result) >= 4096:
-        file = open("output.txt", "w+")
-        file.write(result)
-        file.close()
+        with open("output.txt", "w+") as file:
+            file.write(result)
         await wiki_q.client.send_file(
             wiki_q.chat_id,
             "output.txt",
@@ -251,11 +250,10 @@ async def ipinfo(event):
     #Thanks to https://ipinfo.io for this api
     ip = event.pattern_match.group(1)
     os.system("curl ipinfo.io/{0} --silent > /Fizilion/ip.txt".format(ip))
-    rinfo = open("/Fizilion/ip.txt","r")
-    info = json.load(rinfo)
-    rinfo.close()
+    with open("/Fizilion/ip.txt","r") as rinfo:
+        info = json.load(rinfo)
     os.system("rm /Fizilion/ip.txt")
-    
+
     if "error" in info:
         await event.edit("Invalid IP address")        
     elif "country" in info:
@@ -305,27 +303,26 @@ async def urban_dict(event):
         definition.definition,
         definition.example)
 
-    if len(result) >= 4096:
-        await event.edit("`Output too large, sending as file...`")
-        with open("output.txt", "w+") as file:
-            file.write(
-                "Query: "
-                + definition.word
-                + "\n\nMeaning: "
-                + definition.definition
-                + "Example: \n"
-                + definition.example
-            )
-        await event.client.send_file(
-            event.chat_id,
-            "output.txt",
-            caption=f"Urban Dictionary's definition of {query}",
-        )
-        if os.path.exists("output.txt"):
-            os.remove("output.txt")
-        return await event.delete()
-    else:
+    if len(result) < 4096:
         return await event.edit(result)
+    await event.edit("`Output too large, sending as file...`")
+    with open("output.txt", "w+") as file:
+        file.write(
+            "Query: "
+            + definition.word
+            + "\n\nMeaning: "
+            + definition.definition
+            + "Example: \n"
+            + definition.example
+        )
+    await event.client.send_file(
+        event.chat_id,
+        "output.txt",
+        caption=f"Urban Dictionary's definition of {query}",
+    )
+    if os.path.exists("output.txt"):
+        os.remove("output.txt")
+    return await event.delete()
 
 
 @register(outgoing=True, pattern=r"^\.tts(?: |$)([\s\S]*)")
@@ -408,16 +405,12 @@ async def imdb(e):
             stars = "Not available"
         elif len(credits) > 2:
             writer = credits[1].a.text
-            actors = []
-            for x in credits[2].findAll("a"):
-                actors.append(x.text)
+            actors = [x.text for x in credits[2].findAll("a")]
             actors.pop()
             stars = actors[0] + "," + actors[1] + "," + actors[2]
         else:
             writer = "Not available"
-            actors = []
-            for x in credits[1].findAll("a"):
-                actors.append(x.text)
+            actors = [x.text for x in credits[1].findAll("a")]
             actors.pop()
             stars = actors[0] + "," + actors[1] + "," + actors[2]
         if soup.find("div", "inline canwrap"):
@@ -480,24 +473,22 @@ async def lang(value):
         scraper = "Translator"
         global TRT_LANG
         arg = value.pattern_match.group(2).lower()
-        if arg in LANGUAGES:
-            TRT_LANG = arg
-            LANG = LANGUAGES[arg]
-        else:
+        if arg not in LANGUAGES:
             return await value.edit(
                 f"`Invalid Language code !!`\n`Available language codes for TRT`:\n\n`{LANGUAGES}`"
             )
+        TRT_LANG = arg
+        LANG = LANGUAGES[arg]
     elif util == "tts":
         scraper = "Text to Speech"
         global TTS_LANG
         arg = value.pattern_match.group(2).lower()
-        if arg in tts_langs():
-            TTS_LANG = arg
-            LANG = tts_langs()[arg]
-        else:
+        if arg not in tts_langs():
             return await value.edit(
                 f"`Invalid Language code !!`\n`Available language codes for TTS`:\n\n`{tts_langs()}`"
             )
+        TTS_LANG = arg
+        LANG = tts_langs()[arg]
     await value.edit(f"`Language for {scraper} changed to {LANG.title()}.`")
     if BOTLOG:
         await value.client.send_message(
@@ -653,7 +644,7 @@ async def download_video(v_url):
         with YoutubeDL(opts) as rip:
             rip_data = rip.extract_info(url)
     except DownloadError as DE:
-        return await v_url.edit(f"`{str(DE)}`")
+        return await v_url.edit(f'`{DE}`')
     except ContentTooShortError:
         return await v_url.edit("**The download content was too short.**")
     except GeoRestrictedError:
@@ -672,7 +663,7 @@ async def download_video(v_url):
     except ExtractorError:
         return await v_url.edit("**There was an error during info extraction.**")
     except Exception as e:
-        return await v_url.edit(f"{str(type(e)): {str(e)}}")
+        return await v_url.edit(f'{str(type(e)): {e}}')
     c_time = time.time()
     if song:
         await v_url.edit(f"**Preparing to upload song:**\n**{rip_data['title']}**")

@@ -47,8 +47,7 @@ def getKitsu(mal):
     link = f"https://kitsu.io/api/edge/mappings?filter[external_site]=myanimelist/anime&filter[external_id]={mal}"
     result = requests.get(link).json()["data"][0]["id"]
     link = f"https://kitsu.io/api/edge/mappings/{result}/item?fields[anime]=slug"
-    kitsu = requests.get(link).json()["data"]["id"]
-    return kitsu
+    return requests.get(link).json()["data"]["id"]
 
 
 def getBannerLink(mal, kitsu_search=True):
@@ -224,14 +223,10 @@ async def anime(event):
         score = anime.get("score")
         rating = anime.get("rating")
         genre_lst = anime.get("genres")
-        genres = ""
-        for genre in genre_lst:
-            genres += genre.get("name") + ", "
+        genres = "".join(genre.get("name") + ", " for genre in genre_lst)
         genres = genres[:-2]
-        studios = ""
         studio_lst = anime.get("studios")
-        for studio in studio_lst:
-            studios += studio.get("name") + ", "
+        studios = "".join(studio.get("name") + ", " for studio in studio_lst)
         studios = studios[:-2]
         duration = anime.get("duration")
         premiered = anime.get("premiered")
@@ -239,8 +234,6 @@ async def anime(event):
         trailer = anime.get("trailer_url")
         if trailer:
             bru = f"<a href='{trailer}'>Trailer</a>"
-        else:
-            pass
         url = anime.get("url")
     else:
         await event.edit("`No results Found!`")
@@ -290,9 +283,7 @@ async def manga(event):
         volumes = manga.get("volumes")
         chapters = manga.get("chapters")
         genre_lst = manga.get("genres")
-        genres = ""
-        for genre in genre_lst:
-            genres += genre.get("name") + ", "
+        genres = "".join(genre.get("name") + ", " for genre in genre_lst)
         genres = genres[:-2]
         synopsis = manga.get("synopsis")
         image = manga.get("image_url")
@@ -493,16 +484,9 @@ async def get_anime(message):
     if not telegraph_poster:
         telegraph_poster = main_poster
 
-    genress_md = ""
-    producer_md = ""
-    studio_md = ""
-    for i in genres_list:
-        genress_md += f"{i['name']} "
-    for i in producer_list:
-        producer_md += f"[{i['name']}]({i['url']}) "
-    for i in studios_list:
-        studio_md += f"[{i['name']}]({i['url']}) "
-
+    genress_md = "".join(f"{i['name']} " for i in genres_list)
+    producer_md = "".join(f"[{i['name']}]({i['url']}) " for i in producer_list)
+    studio_md = "".join(f"[{i['name']}]({i['url']}) " for i in studios_list)
     # Build synopsis telegraph post
     html_enc = ""
     html_enc += f"<img src = '{telegraph_poster}' title = {anime_title}/>"
